@@ -1,10 +1,11 @@
-##no podra ser visualizado desde el navegador
+##no podra ser visualizado desde el navegador, esto tendria que ir en las carpetas de de las classes u modelos para aumentar su seguridad
 #order allow,deny
 #deny from all
 
 
 ##url amigables ejemplo
 Options +FollowSymLinks
+##habilitamos el redireccionamiento para poder hacer uso de las url amigables con htaccess
 RewriteEngine on
 # Sintaxis
 RewriteRule ^url-amigable-aqui$ url-no-amigable-va-aqui.php
