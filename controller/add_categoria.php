@@ -4,7 +4,7 @@
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-		$categoria_post = $_POST['name'];
+		$categoria_post = $_POST['categoria'];
 
 		$categoria = new categoria();
 
