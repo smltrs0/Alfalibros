@@ -1,10 +1,5 @@
 <?php
 
-    require_once('classes/autor.php');
-
-    $autores = new autor();
-
-    $autores = $autores->get_all();
 
 ?>
 
@@ -50,28 +45,10 @@ include 'include/breadcrumb.php';
         <tr>
             <th>Column 1</th>
             <th>Accion</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        
-        <?php if ($autores): ?>
-
-            <?php foreach ($autores as $key): ?>
-
-                <tr>
-                    <td><?php echo $key['autor']; ?></td>
-                    <td>edit</td>
-                </tr>
-            
-            <?php endforeach ?>
-            
-        <?php else: ?>
-
-            <tr>
-                <td>NO SE HAN ENCONTRADO ITEMS</td>
-            </tr>
-
-        <?php endif ?>
         
     </tbody>
 </table>
@@ -80,6 +57,54 @@ include 'include/breadcrumb.php';
         <!-- /.content -->
     </div>
     <!-- /#right-panel -->
+
+     <script>
+             // Esta parte se encarga de renderizar la tabla usando ajax
+    $.ajax({
+    "method":"POST",
+    url: "controller/get_autores.php",
+    success : function(data) {
+        var o = JSON.parse(data);//A la variable le almacena todo el json codificado
+                                //para poder renderizarlo en la tabla, sin esto no funciona!
+        $('#Tabla').dataTable( {
+            "language": {
+            "url": "scripts_js/Spanish.json" // traducimos al español datatable
+            },
+                "processing": true,
+                data : o,
+                columns: [
+                {"data" : "id_autor"},
+                {"data" : "autor"},
+                //la idea es disparar un evento que abra un modal ya sea tanto para actualizar como para eliminar(confirmando la eliminacion)
+                {"defaultContent":"<button data-target='modal-eliminar' class='editar btn btn-warning btn-sm text-white'><i class='fa fa-edit'></i></button> <buttoname='delete' data-target='modal-eliminar' class='eliminar btn btn-danger btn-sm text-white'><i class='fa fa-trash'></i></button>"},
+                        ]
+                                });
+                             }       
+            });
+
+$(document).ready(function(){
+  $(document).on('click', '.delete', function(){
+    var user_id = $(this).attr("id");
+    if(confirm("Are you sure you want to delete this?"))
+    {
+      $.ajax({
+        url:"delete.php",
+        method:"POST",
+        data:{user_id:user_id},
+        success:function(data)
+        {
+          alert(data);
+          dataTable.ajax.reload();
+        }
+      });
+    }
+    else
+    {
+      return false;
+    }
+  });
+});
+     </script>
 <?php 
 include 'include/scripts.php';
  ?>

@@ -62,6 +62,7 @@ include 'include/breadcrumb.php';
             success: function(res){
             $('#load').hide();
             alert("Agregado correctamente");
+             $('#modalwindow').modal('hide');
             //Aun falta agregarle sweet alert para que se vea mucho mejor
             //nedd agregar funcion para limpiar y cerrar el modal y actualizar la tabla despues de agregar
     }

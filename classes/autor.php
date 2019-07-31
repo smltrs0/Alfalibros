@@ -48,7 +48,7 @@
 			$sentencia = $this->connection->query('SELECT *
 												   FROM autor');
 
-			$datos = $sentencia->fetchAll();
+			$datos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 			return $datos;
 		}
