@@ -1,18 +1,17 @@
 ##no podra ser visualizado desde el navegador, esto tendria que ir en las carpetas de de las classes u modelos para aumentar su seguridad
 #order allow,deny
 #deny from all
+
+
 ##url amigables ejemplo
-Options +FollowSymLinks
+#Options +FollowSymLinks
 ##habilitamos el redireccionamiento para poder hacer uso de las url amigables con htaccess
 RewriteEngine on
 # Sintaxis
-RewriteRule ^url-amigable-aqui$ url-no-amigable-va-aqui.php
+#RewriteRule ^url-amigable-aqui$ url-no-amigable-va-aqui.php
 #En nuestro ejemplo tendríamos la siguiente ruta
-#creamos las url amigables si no existen 
-RewriteCond %{SCRIPT_FILENAME} !-d  
-RewriteCond %{SCRIPT_FILENAME} !-f  
+#RewriteRule ^blog/([0-9]+)$ blog.php?publicacion_id=$1
 ##Eliminamos el .php para hacer las url amigables, aun siguen funcionando las de .php pero se pueden usar sin el .php :v pero primero necesitamos declararlas aqui
-
 RewriteRule ^clientes$ clientes.php
 RewriteRule ^ventas$ ventas.php
 RewriteRule ^libros$ libros.php
@@ -22,7 +21,8 @@ RewriteRule ^categorias$ categorias.php
 RewriteRule ^respaldo$ respaldo.php
 RewriteRule ^reportes$ reportes.php
 RewriteRule ^perfil$ perfil.php
-RewriteRule ^detalle_libro$ detalle_libro.php 
+
+
 
 ##Bloquea determinadas requests que se unan para insercion de sql
 RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]

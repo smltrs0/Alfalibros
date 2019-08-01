@@ -1,5 +1,5 @@
 <?php
-	require_once('../classes/info_libro.php');
+	require_once('../classes/libro.php');
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
@@ -11,7 +11,7 @@
 		$precio = $_POST['precio'];
 		$sinopsis = $_POST['sinopsis'];
 
-		$info_libro = new info_libro();
+		$info_libro = new libro();
 
 		$info_libro->set_values_libro($titulo,$autor,$categoria,$fecha_lanzamiento,$sinopsis);
 

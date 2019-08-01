@@ -1,8 +1,8 @@
 <?php 
 
-    require_once('classes/info_libro.php');
+    require_once('classes/libro.php');
 
-    $cant_inventario = new info_libro();
+    $cant_inventario = new libro();
 
     $cant_inventario = $cant_inventario->get_cantidad_inventario();
 

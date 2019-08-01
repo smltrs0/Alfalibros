@@ -1,5 +1,5 @@
   <!--Menu principal izquierdo-->
-    <aside id="left-panel" class="left-panel pt-4 animated bounceInLeft">
+    <aside id="left-panel" class="left-panel pt-4">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -20,7 +20,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Libros</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-plus"></i><a href="agregar libro.php">Agregar libro</a></li>
-                            <li><i class="menu-icon fa fa-book"></i><a href="libros.php">Libros </a></li>
+                            <li><i class="menu-icon fa fa-book"></i><a href="libros">Libros </a></li>
                             <li><i class="menu-icon fa fa-feather-alt"></i><a href="autores.php">Autores </a></li>
                             <li><i class="menu-icon fa fa-tasks"></i><a href="categorias.php">Categorías </a></li>
                         </ul>

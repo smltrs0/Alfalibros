@@ -1,8 +1,8 @@
 <?php 
 
-    require_once('classes/info_libro.php');
+    require_once('classes/libro.php');
 
-    $libros = new info_libro();
+    $libros = new libro();
     $libros = $libros->get_all_info_libro();
     
 include 'include/head.php';
@@ -23,7 +23,6 @@ include'include/menu.php';
 <?php 
 include 'include/breadcrumb.php';
  ?>
-
             <!-- Animated test -->
             <div class=" animated bounceInDown">
             <form>
@@ -37,27 +36,23 @@ include 'include/breadcrumb.php';
             </div>
             <div class="container">
     <div class="card-deck">
-
         <?php if ($libros): ?>
-
             <?php foreach ($libros as $key): ?>
-                
-                <div class="card mb-2">
-
+                <a href="detalle_libro?id=<?php echo $key['id_libro']?>" class="card mb-2">
+                  <!--Aqui tendira que ir ?id=id para procesarlo por get-->
                     <?php if(!is_null($key['ruta_imagen'])): ?>
-                        <!-- LE AGREGUE UNA CLASE PARA QUE ESTOS IMG SIEMPRE SEAN DE 200PX -->
+                        <!-- class height-27 mantiene las imagenes siempre en 275 px -->
                         <img class="card-img-top img-fluid height-275" src="<?php echo $key['ruta_imagen']; ?>" alt="Card image cap"> 
                     <?php else: ?>
                          <img class="card-img-top img-fluid height-275" src="images/no_image.png" alt="Card image cap">
                     <?php endif ?>
-
                         <div class="card-body">
                             <h4 class="card-title"><?php echo $key['titulo']; ?></h4>
                             <p class="card-text">Precio: <?php echo $key['precio']; ?> BsS</p>
 
                             <?php if ($key['cantidad'] > 0): ?>
 
-                                <p class="text-success">DISPONIBLE</p>
+                                <strong class="text-success">DISPONIBLE</strong>
 
                             <?php else: ?>
 
@@ -67,10 +62,8 @@ include 'include/breadcrumb.php';
 
                             <p class="card-text"><small class="text-dark"><?php echo $key['autor'] ?></small></p>
                         </div>
-                </div>
-
+                </a>
             <?php endforeach ?>
-            
 
         <?php else: ?>
 
@@ -84,13 +77,8 @@ include 'include/breadcrumb.php';
                 </div>
      </div>
 
-
         <?php endif ?>
-
-
-
         
-
 
     </div>
 </div>

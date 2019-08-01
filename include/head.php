@@ -17,12 +17,12 @@
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Local-->
-    <link rel="stylesheet" href="assets/css/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/webgradients.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="./assets/css/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="./assets/css/themify-icons.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/webgradients.css">
+    <link rel="stylesheet" href="./assets/css/animate.css">
     <!--Font-awesome-->
     <link rel="stylesheet" href="assets/css/all.css">
     <script type="text/javascript" src="assets/js/Chart.js"></script>
