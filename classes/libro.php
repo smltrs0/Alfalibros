@@ -47,7 +47,7 @@
 			//llamamos a la coneccion en el contructor para poder hacer uso de ella atravez de  $this->connection
 		}
 
-		public function set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis, $ruta_imagen = false)
+		public function set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis, $file = false)
 		{
 			if(!empty($titulo) && !empty($autor) && !empty($categoria) && !empty($fecha_lanzamiento) && !empty($cantidad) && !empty($precio))
 			{
@@ -65,11 +65,6 @@
 						if(!empty($sinopsis))
 						{
 							$this->sinopsis = $this->input_cleaning($sinopsis);
-						}
-
-						if($ruta_imagen)
-						{
-							$this->ruta_imagen = $this->input_cleaning($ruta_imagen);
 						}
 
 						if(!empty($file['name']))
