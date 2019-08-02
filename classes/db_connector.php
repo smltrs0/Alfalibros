@@ -6,7 +6,7 @@ abstract class db_connector
 		private static $db_host = 'localhost';
 		private static $db_name = 'alfalibros';
 		private static $db_user = 'root';
-		private static $db_pass = '';
+		private static $db_pass = '25695517.';
 		private static $character = 'SET CHARACTER SET utf8';
 		protected $error = '';
 		protected $connection;
@@ -24,9 +24,11 @@ abstract class db_connector
 				die('ERROR: '.$e->getMessage());
 			}
 		}
+
 		// abstract public function save_on_db();
 		// abstract function del_from_db();
 		// abstract function get_from_db();
+
 		protected function input_cleaning($input)
 		{
 			$input = trim($input);		// "Trim" Limpia los espacios al inicio y final de los caracteres
@@ -38,36 +40,42 @@ abstract class db_connector
 			switch($table)
 			{
 				case 'autor':
+
 					$sentencia = $this->connection->prepare('SELECT id_autor
 															 FROM autor
-															 WHERE id_autor = :id
-															 LIMIT 1');
+															 WHERE id_autor = :id');
+
 					$sentencia->execute(array(':id' => $id));
 
 					if($sentencia->fetch())
 					{
 						return true;
 					}
+					
+
 				break;
 
 				case 'categoria':
 
 					$sentencia = $this->connection->prepare('SELECT id_categoria
-															 FROM categoria
-															 WHERE id_categoria = :id
-															 LIMIT 1');
+															 FROM categoria_libro
+															 WHERE id_categoria = :id');
+
 					$sentencia->execute(array(':id' => $id));
 
 					if($sentencia->fetch())
 					{
 						return true;
 					}
+
 				break;
+
 				default:
 					echo 'La tabla no existe.';
 
 					return true;
 					// SE RETORNA TRUE PORQUE EL VALOR TRUE ES CONSIDERADO COMO ERROR O COMO UN ID DUPLICADO
+
 				break;
 			}
 
