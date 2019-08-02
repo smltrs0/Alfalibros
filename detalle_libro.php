@@ -25,7 +25,7 @@ include'include/menu.php';
 <?php 
 include 'include/breadcrumb.php';
  ?>
- <div class="row">
+ <div class="container">
   <div class="card">
 <?php if (!empty($libros)): ?>
       <div class="card-header mb-3">
@@ -33,7 +33,7 @@ include 'include/breadcrumb.php';
                 <strong><?php echo $libros['titulo']; ?></strong>
            </div>
             </div>
-    <div class="row">
+    <div class="row ">
     <div class=" col-sm-12 col-lg-6">
        <div class="m-1"> 
         <?php if(!is_null($libros['ruta_imagen'])): ?>
