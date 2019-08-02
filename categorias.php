@@ -1,10 +1,3 @@
- <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js" lang="es"> 
-<!--<![endif]-->
 <?php 
 include 'include/head.php';
  ?>
@@ -84,8 +77,8 @@ include 'include/breadcrumb.php';
                 "processing": true,
                 data : o,
                 columns: [
-                {"data" : "id"},
-                {"data" : "nombre"},
+                {"data" : "id_categoria"},
+                {"data" : "categoria"},
                 //la idea es disparar un evento que abra un modal ya sea tanto para actualizar como para eliminar(confirmando la eliminacion)
                 {"defaultContent":"<button data-target='modal-eliminar' class='editar btn btn-warning btn-sm text-white'><i class='fa fa-edit'></i></button> <button data-target='modal-eliminar' class='eliminar btn btn-danger btn-sm text-white'><i class='fa fa-trash'></i></button>"},
                         ]

@@ -52,7 +52,7 @@
                             <!-- ESTE OPTION ES UN SIMPLE PLACEHOLDER PARA QUE NO SE MUESTRE EL NOMBRE DEL PRIMER AUTOR Y ENVIA UN VALOR VACIO PARA QUE LUEGO SE PUEDA VERIFICAR Y RETORNAR ERROR EN EL CASO DE QUE EL USUARIO LO ENVIE COMO AUTOR -->
                             <option value="">Seleccione una categoria</option>
                             <?php foreach ($categorias as $key): ?>
-                                <option value="<?php echo $key['id_categoria']; ?>"><?php echo $key['nombre']; ?></option>
+                                <option value="<?php echo $key['id_categoria']; ?>"><?php echo $key['categoria']; ?></option>
                             <?php endforeach ?>
                             <!-- ESTE LUEGO SE TRATARA CON JS PARA AGREGAR OTRO INPUT PARA AÑADIR EL NUEVO AUTOR -->
                             <option value="nuevo_autor">Otra categoria</option>

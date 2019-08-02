@@ -1,9 +1,11 @@
 <?php 
-$id=5;
+
 $id=$_GET['id'];
 require_once 'classes/libro.php';
 $libros = new libro();
 $libros = $libros->id_libro($id);
+
+// var_dump($libros);
 
 include 'include/head.php';
  ?>

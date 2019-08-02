@@ -3,7 +3,7 @@
     require_once('classes/libro.php');
 
     $libros = new libro();
-    $libros = $libros->get_all_info_libro();
+    $libros = $libros->get_all();
     
 include 'include/head.php';
  ?>
@@ -38,7 +38,7 @@ include 'include/breadcrumb.php';
     <div class="card-deck">
         <?php if ($libros): ?>
             <?php foreach ($libros as $key): ?>
-                <a href="detalle_libro?id=<?php echo $key['id_libro']?>" class="card mb-2">
+                <a href="detalle_libro?id=<?php echo $key['id_info_libro']?>" class="card mb-2">
                   <!--Aqui tendira que ir ?id=id para procesarlo por get-->
                     <?php if(!is_null($key['ruta_imagen'])): ?>
                         <!-- class height-27 mantiene las imagenes siempre en 275 px -->
