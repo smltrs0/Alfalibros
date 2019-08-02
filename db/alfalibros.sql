@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2019 a las 16:19:11
+-- Tiempo de generación: 02-08-2019 a las 18:27:04
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -33,6 +33,20 @@ CREATE TABLE `autor` (
   `autor` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `autor`
+--
+
+INSERT INTO `autor` (`id_autor`, `autor`) VALUES
+(1, 'Oscar Ruiz'),
+(2, 'Kledany Barzola'),
+(3, 'Nuevo Autor'),
+(4, 'Samuel Trias'),
+(5, 'Dan Brown'),
+(6, 'Zuzane Collins'),
+(7, 'Otro autor'),
+(8, 'autor');
+
 -- --------------------------------------------------------
 
 --
@@ -44,6 +58,23 @@ CREATE TABLE `categoria_libro` (
   `categoria` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `categoria_libro`
+--
+
+INSERT INTO `categoria_libro` (`id_categoria`, `categoria`) VALUES
+(1, 'Historia'),
+(2, 'Novela de terror'),
+(3, 'Novela erótica'),
+(4, 'Ciencia ficción'),
+(5, 'Novela romántica'),
+(6, ' Novela negra'),
+(7, ' Novela histórica'),
+(8, 'Biografías'),
+(9, ' Libros de autoayuda'),
+(10, 'Libros de poesía'),
+(11, 'Literatura infantil');
+
 -- --------------------------------------------------------
 
 --
@@ -52,13 +83,20 @@ CREATE TABLE `categoria_libro` (
 
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL,
-  `cod_tipo_documento` int(11) NOT NULL,
-  `documento` varchar(50) NOT NULL,
+  `id_tipo_de_documento` int(11) NOT NULL,
+  `documento` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `apellidos` varchar(30) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
   `direccion` varchar(20) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `id_tipo_de_documento`, `documento`, `nombre`, `apellido`, `direccion`, `telefono`) VALUES
+(3, 1, 25695517, 'Oscar', 'Ruiz', 'Urb. La Paragua', '+584127969795');
 
 -- --------------------------------------------------------
 
@@ -100,6 +138,15 @@ CREATE TABLE `forma_de_pago` (
   `descripcion_formapago` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `forma_de_pago`
+--
+
+INSERT INTO `forma_de_pago` (`id_formapago`, `descripcion_formapago`) VALUES
+(1, 'EFECTIVO'),
+(2, 'TARJETA DE CREDITO'),
+(3, 'CHEQUE');
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +160,15 @@ CREATE TABLE `info_libro` (
   `precio` float NOT NULL,
   `ruta_imagen` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `info_libro`
+--
+
+INSERT INTO `info_libro` (`id_info_libro`, `id_libro`, `cantidad`, `precio`, `ruta_imagen`) VALUES
+(1, 3, 65, 12, NULL),
+(2, 5, 94, 654, NULL),
+(3, 8, 654, 654, 'uploaded_files/img_books/ulyj1bf7hid41j2b1i6v.jpeg');
 
 -- --------------------------------------------------------
 
@@ -128,6 +184,20 @@ CREATE TABLE `libro` (
   `fecha_lanzamiento` date NOT NULL,
   `sinopsis` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `libro`
+--
+
+INSERT INTO `libro` (`id_libro`, `titulo`, `id_autor`, `id_categoria`, `fecha_lanzamiento`, `sinopsis`) VALUES
+(1, 'Prueba', 4, 3, '2018-11-29', 'Esta es una sinopsis'),
+(2, 'Otro libro', 2, 4, '2018-10-29', 'otra sinopsis'),
+(3, 'Prueba sin imagen', 4, 3, '2017-09-28', 'Prueba'),
+(4, 'Inferno', 5, 3, '2017-10-29', 'awefaw'),
+(5, 'Inferno', 1, 9, '2020-02-02', 'ASDFASDF'),
+(6, 'Prueba con imn', 2, 2, '2018-11-30', 'prueba con imagen'),
+(7, 'Prueba con imn', 2, 2, '2018-11-30', 'prueba con imagen'),
+(8, 'Prueba img', 2, 2, '2018-11-30', 'prueba');
 
 -- --------------------------------------------------------
 
@@ -165,9 +235,18 @@ CREATE TABLE `proveedor` (
 --
 
 CREATE TABLE `tipo_de_documento` (
-  `id_tipo_documento` int(11) NOT NULL,
-  `descripcion` varchar(10) NOT NULL
+  `id_tipo_de_documento` int(11) NOT NULL,
+  `tipo_de_documento` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo_de_documento`
+--
+
+INSERT INTO `tipo_de_documento` (`id_tipo_de_documento`, `tipo_de_documento`) VALUES
+(1, 'Cedula'),
+(2, 'Rif Personal'),
+(3, 'Pasaporte');
 
 -- --------------------------------------------------------
 
@@ -186,6 +265,14 @@ CREATE TABLE `usuarios` (
   `cargo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `username`, `email`, `clave`, `id_pregunta`, `cargo`) VALUES
+(2, 'samuel', 'trias', 'smltrs0', 'admin@admin.com', '63a9f0ea7bb98050796b649e85481845', 0, 3),
+(3, 'saul', '', 'saulY', 'saul@gmail.com', '2522', 0, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -196,6 +283,15 @@ CREATE TABLE `usuario_tipo` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario_tipo`
+--
+
+INSERT INTO `usuario_tipo` (`id`, `nombre`) VALUES
+(1, 'Inactivo'),
+(2, 'Administrador'),
+(3, 'Usuario');
 
 --
 -- Índices para tablas volcadas
@@ -217,7 +313,8 @@ ALTER TABLE `categoria_libro`
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_id_tipo_de_documento` (`id_tipo_de_documento`);
 
 --
 -- Indices de la tabla `detalle_compra`
@@ -273,7 +370,7 @@ ALTER TABLE `proveedor`
 -- Indices de la tabla `tipo_de_documento`
 --
 ALTER TABLE `tipo_de_documento`
-  ADD PRIMARY KEY (`id_tipo_documento`);
+  ADD PRIMARY KEY (`id_tipo_de_documento`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -302,12 +399,12 @@ ALTER TABLE `autor`
 -- AUTO_INCREMENT de la tabla `categoria_libro`
 --
 ALTER TABLE `categoria_libro`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `forma_de_pago`
 --
@@ -322,7 +419,7 @@ ALTER TABLE `info_libro`
 -- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
@@ -337,7 +434,7 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `tipo_de_documento`
 --
 ALTER TABLE `tipo_de_documento`
-  MODIFY `id_tipo_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tipo_de_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
@@ -351,6 +448,12 @@ ALTER TABLE `usuario_tipo`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `FK_id_tipo_de_documento` FOREIGN KEY (`id_tipo_de_documento`) REFERENCES `tipo_de_documento` (`id_tipo_de_documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `detalle_compra`
@@ -389,7 +492,7 @@ ALTER TABLE `pregunta`
 -- Filtros para la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`cod_tipo_documento`) REFERENCES `tipo_de_documento` (`id_tipo_documento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`cod_tipo_documento`) REFERENCES `tipo_de_documento` (`id_tipo_de_documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`

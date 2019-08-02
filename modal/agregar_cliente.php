@@ -1,3 +1,13 @@
+<?php 
+
+  require_once('classes/tipo_de_documento.php');
+
+  $tipos_de_documento = new tipo_de_documento();
+
+  $tipos_de_documento = $tipos_de_documento->get_all()
+
+?>
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
  <i class="fa fa-plus"></i> Agregar cliente
@@ -17,18 +27,29 @@
        <form method="POST" action="controller/nuevo_cliente.php">
 
           <div class="form-group">
-            <label>Cedula</label>
+            <label>Tipo de documento</label>
+            <select class="form-control" name="tipo_de_documento">
+              <option value="">Seleccione un tipo de documento:</option>
+              <?php foreach ($tipos_de_documento as $key): ?>
+                <option value="<?php echo $key['id_tipo_de_documento']; ?>"><?php echo $key['tipo_de_documento']; ?></option>
+              <?php endforeach ?>
+              <!-- ESTE LUEGO SE TRATARA CON JS PARA AGREGAR OTRO INPUT PARA AÑADIR EL NUEVO AUTOR -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Cedula sin puntos ni espacios</label>
             <input class="form-control" type="text" name="cedula">
           </div>
 
           <div class="form-group">
             <label>Nombre</label>
-            <input class="form-control" type="text" name="nombre" pattern="[a-z]{1,15}">
+            <input class="form-control" type="text" name="nombre">
           </div>
 
           <div class="form-group">
             <label>Apellido</label>
-            <input class="form-control" type="text" name="apellido" pattern="[a-z]{1,15}">
+            <input class="form-control" type="text" name="apellido">
           </div>
 
           <div class="form-group">
