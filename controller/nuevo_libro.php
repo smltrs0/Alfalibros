@@ -38,7 +38,7 @@
 			
 		}
 
-		// header('location: ../agregar libro.php');
+		header('location: ../agregar libro.php');
 
 
 	}
