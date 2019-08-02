@@ -6,7 +6,7 @@ abstract class db_connector
 		private static $db_host = 'localhost';
 		private static $db_name = 'alfalibros';
 		private static $db_user = 'root';
-		private static $db_pass = '';
+		private static $db_pass = '25695517.';
 		private static $character = 'SET CHARACTER SET utf8';
 		protected $error = '';
 		protected $connection;

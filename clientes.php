@@ -1,13 +1,12 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js" lang="es"> 
-<!--<![endif]-->
 <?php 
-include 'include/head.php';
- ?>
+  include 'include/head.php';
+  require_once('classes/cliente.php');
+
+  $clientes = new cliente();
+
+  $clientes = $clientes->get_all();
+
+?>
 <body>
   <?php
 include'include/menu.php';
@@ -42,11 +41,26 @@ include 'include/breadcrumb.php';
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>nombre y apellido</td>
-            <td>cedula</td>
-            <th>iconos de mod</th>
-        </tr>
+
+      <?php if ($clientes): ?>
+
+        <?php foreach ($clientes as $key): ?> 
+          <tr>
+              <td><?php echo $key['nombre'].' '.$key['apellido']; ?></td>
+              <td><?php echo $key['documento']; ?></td>
+              <th>iconos de mod</th>
+          </tr>
+        <?php endforeach ?>
+
+      <?php else: ?>
+
+          <tr>
+              <td>NO EXISTEN CLIENTES</td>
+          </tr>
+        
+      <?php endif ?>
+
+       
     </tbody>
 </table>
              </div>

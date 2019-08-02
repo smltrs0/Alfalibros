@@ -56,11 +56,11 @@
 					if($this->check_set_id('autor',$autor) && $this->check_set_id('categoria', $categoria))
 					{
 						$this->titulo = $this->input_cleaning($titulo);
-						$this->autor = $autor;
-						$this->categoria = $categoria;
-						$this->fecha_lanzamiento = $fecha_lanzamiento;
-						$this->cantidad = $cantidad;
-						$this->precio = $precio;
+						$this->autor = $this->input_cleaning($autor);
+						$this->categoria = $this->input_cleaning($categoria);
+						$this->fecha_lanzamiento = $this->input_cleaning($fecha_lanzamiento);
+						$this->cantidad = $this->input_cleaning($cantidad);
+						$this->precio = $this->input_cleaning($precio);
 
 						if(!empty($sinopsis))
 						{
