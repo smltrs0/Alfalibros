@@ -11,22 +11,34 @@
 		$precio = $_POST['precio'];
 		$sinopsis = $_POST['sinopsis'];
 
-		$info_libro = new libro();
+		$libro = new libro();
 
-		$info_libro->set_values_libro($titulo,$autor,$categoria,$fecha_lanzamiento,$sinopsis);
-
-		if(empty($_FILES['img']))
+		if(empty($_FILES['img']['name']))
 		{
-			$info_libro->set_values_info($cantidad,$precio);
+			if($libro->set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis))
+			{
+				$libro->save_on_db();
+			}
+			else
+			{
+				die('ERROR AL CARGAR EL LIBRO');
+			}
+			
 		}
 		else
 		{
-			$info_libro->set_values_info($cantidad,$precio,$_FILES['img']);
+			if($libro->set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis, $_FILES['img']))
+			{
+				$libro->save_on_db();
+			}
+			else
+			{
+				die('ERROR AL CARGAR EL LIBRO');
+			}
+			
 		}
 
-		$info_libro->save_on_db();
-
-		header('location: ../agregar libro.php');
+		// header('location: ../agregar libro.php');
 
 
 	}
