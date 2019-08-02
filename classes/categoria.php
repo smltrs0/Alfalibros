@@ -18,12 +18,16 @@
 				$categoria = $this->input_cleaning($categoria);
 
 				$this->categoria = $categoria;
+
+				return true;
 			}
 			else
 			{
 				$this->error .= 'Ingrese un categoria';
 
 				die($this->error);
+
+				return false;
 			}
 		}
 

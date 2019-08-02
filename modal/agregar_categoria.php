@@ -13,7 +13,7 @@
         </button>
       </div>
         <div class="modal-body">
-            <form id="formulario_registro">
+            <form id="formulario_registro" method="POST" action="controller/add_categoria.php">
                 <div class="form-group">
                     <label>Categoria</label>
                     <input class="form-control" type="text" id="categoria" name="categoria">

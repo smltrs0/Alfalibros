@@ -15,7 +15,7 @@
       </div>
 
         <div class="modal-body">
-            <form  method="post" id="formdata">
+            <form  method="post" id="formdata" action="controller/nuevo_autor.php">
                 <div class="form-group">
                     <label>Autor</label>
                     <input class="form-control" type="text" id="autor" name="autor">

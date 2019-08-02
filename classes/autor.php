@@ -18,12 +18,16 @@
 				$autor = $this->input_cleaning($autor);
 
 				$this->autor = $autor;
+
+				return true;
 			}
 			else
 			{
 				$this->error .= 'Ingrese un autor';
 
 				die($this->error);
+
+				return false;
 			}
 		}
 

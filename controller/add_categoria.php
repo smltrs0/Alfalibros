@@ -8,9 +8,16 @@
 
 		$categoria = new categoria();
 
-		$categoria->set_values($categoria_post);
+		if($categoria->set_values($categoria_post))
+		{
+			$categoria->save_on_db();
+		}
+		else
+		{
+			die('ERROR AL CARGAR LA CATEGORIA');
+		}
 
-		$categoria->save_on_db();
+		
 
 		header('location: ../categorias.php');
 	}

@@ -8,9 +8,16 @@
 
 		$autor = new autor();
 
-		$autor->set_values($autor_post);
+		if($autor->set_values($autor_post))
+		{
+			$autor->save_on_db();
+		}
+		else
+		{
+			die('ERROR AL CARGAR EL AUTOR');
+		}
 
-		$autor->save_on_db();
+		
 
 		header('location: ../autores.php');
 	}
