@@ -104,6 +104,19 @@ $(document).ready(function(){
     }
   });
 });
+function deleteRecord(id) {
+    if(confirm("Are you sure you want to delete this row?")) {
+      $.ajax({
+        url: "delete.php",
+        type: "POST",
+        data:'id='+id,
+        success: function(data){
+          $("#table-row-"+id).remove();
+           dataTable.ajax.reload();
+        }
+      });
+    }
+  }
      </script>
 <?php 
 include 'include/scripts.php';
