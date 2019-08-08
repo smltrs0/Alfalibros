@@ -99,6 +99,8 @@ if(isset($_POST["operation"]))
 	}
 	// ahora el peo es como pasamos esto a programacion orientada a objetos?
 	// ya se 2 funciones con self::...
+
+	// CREANDO LA CLASE USUARIO DEJAME ESO A MI PERO PRIMERO ESTOY CONCENTRADO EN EL MODULO DE VENTAS PARA HABILITARLO
 }
 
 ?>

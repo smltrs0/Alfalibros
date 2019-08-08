@@ -39,6 +39,36 @@ abstract class db_connector
 		{
 			switch($table)
 			{
+				case 'info_libro':
+
+					$sentencia = $this->connection->prepare('SELECT id_info_libro
+															 FROM info_libro
+															 WHERE id_info_libro = :id');
+
+					$sentencia->execute(array(':id' => $id));
+
+					if($sentencia->fetch())
+					{
+						return true;
+					}
+
+				break;
+
+				case 'cliente':
+
+					$sentencia = $this->connection->prepare('SELECT id
+															 FROM cliente
+															 WHERE id = :id');
+
+					$sentencia->execute(array(':id' => $id));
+
+					if($sentencia->fetch())
+					{
+						return true;
+					}
+
+				break;
+
 				case 'autor':
 
 					$sentencia = $this->connection->prepare('SELECT id_autor
@@ -60,6 +90,21 @@ abstract class db_connector
 					$sentencia = $this->connection->prepare('SELECT id_categoria
 															 FROM categoria_libro
 															 WHERE id_categoria = :id');
+
+					$sentencia->execute(array(':id' => $id));
+
+					if($sentencia->fetch())
+					{
+						return true;
+					}
+
+				break;
+
+				case 'forma_de_pago':
+
+					$sentencia = $this->connection->prepare('SELECT id_formapago
+															 FROM forma_de_pago
+															 WHERE id_formapago = :id');
 
 					$sentencia->execute(array(':id' => $id));
 

@@ -180,5 +180,36 @@
 
 			return $libro;
 		}
+
+		public function get_price($id)
+		{
+			$sentencia = $this->connection->prepare('SELECT precio
+													 FROM info_libro
+													 WHERE id_info_libro = :id');
+
+			$sentencia->execute(array(':id' => $id));
+
+			$precio = $sentencia->fetch();
+
+			return $precio['precio'];
+		}
+
+		public function check_available_book($id)
+		{
+			$sentencia = $this->connection->prepare('SELECT cantidad
+													FROM info_libro
+													WHERE id_info_libro = :id');
+
+			$sentencia->execute(array(':id' => $id));
+
+			if($sentencia->fetch() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

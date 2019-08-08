@@ -2,12 +2,16 @@
 
   require_once('classes/cliente.php');
   require_once('classes/libro.php');
+  require_once('classes/forma_de_pago.php');
 
   $clientes = new cliente();
   $clientes = $clientes->get_all();
 
   $libros = new libro();
   $libros = $libros->get_all();
+
+  $formas_de_pago = new forma_de_pago();
+  $formas_de_pago = $formas_de_pago->get_all();
 
 ?>
 
@@ -27,11 +31,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+
+        <form method="POST" action="controller/nueva_venta.php">
 
           <div class="form-group">
             <label>Cliente</label>
-            <select class="form-control" name="tipo_de_documento">
+            <select class="form-control" name="cliente">
               <option value="">Seleccione el cliente</option>
               <?php foreach ($clientes as $key): ?>
                 <option value="<?php echo $key['id']; ?>"><?php echo $key['nombre']; ?></option>
@@ -41,10 +46,14 @@
 
           <div class="form-group">
             <label>Articulo</label>
-            <select class="form-control" name="tipo_de_documento">
+            <select class="form-control" name="libro">
               <option value="">Seleccione el articulo</option>
               <?php foreach ($libros as $key): ?>
-                <option value="<?php echo $key['id_libro']; ?>"><?php echo $key['titulo'].' - '.$key['autor'].' - '.$key['precio'].'BsS'; ?></option>
+
+                <?php if ($key['cantidad'] > 0): ?>
+                  <option value="<?php echo $key['id_info_libro']; ?>"><?php echo $key['titulo'].' - '.$key['autor'].' - '.$key['precio'].'BsS'; ?></option>
+                <?php endif ?>
+
               <?php endforeach ?>
             </select>
 
@@ -55,15 +64,31 @@
             <input class="form-control" type="number" name="cantidad">
           </div>
 
-          PRECIO
+          <div class="form-group">
+            <label>Forma de pago</label>
+            <select class="form-control" name="forma_de_pago">
+              <option value="">Seleccione una forma de pago</option>
+              <?php foreach ($formas_de_pago as $key): ?>
 
-          <!-- ESO DEBE SER CAPTURADO CON JS PARA SUMAR LA CANTIDAD TOTAL DEL PRECIO -->
+                <option value="<?php echo $key['id_formapago']; ?>"><?php echo $key['descripcion_formapago']; ?></option>
+
+              <?php endforeach ?>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Precio: </label>
+            <script type="text/javascript">
+              //AQUI MOSTRARIAMOS DE MANERA DINAMICA EL PRECIO
+            </script>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <input type="submit" class="btn btn-primary" name="vender" value="vender">
+          </div>
 
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
