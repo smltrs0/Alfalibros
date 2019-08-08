@@ -38,7 +38,7 @@
           </div>
 
           <div class="form-group">
-            <label>Cedula sin puntos ni espacios</label>
+            <label>N° Documento sin puntos ni espacios</label>
             <input class="form-control" type="text" name="cedula">
           </div>
 

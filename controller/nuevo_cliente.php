@@ -2,6 +2,7 @@
 
 	require_once('../classes/cliente.php');
 
+	$tipo_de_documento = $_POST['tipo_de_documento'];
 	$cedula = $_POST['cedula'];
 	$nombre = $_POST['nombre'];
 	$apellido = $_POST['apellido'];
@@ -10,14 +11,17 @@
 
 	$cliente = new cliente();
 
-	if(!empty($telefono))
+	if($cliente->set_values($tipo_de_documento,$cedula,$nombre,$apellido,$direccion,$telefono))
 	{
-		$cliente->set_values_cliente($cedula,$nombre,$apellido,$direccion,$telefono);
+		$cliente->save_on_db();
 	}
 	else
 	{
-		$cliente->set_values_cliente($cedula,$nombre,$apellido,$direccion);
+		die('ERROR AL CARGAR EL OBJETO');
 	}
+
+	header('location: ../clientes.php');
+
 
 
 ?>

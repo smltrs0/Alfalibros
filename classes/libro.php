@@ -1,33 +1,5 @@
 <?php
 
-	// 
-	// 
-	// NO
-	// MUEVAS
-	// LAS 
-	// PUTAS
-	// FUNCIONES
-	// QUE
-	// YA
-	// FUNCIONAAAN
-	// 
-	// NI
-	// LAS
-	// TABLAS
-	// DE LA BD
-	// PORQUE
-	// DESPUES
-	// TODO
-	// SE
-	// VA
-	// A
-	// LA
-	// VERGA
-	// MMGV
-	// 
-	// 
-
-
 	require_once('db_connector.php');
 
 	class libro extends db_connector{
@@ -181,25 +153,12 @@
 
 		public function get_cantidad_inventario()
 		{
-			// $cantidad = 0;
-			// $sentencia = $this->connection->query('SELECT cantidad
-			// 									   FROM info_libro');
-			// $datos = $sentencia->fetch(PDO::FETCH_ASSOC);
-			// if($datos){
-			// 	foreach ($datos as $key){
-			// 		$cantidad += $key['cantidad'];
-			// 							}
-			// 			}
-			// 			return $cantidad;
-
 			$sentencia = $this->connection->query('SELECT SUM(cantidad)
 												   FROM info_libro');
 
 			$cantidad = $sentencia->fetch();
 
 			return $cantidad['SUM(cantidad)'];
-
-			// IZI PIZI
 		}
 
 		public function id_libro($id)
