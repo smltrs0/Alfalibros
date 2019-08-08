@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2019 a las 18:27:04
+-- Tiempo de generación: 08-08-2019 a las 18:31:33
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -96,7 +96,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `id_tipo_de_documento`, `documento`, `nombre`, `apellido`, `direccion`, `telefono`) VALUES
-(3, 1, 25695517, 'Oscar', 'Ruiz', 'Urb. La Paragua', '+584127969795');
+(3, 1, 25695517, 'Oscar', 'Ruiz', 'Urb. La Paragua', '+584127969795'),
+(4, 1, 26985147, 'Kledany', 'Barzola', 'Urb. La Paragua', '+584120890503');
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,6 @@ CREATE TABLE `detalle_compra` (
 CREATE TABLE `factura` (
   `nmr_factura` varchar(20) NOT NULL,
   `cod_cliente` int(255) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
   `fecha_facturacion` varchar(15) NOT NULL,
   `cod_formapago` int(11) NOT NULL,
   `total_factura` decimal(10,0) DEFAULT NULL,
@@ -145,7 +145,8 @@ CREATE TABLE `forma_de_pago` (
 INSERT INTO `forma_de_pago` (`id_formapago`, `descripcion_formapago`) VALUES
 (1, 'EFECTIVO'),
 (2, 'TARJETA DE CREDITO'),
-(3, 'CHEQUE');
+(3, 'CHEQUE'),
+(4, 'TARJETA DE DEBITO');
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,7 @@ CREATE TABLE `info_libro` (
 
 INSERT INTO `info_libro` (`id_info_libro`, `id_libro`, `cantidad`, `precio`, `ruta_imagen`) VALUES
 (1, 3, 65, 12, NULL),
-(2, 5, 94, 654, NULL),
+(2, 5, 0, 654, NULL),
 (3, 8, 654, 654, 'uploaded_files/img_books/ulyj1bf7hid41j2b1i6v.jpeg');
 
 -- --------------------------------------------------------
@@ -328,8 +329,7 @@ ALTER TABLE `detalle_compra`
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`nmr_factura`),
   ADD KEY `ref_cli_idx` (`cod_cliente`),
-  ADD KEY `ref_formapago_idx` (`cod_formapago`),
-  ADD KEY `id_usuario` (`id_usuario`);
+  ADD KEY `ref_formapago_idx` (`cod_formapago`);
 
 --
 -- Indices de la tabla `forma_de_pago`
@@ -399,17 +399,17 @@ ALTER TABLE `autor`
 -- AUTO_INCREMENT de la tabla `categoria_libro`
 --
 ALTER TABLE `categoria_libro`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `forma_de_pago`
 --
 ALTER TABLE `forma_de_pago`
-  MODIFY `id_formapago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_formapago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `info_libro`
 --
@@ -465,7 +465,6 @@ ALTER TABLE `detalle_compra`
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `id_cliente` FOREIGN KEY (`cod_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `ref_formapago` FOREIGN KEY (`cod_formapago`) REFERENCES `forma_de_pago` (`id_formapago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
