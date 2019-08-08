@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-08-2019 a las 18:31:33
--- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 7.1.7
+-- Tiempo de generación: 08-08-2019 a las 20:23:48
+-- Versión del servidor: 10.3.16-MariaDB
+-- Versión de PHP: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -183,7 +183,7 @@ CREATE TABLE `libro` (
   `id_autor` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `fecha_lanzamiento` date NOT NULL,
-  `sinopsis` text
+  `sinopsis` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -259,20 +259,24 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL,
   `apellido` text NOT NULL,
+  `cedula` varchar(10) NOT NULL,
   `username` text NOT NULL,
   `email` varchar(50) NOT NULL,
   `clave` varchar(255) NOT NULL,
   `id_pregunta` int(11) NOT NULL,
-  `cargo` int(11) NOT NULL
+  `cargo` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `pregunta` text NOT NULL,
+  `respuesta` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `username`, `email`, `clave`, `id_pregunta`, `cargo`) VALUES
-(2, 'samuel', 'trias', 'smltrs0', 'admin@admin.com', '63a9f0ea7bb98050796b649e85481845', 0, 3),
-(3, 'saul', '', 'saulY', 'saul@gmail.com', '2522', 0, 1);
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `cedula`, `username`, `email`, `clave`, `id_pregunta`, `cargo`, `image`, `pregunta`, `respuesta`) VALUES
+(2, 'samuel', 'trias', '24186725', 'smltrs0', 'admin@admin.com', '29481bf5d996d39610e57c0254ee33b7', 0, 1, '5.jpg', 'pregunta', 'respuesta'),
+(3, 'saul', '', '', 'saulY', 'saul@gmail.com', '2522', 0, 1, '4.jpg', '', '');
 
 -- --------------------------------------------------------
 
@@ -395,56 +399,67 @@ ALTER TABLE `usuario_tipo`
 --
 ALTER TABLE `autor`
   MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT de la tabla `categoria_libro`
 --
 ALTER TABLE `categoria_libro`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `forma_de_pago`
 --
 ALTER TABLE `forma_de_pago`
   MODIFY `id_formapago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `info_libro`
 --
 ALTER TABLE `info_libro`
   MODIFY `id_info_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
   MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tipo_de_documento`
 --
 ALTER TABLE `tipo_de_documento`
   MODIFY `id_tipo_de_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario_tipo`
 --
 ALTER TABLE `usuario_tipo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- Restricciones para tablas volcadas
 --
