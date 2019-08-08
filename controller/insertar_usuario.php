@@ -29,7 +29,7 @@ if(isset($_POST["operation"]))
 		// Use MD5 para mayor rapidez pero lo ideal es usar un encriptado con algoritmo de encriptado para
 		// mayor seguridad
 		$statement = $connection->prepare("
-			INSERT INTO usuarios (username, nombre, apellido, cedula, email, usuario_tipo, clave, pregunta, respuesta, image) 
+			INSERT INTO usuarios (username, nombre, apellido, cedula, email, cargo, clave, pregunta, respuesta, image) 
 			VALUES (:username, :nombre, :apellido, :cedula, :email, :cargo, MD5(:clave),:pregunta, :respuesta, :image)
 		");
 		$result = $statement->execute(
@@ -64,12 +64,13 @@ if(isset($_POST["operation"]))
 		}
 		$statement = $connection->prepare(
 			"UPDATE usuarios 
-			SET username = :username,
+			SET 
+			username = :username,
 			nombre = :nombre,
 			apellido = :apellido, 
 			cedula = :cedula, 
 			email = :email,
-			usuario_tipo=:cargo, 
+			cargo=:cargo, 
 			clave = MD5(:clave), 
 			pregunta = :p_seguridad, 
 			respuesta=:respuesta, 

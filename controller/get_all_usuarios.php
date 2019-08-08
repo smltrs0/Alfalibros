@@ -20,9 +20,9 @@ foreach($result as $row)
 		// Aqui va la imagen de perfil default
 		$image = '';
 	}
-if ($row['usuario_tipo']==1) {
+if ($row['cargo']==1) {
 	$tipo='<span class="badge badge-primary">Usuario</span>';
-}elseif ($row['usuario_tipo']==2) {
+}elseif ($row['cargo']==2) {
 	$tipo='<span class="text-white badge badge-warning">Admin</span>';
 }
 else {

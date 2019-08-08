@@ -15,7 +15,7 @@ if (!empty($id))
 		$output["cedula"] 	= 	$row["cedula"];
 		$output["email"] 	= 	$row["email"];
 		$output["clave"] 	= 	$row["clave"];
-		$output["cargo"] 	= 	$row["usuario_tipo"];
+		$output["cargo"] 	= 	$row["cargo"];
 		$output["pregunta"] = 	$row["pregunta"];
 		$output["respuesta"] =  $row["respuesta"];
 		// Si no existe imagen ... 

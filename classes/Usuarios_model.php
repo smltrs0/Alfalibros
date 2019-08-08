@@ -13,7 +13,7 @@ class Usuarios extends db_connector
 		$query = "SELECT * FROM usuarios ";
 		$statement = $this->connection->prepare($query);
 		$statement->execute();
-		$result = $statement->fetchAll();
+		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
 

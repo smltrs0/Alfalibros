@@ -200,6 +200,7 @@ $(document).ready(function()
 					}else{
 						// Por ahora solo mostramos un  error por consola
 						console.log( 'Error' );
+						alert('No se pudieron guardar los datos en la base de datos, error interno.');
 					}
 				}
 			});
