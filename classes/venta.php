@@ -6,6 +6,7 @@
 	class venta extends db_connector
 	{
 		private $cliente;
+		private $libro;
 		private $precio;
 		private $cantidad;
 		private $forma_de_pago;
@@ -27,20 +28,23 @@
 						// ESTA FUE LA UNICA MALVADA SOLUCION QUE ENCONTRE NO ES ESTETICO PERO FUNCIONA XD
 						$aux_object_libro = new libro();
 
-						if($aux_object_libro->check_available_book($libro))
+						if($aux_object_libro->check_available_book($libro,$cantidad))
 						{
 							$this->cliente = $this->input_cleaning($cliente);
+							$this->libro = $this->input_cleaning($libro);
 							$this->precio = $aux_object_libro->get_price($libro);
 							$this->cantidad = $this->input_cleaning($cantidad);
 							$this->forma_de_pago = $this->input_cleaning($forma_de_pago);
 
 							$this->precio_neto = $this->precio * $this->cantidad;
 
-							echo 'precio neto: '.$this->precio_neto.'<br>';
+							return true;
 						}
 						else
 						{
 							die('NO HAY LIBROS DISPONIBLES');
+
+							// return false;
 						}
 
 					}
@@ -55,9 +59,13 @@
 						{
 							die('EL LIBRO NO EXISTE');
 						}
+
+						if(!$this->check_set_id('forma_de_pago',$forma_de_pago))
+						{
+							die('LA FORMA DE PAGO NO EXISTE');
+						}
 					}					
 
-					return true;
 				}
 				else
 				{
@@ -67,13 +75,57 @@
 			}
 			else
 			{
-				return false;
+				die('NO PUEDEN EXISTIR CAMPOS VACIOS');
+				// return false;
 			}
 		}
 
 		public function save_on_db()
 		{
-		
+			$fecha = $this->get_today_date();
+
+			$sentencia = $this->connection->prepare('INSERT INTO factura
+													 VALUES(NULL,:cliente,:forma_de_pago,:fecha_facturacion, NULL, NULL)');
+
+			$sentencia->execute(array(':cliente'			=> $this->cliente,
+									  ':forma_de_pago'		=> $this->forma_de_pago,
+									  'fecha_facturacion'	=> $fecha));
+
+			$id_factura = $this->get_last_id('factura');
+
+			// echo $id_factura;
+
+			$sentencia = $this->connection->prepare('INSERT INTO venta
+													 VALUES(:id_factura,:id_info_libro,:cantidad,:total)');
+
+			$sentencia->execute(array(':id_factura'		=> $id_factura,
+									  ':id_info_libro'	=> $this->libro,
+									  ':cantidad'		=> $this->cantidad,
+									  ':total'			=> $this->precio_neto));
+
+			$iva = $this->precio_neto * 0.12;
+
+			$sentencia = $this->connection->prepare('UPDATE factura
+													 SET IVA 			= :iva,
+													 	 total_factura	= :total_factura
+													 WHERE id_factura = :id_factura ');
+
+			$sentencia->execute(array(':iva'			=> $iva,
+									  ':total_factura'	=> $iva+$this->precio_neto,
+									  ':id_factura'		=> $id_factura));
+
+			// NO ES ESTETICO PERO FUNCIONA XD
+			$aux_object_libro = new libro();
+			$cantidad_libro = $aux_object_libro->get_cantidad_libro($this->libro);
+
+			$cantidad_post_venta = $cantidad_libro - $this->cantidad;
+
+			$sentencia = $this->connection->prepare('UPDATE info_libro
+													 SET cantidad = :cantidad_post_venta
+													 WHERE id_info_libro = :id_info_libro');
+
+			$sentencia->execute(array(':cantidad_post_venta'	=> $cantidad_post_venta,
+									  ':id_info_libro'			=> $this->libro));
 		}
 	}
 

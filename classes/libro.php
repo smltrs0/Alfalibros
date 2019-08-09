@@ -161,7 +161,20 @@
 			return $cantidad['SUM(cantidad)'];
 		}
 
-		public function id_libro($id)
+		public function get_cantidad_libro($id)
+		{
+			$sentencia = $this->connection->prepare('SELECT cantidad
+												   FROM info_libro
+												   WHERE id_info_libro = :id ');
+
+			$sentencia->execute(array(':id' => $id));
+
+			$cantidad = $sentencia->fetch();
+
+			return $cantidad['cantidad'];
+		}
+
+		public function get_libro_by_id($id)
 		{
 
 			$sentencia = $this->connection->prepare('SELECT *
@@ -194,7 +207,7 @@
 			return $precio['precio'];
 		}
 
-		public function check_available_book($id)
+		public function check_available_book($id,$pedido)
 		{
 			$sentencia = $this->connection->prepare('SELECT cantidad
 													FROM info_libro
@@ -202,13 +215,16 @@
 
 			$sentencia->execute(array(':id' => $id));
 
-			if($sentencia->fetch() > 0)
+			$datos = $sentencia->fetch();
+
+			if($datos['cantidad'] >= $pedido)
 			{
 				return true;
 			}
 			else
 			{
-				return false;
+				die('NO HAY SUFICIENTES EJEMPLARES');
+				// return false;
 			}
 		}
 	}

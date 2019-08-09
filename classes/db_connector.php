@@ -6,7 +6,7 @@ abstract class db_connector
 		private static $db_host = 'localhost';
 		private static $db_name = 'alfalibros';
 		private static $db_user = 'root';
-		private static $db_pass = '';
+		private static $db_pass = '25695517.';
 		private static $character = 'SET CHARACTER SET utf8';
 		protected $error = '';
 		protected $connection;
@@ -125,7 +125,6 @@ abstract class db_connector
 			}
 
 			return false;
-
 		}
 
 		protected function check_date($input)
@@ -159,6 +158,49 @@ abstract class db_connector
 		     $key .= $keys[array_rand($keys)]; 
 	    	} 
 		    return $key; 
+		}
+
+		protected function get_today_date()
+		{
+			$fecha = getdate();
+
+			$fecha = $fecha['year'].'-'.$fecha['mon'].'-'.$fecha['mday'];
+
+			return $fecha;
+		}
+
+		protected function get_last_id($table)
+		{
+			switch($table)
+			{
+				case 'libro':
+
+					$sentencia = $this->connection->query('SELECT MAX(id_libro)
+												   		   FROM libro');
+
+					$id_libro = $sentencia->fetch();
+
+					return $id_libro['MAX(id_libro)'];
+
+				break;
+
+				case 'factura':
+
+					$sentencia = $this->connection->query('SELECT MAX(id_factura)
+												   		   FROM factura');
+
+					$id_factura = $sentencia->fetch();
+
+					return $id_factura['MAX(id_factura)'];
+
+
+				break;
+			}
+
+
+
+
+			
 		}
 	}
 

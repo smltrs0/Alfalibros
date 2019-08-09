@@ -3,7 +3,7 @@
 $id=$_GET['id'];
 require_once 'classes/libro.php';
 $libros = new libro();
-$libros = $libros->id_libro($id);
+$libros = $libros->get_libro_by_id($id);
 
 // var_dump($libros);
 

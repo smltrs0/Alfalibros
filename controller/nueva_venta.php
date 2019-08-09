@@ -13,15 +13,16 @@
 
 		if($venta->set_values($cliente,$libro,$cantidad,$forma_de_pago))
 		{
+			$venta->save_on_db();
 			echo 'todo en orden';
 		}
 		else
 		{
-			echo 'error';
+			die('ERROR AL CARGAR EL OBJETO');
 		}
 		
 
-		// header('location: ../ventas.php');
+		header('location: ../ventas.php');
 	}
 	else
 	{

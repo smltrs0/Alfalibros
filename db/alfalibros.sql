@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-08-2019 a las 20:23:48
--- Versión del servidor: 10.3.16-MariaDB
--- Versión de PHP: 7.3.7
+-- Tiempo de generación: 09-08-2019 a las 19:06:47
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -102,30 +102,24 @@ INSERT INTO `cliente` (`id`, `id_tipo_de_documento`, `documento`, `nombre`, `ape
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle_compra`
---
-
-CREATE TABLE `detalle_compra` (
-  `cod_factura` varchar(20) NOT NULL,
-  `cod_articulo` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `total` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `factura`
 --
 
 CREATE TABLE `factura` (
-  `nmr_factura` varchar(20) NOT NULL,
-  `cod_cliente` int(255) NOT NULL,
-  `fecha_facturacion` varchar(15) NOT NULL,
+  `id_factura` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
   `cod_formapago` int(11) NOT NULL,
-  `total_factura` decimal(10,0) DEFAULT NULL,
-  `IVA` decimal(10,0) DEFAULT NULL
+  `fecha_facturacion` date NOT NULL,
+  `IVA` float DEFAULT NULL,
+  `total_factura` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`id_factura`, `id_cliente`, `cod_formapago`, `fecha_facturacion`, `IVA`, `total_factura`) VALUES
+(11, 3, 2, '2019-08-09', 92.16, 860.16);
 
 -- --------------------------------------------------------
 
@@ -167,9 +161,9 @@ CREATE TABLE `info_libro` (
 --
 
 INSERT INTO `info_libro` (`id_info_libro`, `id_libro`, `cantidad`, `precio`, `ruta_imagen`) VALUES
-(1, 3, 65, 12, NULL),
+(1, 3, 1, 12, NULL),
 (2, 5, 0, 654, NULL),
-(3, 8, 654, 654, 'uploaded_files/img_books/ulyj1bf7hid41j2b1i6v.jpeg');
+(3, 8, 654, 654, NULL);
 
 -- --------------------------------------------------------
 
@@ -183,7 +177,7 @@ CREATE TABLE `libro` (
   `id_autor` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `fecha_lanzamiento` date NOT NULL,
-  `sinopsis` text DEFAULT NULL
+  `sinopsis` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -259,24 +253,20 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL,
   `apellido` text NOT NULL,
-  `cedula` varchar(10) NOT NULL,
   `username` text NOT NULL,
   `email` varchar(50) NOT NULL,
   `clave` varchar(255) NOT NULL,
   `id_pregunta` int(11) NOT NULL,
-  `cargo` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `pregunta` text NOT NULL,
-  `respuesta` text NOT NULL
+  `cargo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `cedula`, `username`, `email`, `clave`, `id_pregunta`, `cargo`, `image`, `pregunta`, `respuesta`) VALUES
-(2, 'samuel', 'trias', '24186725', 'smltrs0', 'admin@admin.com', '29481bf5d996d39610e57c0254ee33b7', 0, 1, '5.jpg', 'pregunta', 'respuesta'),
-(3, 'saul', '', '', 'saulY', 'saul@gmail.com', '2522', 0, 1, '4.jpg', '', '');
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `username`, `email`, `clave`, `id_pregunta`, `cargo`) VALUES
+(2, 'samuel', 'trias', 'smltrs0', 'admin@admin.com', '63a9f0ea7bb98050796b649e85481845', 0, 3),
+(3, 'saul', '', 'saulY', 'saul@gmail.com', '2522', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -297,6 +287,26 @@ INSERT INTO `usuario_tipo` (`id`, `nombre`) VALUES
 (1, 'Inactivo'),
 (2, 'Administrador'),
 (3, 'Usuario');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `venta`
+--
+
+CREATE TABLE `venta` (
+  `id_factura` int(11) NOT NULL,
+  `id_info_libro` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `total` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`id_factura`, `id_info_libro`, `cantidad`, `total`) VALUES
+(11, 1, 64, 768);
 
 --
 -- Índices para tablas volcadas
@@ -322,17 +332,11 @@ ALTER TABLE `cliente`
   ADD KEY `FK_id_tipo_de_documento` (`id_tipo_de_documento`);
 
 --
--- Indices de la tabla `detalle_compra`
---
-ALTER TABLE `detalle_compra`
-  ADD KEY `ref_facturacion_idx` (`cod_factura`);
-
---
 -- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD PRIMARY KEY (`nmr_factura`),
-  ADD KEY `ref_cli_idx` (`cod_cliente`),
+  ADD PRIMARY KEY (`id_factura`),
+  ADD KEY `ref_cli_idx` (`id_cliente`),
   ADD KEY `ref_formapago_idx` (`cod_formapago`);
 
 --
@@ -391,6 +395,13 @@ ALTER TABLE `usuario_tipo`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `venta`
+--
+ALTER TABLE `venta`
+  ADD KEY `FK_id_info_libro` (`id_info_libro`),
+  ADD KEY `FK_id_factura` (`id_factura`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -399,67 +410,61 @@ ALTER TABLE `usuario_tipo`
 --
 ALTER TABLE `autor`
   MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT de la tabla `categoria_libro`
 --
 ALTER TABLE `categoria_libro`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+--
+-- AUTO_INCREMENT de la tabla `factura`
+--
+ALTER TABLE `factura`
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `forma_de_pago`
 --
 ALTER TABLE `forma_de_pago`
   MODIFY `id_formapago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `info_libro`
 --
 ALTER TABLE `info_libro`
   MODIFY `id_info_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
   MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tipo_de_documento`
 --
 ALTER TABLE `tipo_de_documento`
   MODIFY `id_tipo_de_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `usuario_tipo`
 --
 ALTER TABLE `usuario_tipo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -471,16 +476,10 @@ ALTER TABLE `cliente`
   ADD CONSTRAINT `FK_id_tipo_de_documento` FOREIGN KEY (`id_tipo_de_documento`) REFERENCES `tipo_de_documento` (`id_tipo_de_documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `detalle_compra`
---
-ALTER TABLE `detalle_compra`
-  ADD CONSTRAINT `ref_facturacion` FOREIGN KEY (`cod_factura`) REFERENCES `factura` (`nmr_factura`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `id_cliente` FOREIGN KEY (`cod_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `ref_formapago` FOREIGN KEY (`cod_formapago`) REFERENCES `forma_de_pago` (`id_formapago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -513,6 +512,13 @@ ALTER TABLE `proveedor`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`cargo`) REFERENCES `usuario_tipo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `venta`
+--
+ALTER TABLE `venta`
+  ADD CONSTRAINT `FK_id_factura` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_id_info_libro` FOREIGN KEY (`id_info_libro`) REFERENCES `info_libro` (`id_info_libro`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
