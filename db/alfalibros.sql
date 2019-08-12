@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-08-2019 a las 19:06:47
+-- Tiempo de generación: 12-08-2019 a las 16:03:10
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -91,14 +91,6 @@ CREATE TABLE `cliente` (
   `telefono` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `cliente`
---
-
-INSERT INTO `cliente` (`id`, `id_tipo_de_documento`, `documento`, `nombre`, `apellido`, `direccion`, `telefono`) VALUES
-(3, 1, 25695517, 'Oscar', 'Ruiz', 'Urb. La Paragua', '+584127969795'),
-(4, 1, 26985147, 'Kledany', 'Barzola', 'Urb. La Paragua', '+584120890503');
-
 -- --------------------------------------------------------
 
 --
@@ -114,12 +106,19 @@ CREATE TABLE `factura` (
   `total_factura` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `factura`
+-- Estructura de tabla para la tabla `finanzas`
 --
 
-INSERT INTO `factura` (`id_factura`, `id_cliente`, `cod_formapago`, `fecha_facturacion`, `IVA`, `total_factura`) VALUES
-(11, 3, 2, '2019-08-09', 92.16, 860.16);
+CREATE TABLE `finanzas` (
+  `id_finanzas` int(11) NOT NULL,
+  `entrada` float NOT NULL,
+  `salida` float NOT NULL DEFAULT '0',
+  `activos` float NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -161,9 +160,9 @@ CREATE TABLE `info_libro` (
 --
 
 INSERT INTO `info_libro` (`id_info_libro`, `id_libro`, `cantidad`, `precio`, `ruta_imagen`) VALUES
-(1, 3, 1, 12, NULL),
-(2, 5, 0, 654, NULL),
-(3, 8, 654, 654, NULL);
+(1, 3, 7619, 12, NULL),
+(2, 5, 98765, 654, NULL),
+(3, 8, 9999, 654, NULL);
 
 -- --------------------------------------------------------
 
@@ -260,14 +259,6 @@ CREATE TABLE `usuarios` (
   `cargo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `username`, `email`, `clave`, `id_pregunta`, `cargo`) VALUES
-(2, 'samuel', 'trias', 'smltrs0', 'admin@admin.com', '63a9f0ea7bb98050796b649e85481845', 0, 3),
-(3, 'saul', '', 'saulY', 'saul@gmail.com', '2522', 0, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -302,13 +293,6 @@ CREATE TABLE `venta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `venta`
---
-
-INSERT INTO `venta` (`id_factura`, `id_info_libro`, `cantidad`, `total`) VALUES
-(11, 1, 64, 768);
-
---
 -- Índices para tablas volcadas
 --
 
@@ -338,6 +322,12 @@ ALTER TABLE `factura`
   ADD PRIMARY KEY (`id_factura`),
   ADD KEY `ref_cli_idx` (`id_cliente`),
   ADD KEY `ref_formapago_idx` (`cod_formapago`);
+
+--
+-- Indices de la tabla `finanzas`
+--
+ALTER TABLE `finanzas`
+  ADD PRIMARY KEY (`id_finanzas`);
 
 --
 -- Indices de la tabla `forma_de_pago`
@@ -419,12 +409,17 @@ ALTER TABLE `categoria_libro`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `finanzas`
+--
+ALTER TABLE `finanzas`
+  MODIFY `id_finanzas` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `forma_de_pago`
 --
@@ -459,7 +454,7 @@ ALTER TABLE `tipo_de_documento`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `usuario_tipo`
 --

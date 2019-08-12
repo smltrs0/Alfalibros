@@ -2,6 +2,7 @@
 
 	require_once('db_connector.php');
 	require_once('libro.php');
+	require_once('finanzas.php');
 
 	class venta extends db_connector
 	{
@@ -108,13 +109,18 @@
 			$sentencia = $this->connection->prepare('UPDATE factura
 													 SET IVA 			= :iva,
 													 	 total_factura	= :total_factura
-													 WHERE id_factura = :id_factura ');
+													 WHERE id_factura 	= :id_factura ');
+
+			$total_factura = $iva + $this->precio_neto;
 
 			$sentencia->execute(array(':iva'			=> $iva,
-									  ':total_factura'	=> $iva+$this->precio_neto,
+									  ':total_factura'	=> $total_factura,
 									  ':id_factura'		=> $id_factura));
 
 			// NO ES ESTETICO PERO FUNCIONA XD
+			$aux_object_finanzas = new finanzas();
+			$aux_object_finanzas->save_on_db($total_factura,0);
+
 			$aux_object_libro = new libro();
 			$cantidad_libro = $aux_object_libro->get_cantidad_libro($this->libro);
 
@@ -126,6 +132,32 @@
 
 			$sentencia->execute(array(':cantidad_post_venta'	=> $cantidad_post_venta,
 									  ':id_info_libro'			=> $this->libro));
+		}
+
+		public function get_all()
+		{
+			$sentencia = $this->connection->query('SELECT *
+												   FROM factura
+												   INNER JOIN venta
+												   ON factura.id_factura = venta.id_factura
+												   INNER JOIN cliente
+												   ON factura.id_cliente = cliente.id
+												   INNER JOIN forma_de_pago
+												   ON factura.cod_formapago = forma_de_pago.id_formapago');
+
+			$datos = $sentencia->fetchAll();
+
+			return $datos;
+		}
+
+		public function get_cantidad_inventario()
+		{
+			$sentencia = $this->connection->query('SELECT COUNT(*)
+													 FROM factura');
+
+			$datos = $sentencia->fetch();
+
+			return $datos['COUNT(*)'];
 		}
 	}
 

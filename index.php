@@ -1,10 +1,17 @@
 <?php 
 
     require_once('classes/libro.php');
+    require_once('classes/venta.php');
+    require_once('classes/finanzas.php');
 
     $cant_inventario = new libro();
-
     $cant_inventario = $cant_inventario->get_cantidad_inventario();
+
+    $cant_ventas = new venta();
+    $cant_ventas = $cant_ventas->get_cantidad_inventario();
+
+    $activos = new finanzas();
+    $activos = $activos->get_activos();
 
 ?>
 
@@ -57,7 +64,7 @@ include'include/menu.php';
                                     <div class="stat-content">
                                         <div class="text-left dib"> 
                                             <div class="stat-heading text-white">Total Neto</div>
-                                             <div class="stat-text text-white">$<span class="count">23569</span></div>
+                                             <div class="stat-text text-white">Bs.<span class="count"><?php echo $activos; ?></span></div>
                                            
                                         </div>
                                     </div>
@@ -76,7 +83,7 @@ include'include/menu.php';
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-heading text-white">Ventas</div>
-                                            <div class="stat-text text-white"><span class="count">3435</span></div>
+                                            <div class="stat-text text-white"><span class="count"><?php echo $cant_ventas; ?></span></div>
                                             
                                         </div>
                                     </div>
@@ -119,43 +126,32 @@ include'include/menu.php';
                             <div class="h-25">
                                 <canvas id="myChart" style="width: 350px"></canvas>
 <script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: 
+    {
+        labels: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+        datasets: 
+        [
+            { 
+                data: [1,2,3,5,8,13,21,34,55,89,144,233],
+                label: "Ventas",
+                borderColor: "#3e95cd",
+                fill: true
+            }
+        ]
     },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+        options:
+        {
+            title:
+            {
+                display: false,
+            }
         }
-    }
-});
+    });
+
 </script>
                                 <div class="widget-chart-content text-center mt-5">
                                     <div class="widget-description mt-0 text-success">

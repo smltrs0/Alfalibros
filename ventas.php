@@ -1,13 +1,15 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js" lang="es"> 
-<!--<![endif]-->
 <?php 
-include 'include/head.php';
- ?>
+
+    require_once('classes/venta.php');
+
+    $registro_ventas = new venta();
+    $registro_ventas = $registro_ventas->get_all();
+
+
+
+
+    include 'include/head.php';
+?>
 
 <body>
   <?php
@@ -34,24 +36,39 @@ include 'include/breadcrumb.php';
             <div class="row">
                 <div class="card p-3 col-12">
 
-                <table id="Tabla" class="display">
-    <thead>
-        <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-    </tbody>
-</table>
+    <?php if ($registro_ventas): ?>
+    <table id="Tabla" class="display">
+
+        <thead>
+            <tr>
+                <th>N° Factura</th>
+                <th>Cliente</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <?php foreach ($registro_ventas as $key): ?>
+                    
+                <tr>
+                    <td><?php echo $key['id_factura']; ?></td>
+                    <td><?php echo $key['nombre']; ?></td>
+                    <td><?php echo $key['total_factura']; ?></td>
+                </tr>
+
+            <?php endforeach ?>
+
+        </tbody>
+
+    </table>
+
+    <?php else: ?>
+
+        <!-- HAZ TU MAGIA AQUI CON UN ALERT BIEN CHIDORI -->
+        NO HAY VENTAS QUE MOSTRAR
+
+    <?php endif ?>
              </div>
             </div>
         </div>

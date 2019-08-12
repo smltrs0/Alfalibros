@@ -193,6 +193,16 @@ abstract class db_connector
 
 					return $id_factura['MAX(id_factura)'];
 
+				break;
+
+				case 'finanzas':
+
+					$sentencia = $this->connection->query('SELECT MAX(id_finanzas)
+												   		   FROM finanzas');
+
+					$id_finanzas = $sentencia->fetch();
+
+					return $id_finanzas['MAX(id_finanzas)'];
 
 				break;
 			}
