@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-08-2019 a las 18:18:09
+-- Tiempo de generación: 19-08-2019 a las 16:38:05
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -47,7 +47,8 @@ INSERT INTO `autor` (`id_autor`, `autor`) VALUES
 (7, 'Otro autor'),
 (8, 'autor'),
 (9, 'prueba nueva clase'),
-(10, 'prueba nueva clase');
+(10, 'prueba nueva clase'),
+(11, 'ejemplo');
 
 -- --------------------------------------------------------
 
@@ -432,7 +433,7 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `categoria_libro`
 --
