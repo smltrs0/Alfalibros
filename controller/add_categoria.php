@@ -1,9 +1,16 @@
 <?php
 
-	require_once('../classes/categoria.php');
-
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
+	    // CARGANDO LAS CONSTANTES DE RUTAS
+	    require('config.path.php');
+
+	    // CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
+	    require(TOOLS.'db_connector.php');
+	    require(TOOLS.'cleaning.php');
+
+	    require(MODELS.'categoria.php');
+
 		$categoria_post = $_POST['categoria'];
 
 		$categoria = new categoria();

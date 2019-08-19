@@ -1,14 +1,14 @@
 <?php
-    require_once('../classes/categoria.php');
 
-    $categorias = new categoria();
+    // CARGANDO LAS CONSTANTES DE RUTAS
+	require('../config.path.php');
 
-    $categorias = $categorias->get_all();
+	// CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
+	require(TOOLS.'db_connector.php');
+	require(TOOLS.'get.php');
 
+	$categorias = get::all_items('cateogoria');
 
+	echo json_encode($categorias);
 
-            
-
-
-
-        echo json_encode($categorias);
+?>

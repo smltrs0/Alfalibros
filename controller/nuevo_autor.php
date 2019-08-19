@@ -1,9 +1,15 @@
 <?php
 
-	require_once('../classes/autor.php');
-
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
+	    // CARGANDO LAS CONSTANTES DE RUTAS
+	    require('../config.path.php');
+
+	    // CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
+	    require(TOOLS.'db_connector.php');
+	    require(TOOLS.'cleaning.php');
+	    require(MODELS.'autor.php');
+
 		$autor_post = $_POST['autor'];
 
 		$autor = new autor();

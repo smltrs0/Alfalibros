@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-08-2019 a las 16:03:10
+-- Tiempo de generación: 16-08-2019 a las 18:18:09
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -45,7 +45,9 @@ INSERT INTO `autor` (`id_autor`, `autor`) VALUES
 (5, 'Dan Brown'),
 (6, 'Zuzane Collins'),
 (7, 'Otro autor'),
-(8, 'autor');
+(8, 'autor'),
+(9, 'prueba nueva clase'),
+(10, 'prueba nueva clase');
 
 -- --------------------------------------------------------
 
@@ -73,7 +75,8 @@ INSERT INTO `categoria_libro` (`id_categoria`, `categoria`) VALUES
 (8, 'Biografías'),
 (9, ' Libros de autoayuda'),
 (10, 'Libros de poesía'),
-(11, 'Literatura infantil');
+(11, 'Literatura infantil'),
+(12, 'prueba nueva clase');
 
 -- --------------------------------------------------------
 
@@ -91,6 +94,15 @@ CREATE TABLE `cliente` (
   `telefono` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `id_tipo_de_documento`, `documento`, `nombre`, `apellido`, `direccion`, `telefono`) VALUES
+(1, 1, 25695517, 'Oscar', 'Ruiz', 'Urb. La Paragua', '+584127969795'),
+(2, 1, 25695518, 'Kledany', 'Barzola', 'Urb. La Paragua', '+584120890503'),
+(3, 1, 123456789, 'Prueba', 'Prueba', 'Prueba', '+584648519');
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +118,13 @@ CREATE TABLE `factura` (
   `total_factura` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`id_factura`, `id_cliente`, `cod_formapago`, `fecha_facturacion`, `IVA`, `total_factura`) VALUES
+(1, 1, 1, '2019-08-13', 627.84, 5859.84);
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +138,13 @@ CREATE TABLE `finanzas` (
   `activos` float NOT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `finanzas`
+--
+
+INSERT INTO `finanzas` (`id_finanzas`, `entrada`, `salida`, `activos`, `fecha`) VALUES
+(1, 5859.84, 0, 5859.84, '2019-08-13');
 
 -- --------------------------------------------------------
 
@@ -161,7 +187,7 @@ CREATE TABLE `info_libro` (
 
 INSERT INTO `info_libro` (`id_info_libro`, `id_libro`, `cantidad`, `precio`, `ruta_imagen`) VALUES
 (1, 3, 7619, 12, NULL),
-(2, 5, 98765, 654, NULL),
+(2, 5, 98757, 654, NULL),
 (3, 8, 9999, 654, NULL);
 
 -- --------------------------------------------------------
@@ -293,6 +319,13 @@ CREATE TABLE `venta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`id_factura`, `id_info_libro`, `cantidad`, `total`) VALUES
+(1, 2, 8, 5232);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -399,27 +432,27 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `categoria_libro`
 --
 ALTER TABLE `categoria_libro`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `finanzas`
 --
 ALTER TABLE `finanzas`
-  MODIFY `id_finanzas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_finanzas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `forma_de_pago`
 --
