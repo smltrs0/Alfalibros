@@ -194,6 +194,24 @@
 
 				break;
 
+				case 'user_level':
+
+					$sentencia = self::$connection->query('SELECT *
+													       FROM user_level');
+
+					return $sentencia->fetchAll();
+
+				break;
+
+				case 'pregunta_de_seguridad':
+
+					$sentencia = self::$connection->query('SELECT *
+													       FROM pregunta_de_seguridad');
+
+					return $sentencia->fetchAll();
+
+				break;
+
 				
 				default:
 					die('tabla '.$table.' no configurada o inexistente');
@@ -292,6 +310,32 @@
 			$datos = $sentencia->fetch();
 
 			return $datos['activos'];
+		}
+
+		static public function new_file_path($table, $file)
+		{
+			if(!self::$connection)
+			{
+				self::$connection = db_connector::get_connection();
+			}
+
+			switch($table)
+			{
+				case 'usuario':
+					
+						$extension = explode('.', $file['name']);
+						$new_name = self::random_string(20).'.'.$extension[1];
+						$destination = USER_IMAGE . $new_name;
+						return $destination;
+
+				break;
+				
+				default:
+
+					die('LA TABLA '.$table.' NO ESTA CONFIGURADA.');
+
+				break;
+			}
 		}
 	}
 

@@ -1,18 +1,19 @@
 <?php
 
-	// CARGANDO LAS CONSTANTES DE RUTAS
-    require('../config.path.php');
-
-    // CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
-    require(TOOLS.'db_connector.php');
-    require(TOOLS.'check.php');
-    require(TOOLS.'cleaning.php');
-    require(TOOLS.'get.php');
-
-    require(MODELS.'libro.php');
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
+		// CARGANDO LAS CONSTANTES DE RUTAS
+	    require('../config.path.php');
+
+	    // CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
+	    require(TOOLS.'db_connector.php');
+	    require(TOOLS.'check.php');
+	    require(TOOLS.'cleaning.php');
+	    require(TOOLS.'get.php');
+
+	    require(MODELS.'libro.php');
+	    
 		$titulo = $_POST['titulo'];
 		$autor = $_POST['autor'];
 		$categoria = $_POST['categoria'];

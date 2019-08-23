@@ -91,13 +91,43 @@
 
 				break;
 
-				default:
-					echo 'La tabla no existe.';
+				case 'user_level':
 
-					return true;
-					// SE RETORNA TRUE PORQUE EL VALOR TRUE ES CONSIDERADO COMO ERROR O COMO UN ID DUPLICADO
+					$sentencia = self::$connection->prepare('SELECT id_user_level
+															 FROM user_level
+															 WHERE id_user_level = :id');
+
+					$sentencia->execute(array(':id' => $id));
+
+					if($sentencia->fetch())
+					{
+						return true;
+					}
 
 				break;
+
+				case 'pregunta_de_seguridad':
+
+					$sentencia = self::$connection->prepare('SELECT id
+															 FROM pregunta_de_seguridad
+															 WHERE id = :id');
+
+					$sentencia->execute(array(':id' => $id));
+
+					if($sentencia->fetch())
+					{
+						return true;
+					}
+
+				break;
+
+				default:
+
+					die('LA TABLA '.$table.' NO ESTA CONFIGURADA.');
+
+				break;
+
+				return false;
 			}
 		}
 
@@ -147,6 +177,49 @@
 				die('NO HAY SUFICIENTES EJEMPLARES');
 				// return false;
 			}
+		}
+
+		static public function email($email)
+		{
+			if (filter_var($email, FILTER_VALIDATE_EMAIL))
+			{
+    			return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		static public function cleaned_input($input)
+		{
+			$aux = trim($input);		// "Trim" Limpia los espacios al inicio y final de los caracteres
+			$aux = filter_var($aux, FILTER_SANITIZE_STRING); // LA FUNCION FILTER_VAR CON EL METODO FILTER_SANITIZE_STRING ELIMINA TODO TIPO DE ETIQUETAS HTML
+			
+			if($input == $aux)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		static public function image($img)
+		{
+			$tipo_de_archivo = $img['type'];
+			$tamaño_archivo = $img['size'];
+
+			if(($tipo_de_archivo == 'image/jpeg') || ($tipo_de_archivo == 'image/png'))
+			{
+				if(!($tamaño_archivo > 4000000))
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 	}
 
