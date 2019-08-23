@@ -33,9 +33,7 @@
 	// define('SCRIPTS',			ROOT_PATH.'scripts/');
 	// define('GRAPHICS',			SCRIPTS.'js/graphics/');
 	define('UPLOADED_FILES',		ROOT_PATH.'uploaded_files/');
+	define('USER_IMAGE',			UPLOADED_FILES.'users/');
 	define('VIEWS_WEB',				ROOT_PATH.'views/web/');
 	define('VIEWS_MODAL',			ROOT_PATH.'views/modal/');
-
-
-
 ?>
