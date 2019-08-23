@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-08-2019 a las 16:38:05
+-- Tiempo de generación: 23-08-2019 a las 18:24:21
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -189,7 +189,8 @@ CREATE TABLE `info_libro` (
 INSERT INTO `info_libro` (`id_info_libro`, `id_libro`, `cantidad`, `precio`, `ruta_imagen`) VALUES
 (1, 3, 7619, 12, NULL),
 (2, 5, 98757, 654, NULL),
-(3, 8, 9999, 654, NULL);
+(3, 8, 9999, 654, NULL),
+(4, 9, 6486, 654684, 'uploaded_files/img_books/vyniurqdu3oqjasqwcmb.jpeg');
 
 -- --------------------------------------------------------
 
@@ -218,20 +219,30 @@ INSERT INTO `libro` (`id_libro`, `titulo`, `id_autor`, `id_categoria`, `fecha_la
 (5, 'Inferno', 1, 9, '2020-02-02', 'ASDFASDF'),
 (6, 'Prueba con imn', 2, 2, '2018-11-30', 'prueba con imagen'),
 (7, 'Prueba con imn', 2, 2, '2018-11-30', 'prueba con imagen'),
-(8, 'Prueba img', 2, 2, '2018-11-30', 'prueba');
+(8, 'Prueba img', 2, 2, '2018-11-30', 'prueba'),
+(9, 'prueba', 3, 2, '2017-10-29', 'prueba');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pregunta`
+-- Estructura de tabla para la tabla `pregunta_de_seguridad`
 --
 
-CREATE TABLE `pregunta` (
+CREATE TABLE `pregunta_de_seguridad` (
   `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `pregunta` text NOT NULL,
-  `respuesta` text NOT NULL
+  `pregunta` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pregunta_de_seguridad`
+--
+
+INSERT INTO `pregunta_de_seguridad` (`id`, `pregunta`) VALUES
+(1, 'Nombre de mi mejor amigo'),
+(2, 'Lugar de nacimiento'),
+(3, 'Nombre de mi mascota'),
+(4, 'Lugar de nacimiento de mi madre'),
+(5, 'Nombre de mi primer colegio');
 
 -- --------------------------------------------------------
 
@@ -272,10 +283,30 @@ INSERT INTO `tipo_de_documento` (`id_tipo_de_documento`, `tipo_de_documento`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Estructura de tabla para la tabla `user_level`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE `user_level` (
+  `id_user_level` int(11) NOT NULL,
+  `level` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `user_level`
+--
+
+INSERT INTO `user_level` (`id_user_level`, `level`) VALUES
+(1, 'Administrador'),
+(2, 'Encargado'),
+(3, 'Inactivo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL,
   `apellido` text NOT NULL,
@@ -283,28 +314,10 @@ CREATE TABLE `usuarios` (
   `email` varchar(50) NOT NULL,
   `clave` varchar(255) NOT NULL,
   `id_pregunta` int(11) NOT NULL,
-  `cargo` int(11) NOT NULL
+  `respuesta_pregunta` int(11) NOT NULL,
+  `user_level` int(11) NOT NULL,
+  `ruta_imagen` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario_tipo`
---
-
-CREATE TABLE `usuario_tipo` (
-  `id` int(11) NOT NULL,
-  `nombre` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuario_tipo`
---
-
-INSERT INTO `usuario_tipo` (`id`, `nombre`) VALUES
-(1, 'Inactivo'),
-(2, 'Administrador'),
-(3, 'Usuario');
 
 -- --------------------------------------------------------
 
@@ -385,11 +398,10 @@ ALTER TABLE `libro`
   ADD KEY `fk_id_categoria` (`id_categoria`);
 
 --
--- Indices de la tabla `pregunta`
+-- Indices de la tabla `pregunta_de_seguridad`
 --
-ALTER TABLE `pregunta`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_usuario` (`id_usuario`);
+ALTER TABLE `pregunta_de_seguridad`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -405,18 +417,18 @@ ALTER TABLE `tipo_de_documento`
   ADD PRIMARY KEY (`id_tipo_de_documento`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indices de la tabla `user_level`
 --
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tipo` (`cargo`),
-  ADD KEY `id_pregunta` (`id_pregunta`);
+ALTER TABLE `user_level`
+  ADD PRIMARY KEY (`id_user_level`);
 
 --
--- Indices de la tabla `usuario_tipo`
+-- Indices de la tabla `usuario`
 --
-ALTER TABLE `usuario_tipo`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tipo` (`user_level`),
+  ADD KEY `FK2_id_pregunta` (`id_pregunta`);
 
 --
 -- Indices de la tabla `venta`
@@ -463,17 +475,17 @@ ALTER TABLE `forma_de_pago`
 -- AUTO_INCREMENT de la tabla `info_libro`
 --
 ALTER TABLE `info_libro`
-  MODIFY `id_info_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_info_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT de la tabla `pregunta`
+-- AUTO_INCREMENT de la tabla `pregunta_de_seguridad`
 --
-ALTER TABLE `pregunta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pregunta_de_seguridad`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
@@ -485,15 +497,15 @@ ALTER TABLE `proveedor`
 ALTER TABLE `tipo_de_documento`
   MODIFY `id_tipo_de_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT de la tabla `user_level`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `user_level`
+  MODIFY `id_user_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `usuario_tipo`
---
-ALTER TABLE `usuario_tipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --
@@ -525,22 +537,17 @@ ALTER TABLE `libro`
   ADD CONSTRAINT `libro_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria_libro` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `pregunta`
---
-ALTER TABLE `pregunta`
-  ADD CONSTRAINT `pregunta_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
   ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`cod_tipo_documento`) REFERENCES `tipo_de_documento` (`id_tipo_de_documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `usuarios`
+-- Filtros para la tabla `usuario`
 --
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`cargo`) REFERENCES `usuario_tipo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `FK2_id_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_de_seguridad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`user_level`) REFERENCES `user_level` (`id_user_level`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `venta`
