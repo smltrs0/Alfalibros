@@ -1,2 +1,1 @@
 Para no mover algo que no debo con estas clases muevelas tu a la carpeta de models para borrar esta carpeta
-Te deje con db_connector antiguo para que lo que tienes siga funcionando, pero adaptalo al nuevo, solo es una funcion que retorna la conexion y ya, aunque estoy trabajando con conexiones unicas por documento. es decir nunca se generaran conexiones innecesarias, por eso siempre verifica si la propiedad conexion de cada instancia esta seteada, si no lo esta pues llama a db_connector::get_connection()

@@ -13,6 +13,12 @@
 			return $fecha;
 		}
 
+		static public function today_year()
+		{
+			$fecha = getdate();
+			return $fecha['year'];
+		}
+
 		static public function last_id($table)
 		{
 			if(!self::$connection)
@@ -251,7 +257,9 @@
 				break;
 				
 				default:
-					# code...
+
+					die('LA TABLA'.$table.' NO ESTA CONFIGURADA.');
+
 				break;
 			}
 		}
@@ -336,6 +344,119 @@
 
 				break;
 			}
+		}
+
+		static public function split_month($date)
+		{
+			$datos = explode('-', $date);
+
+			return $datos[1];
+		}
+
+		static public function last_year_from($table)
+		{
+			if(!self::$connection)
+			{
+				self::$connection = db_connector::get_connection();
+			}
+
+			switch($table)
+			{
+				case 'finanzas':
+
+					$last_id = self::last_id('finanzas');
+					
+					$sentencia = self::$connection->prepare('SELECT SUBSTRING_INDEX(fecha,:split_sign,1)
+														     FROM finanzas
+														     WHERE id_finanzas = :last_id');
+
+					$sentencia->execute(array(':split_sign'	=> '-',
+											  ':last_id' 	=> $last_id));
+
+					$año = $sentencia->fetch();
+
+					return $año[0];
+
+				break;
+				
+				default:
+					
+					die('LA TABLA'.$table.' NO ESTA CONFIGURADA.');
+
+				break;
+			}
+		}
+
+		static public function last_date_from($table)
+		{
+			if(!self::$connection)
+			{
+				self::$connection = db_connector::get_connection();
+			}
+
+			switch($table)
+			{
+				case 'finanzas':
+
+					$last_id = self::last_id('finanzas');
+					
+					$sentencia = self::$connection->prepare('SELECT fecha
+														     FROM finanzas
+														     WHERE id_finanzas = :last_id');
+
+					$sentencia->execute(array(':last_id' => $last_id));
+
+					$fecha = $sentencia->fetch();
+
+					return $fecha['fecha'];
+
+				break;
+				
+				default:
+					
+					die('LA TABLA'.$table.' NO ESTA CONFIGURADA.');
+
+				break;
+			}
+		}
+
+		static public function values_dashboard_graphic()
+		{
+			$año_actual = self::today_year();
+			$año_ultima_venta = self::last_year_from('finanzas');
+
+			if($año_actual == $año_ultima_venta)
+			{
+				$fecha_actual = self::today_date();
+				$fecha_ultima_venta = self::last_date_from('finanzas');
+
+				if(self::split_month($fecha_actual) >= self::split_month($fecha_ultima_venta))
+				{
+					
+					echo 'TODO EN ORDEN';
+				}
+				else
+				{
+					die('NO PUEDE EXISTIR UNA VENTA CON UN MES SUPERIOR AL MES ACTUAL.');
+				}
+
+
+			}
+			else
+			{
+				if($año_actual > $año_ultima_venta)
+				{
+					die('NO SE HAN REALIZADO VENTAS ESTE AÑO.');
+				}
+				else
+				{
+					die('NO PUEDE EXISTIR UNA VENTA CON UN AÑO SUPERIOR A LA FECHA ACTUAL.');
+				}
+			}
+
+
+			
+
 		}
 	}
 

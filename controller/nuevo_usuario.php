@@ -24,18 +24,6 @@
 		// $respuesta = $_POST['respuesta'];
 		// $img = $_FILES['user_image'];
 
-		$nombre = 'Oscar';
-		$apellido = 'Ruiz';
-		$cedula = '25695517';
-		$email = 'oscaralexruiz@gmail.com';
-		$username = 'mr_roiz';
-		$user_level = '2';
-		$pass = '25695517';
-		$rep_pass = '25695517';
-		$pregunta = '2';
-		$respuesta = 'awef';
-		// $img = $_FILES['user_image'];
-
 		$usuario = new usuario();
 
 		if(!empty($img['name']))
