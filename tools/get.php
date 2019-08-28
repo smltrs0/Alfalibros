@@ -13,12 +13,6 @@
 			return $fecha;
 		}
 
-		static public function today_year()
-		{
-			$fecha = getdate();
-			return $fecha['year'];
-		}
-
 		static public function last_id($table)
 		{
 			if(!self::$connection)
@@ -348,43 +342,16 @@
 
 		static public function split_month($date)
 		{
-			$datos = explode('-', $date);
+			$month = explode('-', $date);
 
-			return $datos[1];
+			return $month[1];
 		}
 
-		static public function last_year_from($table)
+		static public function split_year($date)
 		{
-			if(!self::$connection)
-			{
-				self::$connection = db_connector::get_connection();
-			}
+			$year = explode('-', $date);
 
-			switch($table)
-			{
-				case 'finanzas':
-
-					$last_id = self::last_id('finanzas');
-					
-					$sentencia = self::$connection->prepare('SELECT SUBSTRING_INDEX(fecha,:split_sign,1)
-														     FROM finanzas
-														     WHERE id_finanzas = :last_id');
-
-					$sentencia->execute(array(':split_sign'	=> '-',
-											  ':last_id' 	=> $last_id));
-
-					$año = $sentencia->fetch();
-
-					return $año[0];
-
-				break;
-				
-				default:
-					
-					die('LA TABLA'.$table.' NO ESTA CONFIGURADA.');
-
-				break;
-			}
+			return $year[0];
 		}
 
 		static public function last_date_from($table)
@@ -397,18 +364,13 @@
 			switch($table)
 			{
 				case 'finanzas':
-
-					$last_id = self::last_id('finanzas');
 					
-					$sentencia = self::$connection->prepare('SELECT fecha
-														     FROM finanzas
-														     WHERE id_finanzas = :last_id');
-
-					$sentencia->execute(array(':last_id' => $last_id));
+					$sentencia = self::$connection->query('SELECT MAX(fecha)
+														     FROM finanzas');
 
 					$fecha = $sentencia->fetch();
 
-					return $fecha['fecha'];
+					return $fecha['MAX(fecha)'];
 
 				break;
 				
@@ -420,10 +382,15 @@
 			}
 		}
 
+		static public function month_lenght($date)
+		{
+			return date('t', strtotime($date));
+		}
+
 		static public function values_dashboard_graphic()
 		{
-			$año_actual = self::today_year();
-			$año_ultima_venta = self::last_year_from('finanzas');
+			$año_actual = self::split_year(self::today_date());
+			$año_ultima_venta = self::split_year(self::last_date_from('finanzas'));
 
 			if($año_actual == $año_ultima_venta)
 			{
@@ -432,12 +399,53 @@
 
 				if(self::split_month($fecha_actual) >= self::split_month($fecha_ultima_venta))
 				{
-					
-					echo 'TODO EN ORDEN';
+					if(!self::$connection)
+					{
+						self::$connection = db_connector::get_connection();
+					}
+
+					for ($i= 1; $i <= self::split_month($fecha_ultima_venta); $i++)
+					{
+						if($i == self::split_month($fecha_ultima_venta))
+						{
+							$fin_mes = $fecha_ultima_venta;
+						}
+						else
+						{
+							$fin_mes = $año_ultima_venta.'-'.$i.'-'.self::month_lenght($año_ultima_venta.'-'.$i.'-1');
+						}
+
+						$inicio_mes = $año_ultima_venta.'-'.$i.'-1';
+
+						$sentencia = self::$connection->prepare('SELECT SUM(activos)
+																 FROM finanzas
+																 WHERE fecha BETWEEN CAST(:inicio_mes AS DATE) AND CAST(:fin_mes AS DATE)');
+
+						$sentencia->execute(array(':inicio_mes'	=> $inicio_mes,
+												  ':fin_mes'	=> $fin_mes));
+
+						$sumatoria_por_mes = $sentencia->fetch();
+
+						$values[$i] = round($sumatoria_por_mes['SUM(activos)'], 2);
+
+					}
+
+					// BUCLE SIMPLEMENTE PARA COMPLETAR EL ARREGLO A LOS 12 MESES DEL AÑO SI ESTE NO CULMINA PARA EVITAR PROBLEMAS PROXIMOS
+					if(count($values) < 12)
+					{
+						for($i = self::split_month($fecha_ultima_venta); $i <= 12; $i++)
+						{
+							$values[$i] = NULL;
+						}
+
+					}
+
+					return $values;
 				}
 				else
 				{
-					die('NO PUEDE EXISTIR UNA VENTA CON UN MES SUPERIOR AL MES ACTUAL.');
+					return $values = array(1,1,1,1,1,1,1,1,1,1,1,1,1);
+					// die('NO PUEDE EXISTIR UNA VENTA CON UN MES SUPERIOR AL MES ACTUAL.');
 				}
 
 
@@ -446,11 +454,13 @@
 			{
 				if($año_actual > $año_ultima_venta)
 				{
-					die('NO SE HAN REALIZADO VENTAS ESTE AÑO.');
+					return $values= array(2,2,2,2,2,2,2,2,2,2,2,2,2);
+					// die('NO SE HAN REALIZADO VENTAS ESTE AÑO.');
 				}
 				else
 				{
-					die('NO PUEDE EXISTIR UNA VENTA CON UN AÑO SUPERIOR A LA FECHA ACTUAL.');
+					return $values= array(3,3,3,3,3,3,3,3,3,3,3,3,3);
+					// die('NO PUEDE EXISTIR UNA VENTA CON UN AÑO SUPERIOR A LA FECHA ACTUAL.');
 				}
 			}
 
