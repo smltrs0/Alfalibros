@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-08-2019 a las 18:24:21
+-- Tiempo de generación: 28-08-2019 a las 18:02:41
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -124,7 +124,14 @@ CREATE TABLE `factura` (
 --
 
 INSERT INTO `factura` (`id_factura`, `id_cliente`, `cod_formapago`, `fecha_facturacion`, `IVA`, `total_factura`) VALUES
-(1, 1, 1, '2019-08-13', 627.84, 5859.84);
+(29, 2, 1, '2019-08-28', 17.28, 161.28),
+(30, 2, 2, '2019-08-28', 64.8, 604.8),
+(31, 1, 1, '2019-08-28', 21.6, 201.6),
+(32, 2, 2, '2019-08-28', 6121.44, 57133.4),
+(33, 3, 2, '2019-08-28', 112.32, 1048.32),
+(34, 2, 2, '2019-08-28', 14.4, 134.4),
+(35, 1, 2, '2019-08-28', 77.76, 725.76),
+(36, 2, 1, '2019-08-28', 1648.08, 15382.1);
 
 -- --------------------------------------------------------
 
@@ -145,7 +152,14 @@ CREATE TABLE `finanzas` (
 --
 
 INSERT INTO `finanzas` (`id_finanzas`, `entrada`, `salida`, `activos`, `fecha`) VALUES
-(1, 5859.84, 0, 5859.84, '2019-08-13');
+(29, 161.28, 0, 161000, '2019-08-28'),
+(30, 604.8, 0, 76006.1, '2019-07-28'),
+(31, 201.6, 0, 96007.7, '2019-06-28'),
+(32, 57133.4, 0, 58101.1, '2019-05-28'),
+(33, 1048.32, 0, 59149.4, '2019-04-28'),
+(34, 134.4, 0, 59283.8, '2019-03-28'),
+(35, 725.76, 0, 60009.6, '2019-02-28'),
+(36, 15382.1, 0, 75391.7, '2019-01-28');
 
 -- --------------------------------------------------------
 
@@ -187,9 +201,9 @@ CREATE TABLE `info_libro` (
 --
 
 INSERT INTO `info_libro` (`id_info_libro`, `id_libro`, `cantidad`, `precio`, `ruta_imagen`) VALUES
-(1, 3, 7619, 12, NULL),
-(2, 5, 98757, 654, NULL),
-(3, 8, 9999, 654, NULL),
+(1, 3, 670, 12, NULL),
+(2, 5, 98451, 654, NULL),
+(3, 8, 657, 654, NULL),
 (4, 9, 6486, 654684, 'uploaded_files/img_books/vyniurqdu3oqjasqwcmb.jpeg');
 
 -- --------------------------------------------------------
@@ -337,7 +351,14 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`id_factura`, `id_info_libro`, `cantidad`, `total`) VALUES
-(1, 2, 8, 5232);
+(29, 1, 12, 144),
+(30, 1, 45, 540),
+(31, 1, 15, 180),
+(32, 2, 78, 51012),
+(33, 1, 78, 936),
+(34, 1, 10, 120),
+(35, 1, 54, 648),
+(36, 2, 21, 13734);
 
 --
 -- Índices para tablas volcadas
@@ -460,12 +481,12 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT de la tabla `finanzas`
 --
 ALTER TABLE `finanzas`
-  MODIFY `id_finanzas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_finanzas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT de la tabla `forma_de_pago`
 --
