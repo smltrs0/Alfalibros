@@ -20,8 +20,14 @@
                             </form>
                         </div>
                     </div>
-                     <div class="header-left" style="margin-top: 15px;">
-                      <a href="#"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success">11</span></a>
+                     <div class="header-left" >
+                        <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success">11</span></a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li></i><a href="#">Libro agregado</a></li>
+                            <li class="btn btn-block"><a href="libros">Terminar compra </a></li>  
+                        </ul>
+                    </li>
                          
                     </div>
  
