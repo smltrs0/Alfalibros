@@ -20,7 +20,11 @@
                             </form>
                         </div>
                     </div>
-
+                     <div class="header-left" style="margin-top: 15px;">
+                      <a href="#"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success">11</span></a>
+                         
+                    </div>
+ 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">

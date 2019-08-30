@@ -32,7 +32,8 @@ require(TEMPLATES.'breadcrumb.php');
     <div class="card-deck">
         <?php if ($libros): ?>
             <?php foreach ($libros as $key): ?>
-                <a href="detalle_libro?id=<?php echo $key['id_info_libro']?>" class="card mb-2">
+              <div class="card mb-2">
+                <a href="detalle_libro?id=<?php echo $key['id_info_libro']?>">
                   <!--Aqui tendira que ir ?id=id para procesarlo por get-->
                     <?php if(!is_null($key['ruta_imagen'])): ?>
                         <!-- class height-27 mantiene las imagenes siempre en 275 px -->
@@ -40,23 +41,25 @@ require(TEMPLATES.'breadcrumb.php');
                     <?php else: ?>
                          <img class="card-img-top img-fluid height-275" src="images/no_image.png" alt="Card image cap">
                     <?php endif ?>
+                     </a>
                         <div class="card-body">
                             <h4 class="card-title"><?php echo $key['titulo']; ?></h4>
-                            <p class="card-text">Precio: <?php echo $key['precio']; ?> BsS</p>
+                            <p class="text-dark"><strong>Precio:</strong> <?php echo $key['precio']; ?> BsS</p>
+                            <p class="card-text"><small class="text-dark"><?php echo $key['autor'] ?></small></p>
 
                             <?php if ($key['cantidad'] > 0): ?>
 
                                 <strong class="text-success">DISPONIBLE</strong>
+                                <button class="mt-1 btn-block btn-outline-primary btn-sm">Agregar al carrito</button>
 
                             <?php else: ?>
 
                                 <p class="text-danger">NO DISPONIBLE</p>
                                 
                             <?php endif ?>
-
-                            <p class="card-text"><small class="text-dark"><?php echo $key['autor'] ?></small></p>
                         </div>
-                </a>
+               
+              </div>
             <?php endforeach ?>
 
         <?php else: ?>

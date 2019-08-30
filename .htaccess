@@ -46,7 +46,7 @@ RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
   RewriteRule .* - [F]
 
 ## Pagina de error personalizada 403, 404 and 500
-ErrorDocument 404 http://localhost/frontend/dashboard/error/404.html
+ErrorDocument 404 http://localhost/Alfalibros/views/error/404.html
 ErrorDocument 500 http://example.com/500/
 
 ## Ejemplo de las redirecciones
