@@ -25,7 +25,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success">11</span></a>
                         <ul class="sub-menu children dropdown-menu">
                             <li></i><a href="#">Libro agregado</a></li>
-                            <li class="btn btn-block"><a href="libros">Terminar compra </a></li>  
+                            <li><button>terminar compra</button></li>  
                         </ul>
                     </li>
                          

@@ -95,7 +95,7 @@
 
 			$sentencia->execute(array(':id' => $id));
 
-			$libro = $sentencia->fetch();
+			$libro = $sentencia->fetch(PDO::FETCH_ASSOC);
 
 			return $libro;
 		}

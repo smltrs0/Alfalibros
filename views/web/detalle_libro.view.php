@@ -23,6 +23,7 @@ require(TEMPLATES.'breadcrumb.php');
       <div class="card-header mb-3">
            <div class="text-center">
                 <strong><?php echo $libro['titulo']; ?></strong>
+               
            </div>
             </div>
     <div class="row">
