@@ -13,7 +13,7 @@ echo session_id();
 // como la consulta la vamos a hacer usando ajax... 
 // de esta manera verificamos la existencia del producto
    $id_request = $_POST['product_code'];
-   // $cantidad = $_POST['cantidad'];
+   $cantidad = $_POST['product_cantidad'];
 
     $libro = get::libro_by_id($id_request);
 echo "<pre>";
@@ -33,7 +33,8 @@ if(isset($libro) && !empty($libro))
 			$item_array = array(
 			'item_id' => $libro["id_libro"],
 			'item_name' => $libro["titulo"],
-			'item_price' => $libro["precio"]
+			'item_price' => $libro["precio"],
+			'item_loot'=> $cantidad
 			);
 
 			$_SESSION["carrito"][md5($libro["id_libro"])] = $item_array;
@@ -52,7 +53,8 @@ if(isset($libro) && !empty($libro))
 			$item_array = array(
 			'item_id' => $libro["id_libro"],
 			'item_name' => $libro["titulo"],
-			'item_price' => $libro["precio"]
+			'item_price' => $libro["precio"],
+			'item_loot'=> $cantidad
 			);
 			$_SESSION["carrito"][md5($libro["id_libro"])] = $item_array;
 		}
@@ -77,9 +79,10 @@ echo "***************Esto es lo que imprimiria los productos agregados al carrit
 $sum=0;
 foreach($_SESSION["carrito"] as $keys => $values)
 {
-	echo "Nombre: ".$values["item_name"]."<br>";
+	echo "Nombre: ".$values["item_name"]."(".$values["item_loot"].")"."<br>";
 	echo sprintf("%01.2f",($values["item_price"] * 1))."<br>";// Con sprintf lo que hacemos es agregarle .00 para que sea mas agradable a la vista
-	$subtotal = ($values["item_price"] * 1);
+
+	$subtotal = ($values["item_price"] * $values["item_loot"]);
 	$sum += $subtotal;
 }
 
@@ -90,28 +93,7 @@ echo "Total Neto: ".$total;
 
 
 // Esto se encargara de mostrar y actualizar los elementos del carrito
-if(isset($_POST["load_cart"]) && $_POST["load_cart"]==1)
+if(isset($_POST["load_cart"]))
 {
 
-	if(isset($_SESSION["products"]) && count($_SESSION["products"])>0){ //if we have session variable
-		$cart_box = '<ul class="cart-products-loaded">';
-		$total = 0;
-		foreach($_SESSION["products"] as $product){ //loop though items and prepare html content
-			
-			//set variables to use them in HTML content below
-			$product_name = $product["product_name"]; 
-			$product_price = $product["product_price"];
-			$product_code = $product["product_code"];
-			$product_cantidad = $product["product_cantidad"];
-			
-			$cart_box .=  "<li> $product_name (Cantidad : $product_cantidad  |  ) &mdash; $currency ".sprintf("%01.2f", ($product_price * $product_cantidad)). " <a href=\"#\" class=\"remove-item\" data-code=\"$product_code\">&times;</a></li>";
-			$subtotal = ($product_price * $product_cantidad);
-			$total = ($total + $subtotal);
-		}
-		$cart_box .= "</ul>";
-		$cart_box .= '<div class="cart-products-total">Total : '.$currency.sprintf("%01.2f",$total).' <u><a href="pagar_carrito.php" title="Ver los itens y Procesar la compra">Terminar Compra</a></u></div>';
-		die($cart_box); //exit and output content
-	}else{
-		die("Tu carrito esta vacio"); //we have empty cart
-	}
 }

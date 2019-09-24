@@ -40,7 +40,7 @@
                                     echo "Tu carrito de compra esta vació";
                                 }
                              ?>
-                             <li><button class="btn btn-block bg-facebook">Procesar compra</button></li>
+                             <li><a href="controller/carrito_controller.php" class="btn btn-block bg-facebook">Procesar compra</a></li>
                         </ul>
                     </li>
                          
