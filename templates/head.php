@@ -1,6 +1,9 @@
 <?php 
 session_start();
-$total_items = count($_SESSION["carrito"]);
+
+if (isset($_SESSION["carrito"])) {
+   $total_items = count($_SESSION["carrito"]);
+}
 
                         ?>
 <!doctype html>

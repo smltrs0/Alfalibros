@@ -22,15 +22,22 @@
                     </div>
                      <div class="header-left" >
                         <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success"><?php echo $total_items; ?></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success"><?php if (isset($total_items)) {
+                           echo $total_items;
+                        } ?></span></a>
                         <ul class="sub-menu children dropdown-menu">
                             <?php 
-                                //Listando los productos agregados al carrito
-                                foreach($_SESSION["carrito"] as $keys => $values)
+                                if (isset($_SESSION["carrito"])) 
                                 {
-                                    echo "<li><a>".$values["item_name"]."(x1)</a></li><br>";
-                                    echo $subtotal = ($values["item_price"] * 1);
-                                  
+                                    //Listando los productos agregados al carrito
+                                    foreach($_SESSION["carrito"] as $keys => $values)
+                                    {
+                                        echo "<li><a>".$values["item_name"]."(x1)</a></li><br>";
+                                        echo $subtotal = ($values["item_price"] * 1);
+                                      
+                                    }
+                                }else{
+                                    echo "Tu carrito de compra esta vació";
                                 }
                              ?>
                              <li><button class="btn btn-block bg-facebook">Procesar compra</button></li>

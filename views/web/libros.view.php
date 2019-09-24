@@ -97,7 +97,7 @@ $(document).ready(function(){
       button_content.html('Agregando...'); //Cambiamos el boton mientras se agrega
 
       $.ajax({ // Mandamos el id del libro para agregar los datos a la sesion
-        url: "carrito_controller.php",
+        url: "controller/carrito_controller.php",
         type: "POST",
         dataType:"json", // El JSON como siempre :v
         data: form_data
