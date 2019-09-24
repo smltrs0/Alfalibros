@@ -94,8 +94,9 @@ $(document).ready(function(){
   function actualizar_carrito() 
   { 
        $("#lista-carrito").load("controller/get_carrito.php");
-       console.log('ejecutado desde la function');
+       console.log('carrito actualizado');
   }
+  actualizar_carrito();
     $(".form-item").submit(function(e){
       var form_data = $(this).serialize();
       var button_content = $(this).find('button[type=submit]');

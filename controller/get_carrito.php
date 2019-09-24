@@ -11,7 +11,7 @@ session_start();
          }
 
              }else{
-         echo "Tu carrito de compra esta vació";
+         echo "<li class='list-group-item'>Tu carrito de compra esta vació</li>";
          }
 
 
