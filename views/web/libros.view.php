@@ -106,13 +106,11 @@ $(document).ready(function(){
        {
           console.log(data[item].item_name);
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<li class='list-group-item'>" + data[item].item_name +" <span class='badge badge-primary badge-pill'>"+ data[item].item_loot +"</span><button type='button' class='close'><span aria-hidden='true'>&times;</span></button></li></li>";
+         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  id='eliminar' data-id="+ data[item].item_id+"href='#' class='close'><span>&times;</span></button></li></li>";
         }
         $("#lista-carrito").html(listado);
     }       
             });
-      
-
   }
   actualizar_carrito();
     $(".form-item").submit(function(e){
@@ -136,7 +134,6 @@ $(document).ready(function(){
           if (data=='actualizado') 
           {
             console.log('producto actualizado');
-
           }
         },
               error: function (error) {
@@ -144,12 +141,10 @@ $(document).ready(function(){
               }
         
 
-
       })
      
       e.preventDefault(); // Permite que se pueda presionar nuevamente el boton
     });
-
 
 
   //al hacer click en el link remove-item Eliminar un articulo del carrito
