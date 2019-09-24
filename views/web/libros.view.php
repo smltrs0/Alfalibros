@@ -45,7 +45,7 @@ require(TEMPLATES.'breadcrumb.php');
                       <?php endif ?>
                        </a>
                           <div class="card-body">
-                                <input name="product_code" type="hidden" value="<?php echo $key['id_libro']; ?>">
+                                <input name="product_code" type="" value="<?php echo $key['id_info_libro']; ?>">
                               <h4 class="card-title"><?php echo $key['titulo']; ?></h4>
                               <p class="text-dark"><strong>Precio:</strong> <?php echo $key['precio']; ?> BsS</p>
                               <p class="card-text"><small class="text-dark"><?php echo $key['autor'] ?></small></p>

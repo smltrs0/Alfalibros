@@ -12,10 +12,10 @@ echo session_id();
 
 // como la consulta la vamos a hacer usando ajax... 
 // de esta manera verificamos la existencia del producto
-   // $id_request = $_POST['product_code'];
+   $id_request = $_POST['product_code'];
    // $cantidad = $_POST['cantidad'];
 
-    $libro = get::libro_by_id(2);
+    $libro = get::libro_by_id($id_request);
 echo "<pre>";
 print_r($libro);
 
@@ -42,6 +42,7 @@ if(isset($libro) && !empty($libro))
 			{
 				// Aqui se tendria que actualizar la cantidad 
 				echo '<script>alert("El producto ya se encuentra agregado");
+				console.log("El producto ya existe");
 				</script>';
 			}
 	}
@@ -86,3 +87,31 @@ echo "Subtotal: ".$sum."<br>";
 echo "IVA 12% :".($iva=(12 / 100) * $sum)."<br>";
 $total=($iva+$sum);
 echo "Total Neto: ".$total;
+
+
+// Esto se encargara de mostrar y actualizar los elementos del carrito
+if(isset($_POST["load_cart"]) && $_POST["load_cart"]==1)
+{
+
+	if(isset($_SESSION["products"]) && count($_SESSION["products"])>0){ //if we have session variable
+		$cart_box = '<ul class="cart-products-loaded">';
+		$total = 0;
+		foreach($_SESSION["products"] as $product){ //loop though items and prepare html content
+			
+			//set variables to use them in HTML content below
+			$product_name = $product["product_name"]; 
+			$product_price = $product["product_price"];
+			$product_code = $product["product_code"];
+			$product_cantidad = $product["product_cantidad"];
+			
+			$cart_box .=  "<li> $product_name (Cantidad : $product_cantidad  |  ) &mdash; $currency ".sprintf("%01.2f", ($product_price * $product_cantidad)). " <a href=\"#\" class=\"remove-item\" data-code=\"$product_code\">&times;</a></li>";
+			$subtotal = ($product_price * $product_cantidad);
+			$total = ($total + $subtotal);
+		}
+		$cart_box .= "</ul>";
+		$cart_box .= '<div class="cart-products-total">Total : '.$currency.sprintf("%01.2f",$total).' <u><a href="pagar_carrito.php" title="Ver los itens y Procesar la compra">Terminar Compra</a></u></div>';
+		die($cart_box); //exit and output content
+	}else{
+		die("Tu carrito esta vacio"); //we have empty cart
+	}
+}
