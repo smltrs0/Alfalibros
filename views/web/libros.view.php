@@ -99,13 +99,13 @@ $(document).ready(function(){
     url: "controller/get_carrito.php",
     success : function(data) 
     {
-      $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json
-         console.log(data);//objeto
+      $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
+         console.log(data);//objeto testeando :v
          var listado="";// Definimos para que no de error
-         for (var item in data)
+         for (var item in data)// Con el siclo for recorremos todo el objeto
        {
           console.log(data[item].item_name);
-          // Concatenamos los objetos existentes para imprimir la lista
+          // Concatenamos los objetos existentes para imprimir la lista de los productos
          listado += "<li class='list-group-item'>" + data[item].item_name +" <span class='badge badge-primary badge-pill'>"+ data[item].item_loot +"</span><button type='button' class='close'><span aria-hidden='true'>&times;</span></button></li></li>";
         }
         $("#lista-carrito").html(listado);
