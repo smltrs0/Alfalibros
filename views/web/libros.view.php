@@ -100,13 +100,15 @@ $(document).ready(function(){
     success : function(data) 
     {
       $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json
-     console.log(data);//objeto
-     for (var item_name in data)
-     {
-        console.log(data[item_name].item_name);
-
-      }
-     
+         console.log(data);//objeto
+         var listado="";// Definimos para que no de error
+         for (var item in data)
+       {
+          console.log(data[item].item_name);
+          // Concatenamos los objetos existentes para imprimir la lista
+         listado += "<li class='list-group-item'>" + data[item].item_name +" <span class='badge badge-primary badge-pill'>"+ data[item].item_loot +"</span><button type='button' class='close'><span aria-hidden='true'>&times;</span></button></li></li>";
+        }
+        $("#lista-carrito").html(listado);
     }       
             });
       
@@ -125,6 +127,7 @@ $(document).ready(function(){
         data: form_data,
         success:function(data)
         {
+          actualizar_carrito();
            $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json
           console.log(data);
           alert('Agregado al carrito');
@@ -146,13 +149,6 @@ $(document).ready(function(){
      
       e.preventDefault(); // Permite que se pueda presionar nuevamente el boton
     });
-
-
-   $("#boton-carrito").click(function(e){
-     actualizar_carrito();
-   });
-
-
 
 
 

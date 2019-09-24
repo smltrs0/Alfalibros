@@ -1,18 +1,5 @@
 <?php 
 session_start();
-         /* if (isset($_SESSION["carrito"])) 
-         {
-
-         	 
-         //Listando los productos agregados al carrito
-         foreach($_SESSION["carrito"] as $keys => $values)
-         {
-         echo " <li class='list-group-item'>".$values["item_name"]." <span class='badge badge-primary badge-pill'>".$values["item_loot"]."</span><button type='button' class='close' aria-label='Eliminar'><span aria-hidden='true'>&times;</span></button></li>";
-         }
-
-             }else{
-         echo "<li class='list-group-item'>Tu carrito de compra esta vació</li>";
-         }*/
 
 echo json_encode($_SESSION['carrito']);
 /*
