@@ -21,31 +21,18 @@
                         </div>
                     </div>
                      <div class="header-left" >
-                        <li class="menu-item-has-children dropdown">
+                        <li class="menu-item-has-children dropdown" id="boton-carrito">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success"><?php if (isset($total_items)) {
                            echo $total_items;
                         } ?></span></a>
-                        <ul class="sub-menu children dropdown-menu">
                        
+                        <ul class="sub-menu children dropdown-menu">
+                        <div id="lista-carrito"></div>
 
 
-                            <?php 
-                                if (isset($_SESSION["carrito"])) 
-                                {
-                                    //Listando los productos agregados al carrito
-                                    foreach($_SESSION["carrito"] as $keys => $values)
-                                    {
-                                        echo " <li class='list-group-item'>".$values["item_name"]." <span class='badge badge-primary badge-pill'>".$values["item_loot"]."</span><button type='button' class='close' aria-label='Eliminar'><span aria-hidden='true'>&times;</span></button></li>";
-
-                                        
-                                      
-                                    }
-                                }else{
-                                    echo "Tu carrito de compra esta vació";
-                                }
-                             ?>
+                            
                              
-                             <li><a href="controller/carrito_controller.php" class="btn btn-block bg-facebook">Procesar compra</a></li>
+                             <li><a href="controller/carrito_controller.php" class="btn btn-block bg-instagram text-white">Procesar compra</a></li>
                         </ul>
                     </li>
                          

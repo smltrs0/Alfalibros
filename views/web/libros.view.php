@@ -91,6 +91,11 @@ require(TEMPLATES.'breadcrumb.php');
 
 <script>
 $(document).ready(function(){ 
+  function actualizar_carrito() 
+  { 
+       $("#lista-carrito").load("controller/get_carrito.php");
+       console.log('ejecutado desde la function');
+  }
     $(".form-item").submit(function(e){
       var form_data = $(this).serialize();
       var button_content = $(this).find('button[type=submit]');
@@ -102,37 +107,41 @@ $(document).ready(function(){
         data: form_data,
         success:function(data)
         {
+          actualizar_carrito();// Siempre que se agregue o actualize actualizamos la lista del carrito
           console.log(data);
-          alert('agregado al carrito');
+          alert('Agregado al carrito');
           // Como ya se agrego correctamente cambiamos el texto del boton
           button_content.html('Agregado <i class="fas fa-sync fa-spin"></i>');
           if (data=='actualizado') 
           {
             console.log('producto actualizado');
+
           }
-        }
+        },
+              error: function (error) {
+                  alert('error; ' + eval(error));
+              }
         
 
 
       })
-      
-      e.preventDefault();
+     
+      e.preventDefault(); // Permite que se pueda presionar nuevamente el boton
     });
 
-  //Show Items in Cart
-  $( ".cart-box").click(function(e) { //when user clicks on cart box
-    e.preventDefault(); 
-    $(".shopping-cart-box").fadeIn(); //display cart box
-    $("#shopping-cart-results").html('<img src="images/ajax-loader.gif">'); //show loading image
-    $("#shopping-cart-results" ).load( "carrito_controller.php", {"load_cart":"1"}); //Make ajax request using jQuery Load() & update results
-  });
-  
+
+   $("#boton-carrito").click(function(e){
+     actualizar_carrito();
+   });
+
+
+
   //al hacer click en el link remove-item Eliminar un articulo del carrito
   $("#shopping-cart-results").on('click', 'a.remove-item', function(e) {
     e.preventDefault(); 
-    var pcode = $(this).attr("data-code"); //get product code
+    var pcode = $(this).attr("data-code"); //tomamos el codigo del producto
     $(this).parent().fadeOut(); // Efecto fade para eliminar el elemento de la lista
-    $.getJSON( "carrito_controller.php", {"remove_code":pcode} , function(data){ //get Item count from Server
+    $.getJSON( "carrito_controller.php", {"remove_code":pcode} , function(data){ 
       $("#cart-info").html(data.items); // Actualizamos el contador de itens de cart-info
       $(".cart-box").trigger( "click" ); //trigger click on cart-box to update the items list
     });
