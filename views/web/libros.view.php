@@ -104,8 +104,12 @@ $(document).ready(function(){
         {
           console.log(data);
           alert('agregado al carrito');
-          // Como ya se agrego correctamente cambiamos el titulo del boton
-          button_content.html('Agregado');
+          // Como ya se agrego correctamente cambiamos el texto del boton
+          button_content.html('Agregado <i class="fas fa-sync fa-spin"></i>');
+          if (data=='actualizado') 
+          {
+            console.log('producto actualizado');
+          }
         }
         
 

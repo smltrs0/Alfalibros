@@ -40,10 +40,7 @@ if(isset($libro) && !empty($libro))
 
 		}else
 			{
-				// Aqui se tendria que actualizar la cantidad 
-				echo '<script>alert("El producto ya se encuentra agregado");
-				console.log("El producto ya existe");
-				</script>';
+				echo "actualizado";
 			}
 	}
 
@@ -66,14 +63,13 @@ else
 		echo '<script>alert("El producto No existe");
 				</script>';
 	}
-	echo "<pre>";
-print_r($_SESSION["carrito"]);
+	//echo "<pre>";
+//print_r($_SESSION["carrito"]);
 
 
 //session_destroy();
 //Eliminamos el id seleccionado del array
 //unset($_SESSION["carrito"][md5($libro["id_libro"])]); 
-
 
 
 echo "***************Esto es lo que imprimiria los productos agregados al carrito *********************</br>";
@@ -99,3 +95,5 @@ if(isset($_POST["load_cart"]))
 {
 
 }
+
+
