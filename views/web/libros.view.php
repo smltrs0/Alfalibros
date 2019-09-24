@@ -99,17 +99,19 @@ $(document).ready(function(){
       $.ajax({ // Mandamos el id del libro para agregar los datos a la sesion
         url: "controller/carrito_controller.php",
         type: "POST",
-        dataType:"json", // El JSON como siempre :v
-        data: form_data
-      }).done(function(data){ 
-        $("#cart-info").html(data.items); //total items in cart-info element
-        console.log('data');
-        button_content.html('Agregar al carrito'); //reset button text to original text
-        alert("Item added to Cart!"); //alert user
-        if($(".shopping-cart-box").css("display") == "block"){ //if cart box is still visible
-          $(".cart-box").trigger( "click" ); //trigger click to update the cart box.
+        data: form_data,
+        success:function(data)
+        {
+          console.log(data);
+          alert('agregado al carrito');
+          // Como ya se agrego correctamente cambiamos el titulo del boton
+          button_content.html('Agregado');
         }
+        
+
+
       })
+      
       e.preventDefault();
     });
 
@@ -119,12 +121,6 @@ $(document).ready(function(){
     $(".shopping-cart-box").fadeIn(); //display cart box
     $("#shopping-cart-results").html('<img src="images/ajax-loader.gif">'); //show loading image
     $("#shopping-cart-results" ).load( "carrito_controller.php", {"load_cart":"1"}); //Make ajax request using jQuery Load() & update results
-  });
-  
-  //Close Cart
-  $( ".close-shopping-cart-box").click(function(e){ //user click on cart box close link
-    e.preventDefault(); 
-    $(".shopping-cart-box").fadeOut(); //close cart-box
   });
   
   //al hacer click en el link remove-item Eliminar un articulo del carrito

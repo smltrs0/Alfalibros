@@ -1,7 +1,5 @@
 <?php 
 session_start();
-echo session_id();
-
      // CARGANDO LAS CONSTANTES DE RUTAS
     require_once('../config.path.php');
     // CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
@@ -16,8 +14,9 @@ echo session_id();
    $cantidad = $_POST['product_cantidad'];
 
     $libro = get::libro_by_id($id_request);
-echo "<pre>";
-print_r($libro);
+//echo "<pre>";
+//print_r($libro);
+//echo "/<pre>";
 
 
 
@@ -58,16 +57,19 @@ if(isset($libro) && !empty($libro))
 			);
 			$_SESSION["carrito"][md5($libro["id_libro"])] = $item_array;
 		}
-$total_items = count($_SESSION["carrito"]);
-echo $total_items; // Indicador de cantidad de objetos en el carrito
+
+//echo json_encode($_SESSION["carrito"], JSON_FORCE_OBJECT);
+
 }
 else 
 	{
 		echo '<script>alert("El producto No existe");
 				</script>';
 	}
-echo "***************Esto es lo que esta almacenado en la sesion*********************</br>";
+	echo "<pre>";
 print_r($_SESSION["carrito"]);
+
+
 //session_destroy();
 //Eliminamos el id seleccionado del array
 //unset($_SESSION["carrito"][md5($libro["id_libro"])]); 
