@@ -1,24 +1,24 @@
 <?php 
 session_start();
+echo session_id();
 
      // CARGANDO LAS CONSTANTES DE RUTAS
-    require('../config.path.php');
-
+    require_once('../config.path.php');
     // CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
-    require(TOOLS.'db_connector.php');
-    require(TOOLS.'check.php');
-    require(TOOLS.'cleaning.php');
-    require(TOOLS.'get.php');
+    require_once(TOOLS.'db_connector.php');
+    require_once(TOOLS.'check.php');
+    require_once(TOOLS.'cleaning.php');
+    require_once(TOOLS.'get.php');
 
 // como la consulta la vamos a hacer usando ajax... 
 // de esta manera verificamos la existencia del producto
    // $id_request = $_POST['product_code'];
    // $cantidad = $_POST['cantidad'];
 
-    $libro = get::libro_by_id(1);
+    $libro = get::libro_by_id(2);
 echo "<pre>";
 print_r($libro);
-echo "<pre>";
+
 
 
 
@@ -55,6 +55,8 @@ if(isset($libro) && !empty($libro))
 			);
 			$_SESSION["carrito"][md5($libro["id_libro"])] = $item_array;
 		}
+$total_items = count($_SESSION["carrito"]);
+echo $total_items; // Indicador de cantidad de objetos en el carrito
 }
 else 
 	{
@@ -64,7 +66,6 @@ else
 echo "***************Esto es lo que esta almacenado en la sesion*********************</br>";
 print_r($_SESSION["carrito"]);
 //session_destroy();
-
 //Eliminamos el id seleccionado del array
 //unset($_SESSION["carrito"][md5($libro["id_libro"])]); 
 
@@ -73,17 +74,15 @@ print_r($_SESSION["carrito"]);
 echo "***************Esto es lo que imprimiria los productos agregados al carrito *********************</br>";
 
 $sum=0;
-foreach($_SESSION["carrito"] as $keys => $values){
-
-echo "ID: ".$values["item_id"]."<br>";
-echo "Precio: ".$values["item_price"]."<br>"; 
-$sum += $values["item_price"];
-
+foreach($_SESSION["carrito"] as $keys => $values)
+{
+	echo "Nombre: ".$values["item_name"]."<br>";
+	echo sprintf("%01.2f",($values["item_price"] * 1))."<br>";// Con sprintf lo que hacemos es agregarle .00 para que sea mas agradable a la vista
+	$subtotal = ($values["item_price"] * 1);
+	$sum += $subtotal;
 }
 
-
 echo "Subtotal: ".$sum."<br>";
-echo "IVA: ".($iva=(12 / 100) * $sum)."<br>";
+echo "IVA 12% :".($iva=(12 / 100) * $sum)."<br>";
 $total=($iva+$sum);
-echo "Neto a pagar: ".$total;
-?>
+echo "Total Neto: ".$total;
