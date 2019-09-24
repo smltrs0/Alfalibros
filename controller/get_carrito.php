@@ -1,6 +1,6 @@
 <?php 
 session_start();
-          if (isset($_SESSION["carrito"])) 
+         /* if (isset($_SESSION["carrito"])) 
          {
 
          	 
@@ -12,9 +12,9 @@ session_start();
 
              }else{
          echo "<li class='list-group-item'>Tu carrito de compra esta vació</li>";
-         }
+         }*/
 
-
+echo json_encode($_SESSION['carrito']);
 /*
 
 $sum=0;

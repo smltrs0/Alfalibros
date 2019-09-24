@@ -93,8 +93,24 @@ require(TEMPLATES.'breadcrumb.php');
 $(document).ready(function(){ 
   function actualizar_carrito() 
   { 
-       $("#lista-carrito").load("controller/get_carrito.php");
-       console.log('carrito actualizado');
+    $.ajax({
+    "method":"POST",
+    dataType:"json",
+    url: "controller/get_carrito.php",
+    success : function(data) 
+    {
+      $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json
+     console.log(data);//objeto
+     for (var item_name in data)
+     {
+        console.log(data[item_name].item_name);
+
+      }
+     
+    }       
+            });
+      
+
   }
   actualizar_carrito();
     $(".form-item").submit(function(e){
@@ -109,8 +125,7 @@ $(document).ready(function(){
         data: form_data,
         success:function(data)
         {
-          actualizar_carrito();// Siempre que se agregue o actualize actualizamos la lista del carrito
-            $("#cantidad").html(data.items); //total items in cart-info element
+           $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json
           console.log(data);
           alert('Agregado al carrito');
           // Como ya se agrego correctamente cambiamos el texto del boton
@@ -136,6 +151,8 @@ $(document).ready(function(){
    $("#boton-carrito").click(function(e){
      actualizar_carrito();
    });
+
+
 
 
 

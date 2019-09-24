@@ -79,8 +79,7 @@ else
 
 }
 //session_destroy();
-	 $total_items = count($_SESSION["carrito"]); //contamos todos los items
-	echo json_encode(array('items'=>$total_items)); //output json
+	echo json_encode($_SESSION['carrito']);
 	//echo "<pre>";
 //print_r($_SESSION["carrito"]);
 
