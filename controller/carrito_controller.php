@@ -10,16 +10,17 @@ session_start();
 
 // como la consulta la vamos a hacer usando ajax... 
 // de esta manera verificamos la existencia del producto
-   $id_request = $_POST['product_code'];
-   $cantidad = $_POST['product_cantidad'];
 
-    $libro = get::libro_by_id($id_request);
+
 //echo "<pre>";
 //print_r($libro);
 //echo "/<pre>";
 
+if (isset($_POST['product_code'])) {
+	 $id_request = $_POST['product_code'];
+   $cantidad = $_POST['product_cantidad'];
 
-
+    $libro = get::libro_by_id($id_request);
 
 if(isset($libro) && !empty($libro))
 {
@@ -48,7 +49,7 @@ if(isset($libro) && !empty($libro))
 				'item_loot'=> $cantidad
 				);
 				$_SESSION["carrito"][md5($libro["id_libro"])] = $item_array;
-				echo "actualizado";
+				//echo "actualizado";
 
 			}
 	}
@@ -65,17 +66,26 @@ if(isset($libro) && !empty($libro))
 		}
 
 //echo json_encode($_SESSION["carrito"], JSON_FORCE_OBJECT);
-
+            
+ 
 }
 else 
 	{
 		echo "inexistente";
 	}
+
+
+
+
+}
+//session_destroy();
+	 $total_items = count($_SESSION["carrito"]); //contamos todos los items
+	echo json_encode(array('items'=>$total_items)); //output json
 	//echo "<pre>";
 //print_r($_SESSION["carrito"]);
 
 
-//session_destroy();
+
 //Eliminamos el id seleccionado del array
 
 

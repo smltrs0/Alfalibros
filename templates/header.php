@@ -22,9 +22,7 @@
                     </div>
                      <div class="header-left" >
                         <li class="menu-item-has-children dropdown" id="boton-carrito">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success"><?php if (isset($total_items)) {
-                           echo $total_items;
-                        } ?></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success"> <div id="cantidad"></div></span></a>
                        
                         <ul class="sub-menu children dropdown-menu">
                         <div id="lista-carrito"></div>

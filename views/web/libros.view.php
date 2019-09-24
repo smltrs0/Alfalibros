@@ -104,10 +104,12 @@ $(document).ready(function(){
       $.ajax({ // Mandamos el id del libro para agregar los datos a la sesion
         url: "controller/carrito_controller.php",
         type: "POST",
+        dataType:"json",
         data: form_data,
         success:function(data)
         {
           actualizar_carrito();// Siempre que se agregue o actualize actualizamos la lista del carrito
+            $("#cantidad").html(data.items); //total items in cart-info element
           console.log(data);
           alert('Agregado al carrito');
           // Como ya se agrego correctamente cambiamos el texto del boton
