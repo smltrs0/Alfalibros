@@ -35,7 +35,7 @@
                                     //Listando los productos agregados al carrito
                                     foreach($_SESSION["carrito"] as $keys => $values)
                                     {
-                                        echo " <li class='list-group-item'>".$values["item_name"]." (".$values["item_loot"].")</li>";
+                                        echo " <li class='list-group-item'>".$values["item_name"]." <span class='badge badge-primary badge-pill'>".$values["item_loot"]."</span><button type='button' class='close' aria-label='Eliminar'><span aria-hidden='true'>&times;</span></button></li>";
 
                                         
                                       
@@ -44,6 +44,7 @@
                                     echo "Tu carrito de compra esta vació";
                                 }
                              ?>
+                             
                              <li><a href="controller/carrito_controller.php" class="btn btn-block bg-facebook">Procesar compra</a></li>
                         </ul>
                     </li>

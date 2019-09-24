@@ -103,6 +103,7 @@ $(document).ready(function(){
         data: form_data
       }).done(function(data){ 
         $("#cart-info").html(data.items); //total items in cart-info element
+        console.log('data');
         button_content.html('Agregar al carrito'); //reset button text to original text
         alert("Item added to Cart!"); //alert user
         if($(".shopping-cart-box").css("display") == "block"){ //if cart box is still visible
