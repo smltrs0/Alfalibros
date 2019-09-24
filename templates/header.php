@@ -26,14 +26,18 @@
                            echo $total_items;
                         } ?></span></a>
                         <ul class="sub-menu children dropdown-menu">
+                       
+
+
                             <?php 
                                 if (isset($_SESSION["carrito"])) 
                                 {
                                     //Listando los productos agregados al carrito
                                     foreach($_SESSION["carrito"] as $keys => $values)
                                     {
-                                        echo "<li><a>".$values["item_name"]."(x1)</a></li><br>";
-                                        echo $subtotal = ($values["item_price"] * 1);
+                                        echo " <li class='list-group-item'>".$values["item_name"]." (".$values["item_loot"].")</li>";
+
+                                        
                                       
                                     }
                                 }else{

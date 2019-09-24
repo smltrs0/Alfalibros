@@ -1020,7 +1020,9 @@ header .form-inline {
     right: 0 !important;
     -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-    line-height: 35px; }
+    line-height: 35px; 
+    min-width: 400px;
+  }
     .header-left .dropdown .dropdown-menu p {
       font-size: 15px;
       margin: 0;
