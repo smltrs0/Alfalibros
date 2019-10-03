@@ -22,7 +22,8 @@ RewriteRule ^categorias$ categorias.php
 RewriteRule ^respaldo$ respaldo.php
 RewriteRule ^reportes$ reportes.php
 RewriteRule ^perfil$ perfil.php
-RewriteRule ^detalle_libro$ detalle_libro.php 
+RewriteRule ^detalle_libro$ detalle_libro.php
+RewriteRule ^procesar-compra$ procesar-compra.php 
 
 ##Bloquea determinadas requests que se unan para insercion de sql
 RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
@@ -46,7 +47,7 @@ RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
   RewriteRule .* - [F]
 
 ## Pagina de error personalizada 403, 404 and 500
-ErrorDocument 404 http://localhost/Alfalibros/views/error/404.html
+ErrorDocument 404 http://localhost/alfalibros-master/views/error/404.html
 ErrorDocument 500 http://example.com/500/
 
 ## Ejemplo de las redirecciones

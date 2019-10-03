@@ -108,7 +108,7 @@ $(document).ready(function(){
        {
           console.log(data[item].item_name);
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onClick='eliminar(this)' data-id="+ data[item].item_id+"href='#' class='close'><span>&times;</span></button></li></li>";
+         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onclick='eliminar()' data-id="+ data[item].item_id+"href='#' class='close'><span>&times;</span></button></li></li>";
         }
         $("#lista-carrito").html(listado);
         
