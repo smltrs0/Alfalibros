@@ -109,6 +109,7 @@ $(document).ready(function(){
          listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  id='eliminar' data-id="+ data[item].item_id+"href='#' class='close'><span>&times;</span></button></li></li>";
         }
         $("#lista-carrito").html(listado);
+         $("#lista-carrito").html(listado);
     }       
             });
   }

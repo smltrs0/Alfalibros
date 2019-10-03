@@ -30,7 +30,9 @@
 
                             
                              
-                             <li><a href="controller/carrito_controller.php" class="btn btn-block bg-instagram text-white">Procesar compra</a></li>
+                             <li><a href="controller/carrito_controller.php" class="btn bg-instagram text-white">Procesar compra</a>
+                                <a class="btn btn-danger" href="#">X limpiar carrito</a>
+                             </li>
                         </ul>
                     </li>
                          
