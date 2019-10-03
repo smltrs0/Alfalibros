@@ -22,16 +22,21 @@
                     </div>
                      <div class="header-left" >
                         <li class="menu-item-has-children dropdown" id="boton-carrito">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success"> <div id="cantidad"></div></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-shopping-cart"> </i><span class="badge badge-success"> <div id="cantidad">0</div></span></a>
                        
                         <ul class="sub-menu children dropdown-menu">
                         <div id="lista-carrito"></div>
 
-
-                            
-                             
-                             <li><a href="controller/carrito_controller.php" class="btn bg-instagram text-white">Procesar compra</a>
-                                <a class="btn btn-danger" href="#">X limpiar carrito</a>
+                             <li><a href="controller/carrito_controller.php" class="btn-block btn bg-instagram text-white">Procesar compra</a>
+                             </li>
+                             <li class="text-center">
+                                 <a class="btn-block btn" id="limpiar_carrito">
+                                    limpiar carrito de compra
+                                    <span class="fa-stack">
+                                      <i class="fa fa-shopping-cart fa-stack-1x"></i>
+                                      <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
+                                    </span>
+                                </a> 
                              </li>
                         </ul>
                     </li>

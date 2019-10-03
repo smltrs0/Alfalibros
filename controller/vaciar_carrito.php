@@ -5,5 +5,5 @@
 
 session_start();
 unset($_SESSION["carrito"]);
-
+echo "Carrito vacio";
  ?>

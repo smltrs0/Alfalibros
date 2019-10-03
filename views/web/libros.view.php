@@ -91,6 +91,8 @@ require(TEMPLATES.'breadcrumb.php');
 
 <script>
 $(document).ready(function(){ 
+
+  // Funcion para actualizar el carrito siempre que sufra cambios
   function actualizar_carrito() 
   { 
     $.ajax({
@@ -106,25 +108,35 @@ $(document).ready(function(){
        {
           console.log(data[item].item_name);
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  id='eliminar' data-id="+ data[item].item_id+"href='#' class='close'><span>&times;</span></button></li></li>";
+         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onClick='eliminar(this)' data-id="+ data[item].item_id+"href='#' class='close'><span>&times;</span></button></li></li>";
         }
         $("#lista-carrito").html(listado);
-         $("#lista-carrito").html(listado);
+        
     }       
             });
   }
-  actualizar_carrito();
-    $(".form-item").submit(function(e){
-      var form_data = $(this).serialize();
-      var button_content = $(this).find('button[type=submit]');
-      button_content.html('Agregando...'); //Cambiamos el boton mientras se agrega
 
-      $.ajax({ // Mandamos el id del libro para agregar los datos a la sesion
-        url: "controller/carrito_controller.php",
-        type: "POST",
-        dataType:"json",
-        data: form_data,
-        success:function(data)
+
+// intentando tomar el id a ver si funciona asi..
+ function eliminar(elem){
+    var dataId = $(elem).data("id");
+    console.log(dataId);
+}
+
+
+
+// Boton agregar al carrito
+$(".form-item").submit(function(e)
+{
+  var form_data = $(this).serialize();
+  var button_content = $(this).find('button[type=submit]');
+  button_content.html('Agregando...'); //Cambiamos el boton mientras se agrega
+    $.ajax({ // Mandamos el id del libro para agregar los datos a la sesion
+      url: "controller/carrito_controller.php",
+      type: "POST",
+      dataType:"json",
+      data: form_data,
+      success:function(data)
         {
           actualizar_carrito();
            $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json
@@ -137,15 +149,49 @@ $(document).ready(function(){
             console.log('producto actualizado');
           }
         },
-              error: function (error) {
+              error: function (error)
+              {
                   alert('error; ' + eval(error));
               }
-        
 
       })
-     
       e.preventDefault(); // Permite que se pueda presionar nuevamente el boton
+});
+
+
+//Boton limpiar carrito
+$("#limpiar_carrito").click(function ()
+{
+  var vaciado= confirm("¿Esta seguro que desea vaciar el carrito?");
+  console.log(vaciado);
+  if (vaciado == true) 
+  {
+    $.get("controller/vaciar_carrito.php", function(data)
+    {
+
+      
+      if (data=="Carrito vacio")
+        {
+          alert('Carrito vaciado con exito');
+          location.reload();
+          // Tampoco se actualiza el carrito al llamar a la funcion por lo que fuy por lo facil y actualizo la pagina.
+          
+        }
+        else
+        {
+          // no existen elementos en el carrito de compra
+        }
     });
+  }else {
+
+  }
+
+  
+    
+
+
+});
+
 
 
   //al hacer click en el link remove-item Eliminar un articulo del carrito
@@ -158,7 +204,7 @@ $(document).ready(function(){
       $(".cart-box").trigger( "click" ); //trigger click on cart-box to update the items list
     });
   });
-
+      actualizar_carrito();
 });
 </script>
 </body>
