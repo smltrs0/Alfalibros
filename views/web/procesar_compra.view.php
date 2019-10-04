@@ -55,7 +55,7 @@
     success : function(data) 
     {
       $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
-         console.log(data);//objeto testeando :v
+         console.log(data);//aqui tenemos que tomar el id del iten seleccionado y mandarlo por ajax para ser eliminado del carrito de compra
          var listado="";// Definimos para que no de error
          for (var item in data)// Con el siclo for recorremos todo el objeto
        {
