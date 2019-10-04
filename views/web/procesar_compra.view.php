@@ -19,14 +19,21 @@
         ?>
         <!-- Animated test -->
         <div class="card animated bounceInDown">
+             <form>
             <div class="card-header">
                 Finalizar orden de compra
             </div>
             <div class="card-body">
+               
             <ul>
                  <div id="carrito"></div>
             </ul>
             </div>
+            <div class="card-footer">
+                <input class="btn btn-block" type="submit" value="Finalizar Compra">
+               
+            </div>
+         </form>
         </div>
         <!-- /.content -->
     </div>
@@ -51,7 +58,7 @@
        {
           console.log(data[item].item_name);
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onclick=eliminar(this); data-id="+ data[item].item_id+" href='#' class='close'><span>&times;</span></button></li></li>";
+         listado += "<li id="+ data[item].item_id+" class='list-group-item'>"+data[item].item_name+" <input class='' value='"+data[item].item_loot+"'><button  onclick=eliminar(this); data-id="+ data[item].item_id+" href='#' class='close'><span>&times;</span></button></li></li>";
         }
         $("#carrito").html(listado);
         
@@ -62,6 +69,8 @@
   function eliminar(elem) {
 console.log('eliminando');
     data_id = $(elem).data('id');
+    // Este puto fade me tomo 2 horas y era con un puto +...
+    $('#'+data_id).fadeToggle('slow' );
    console.log(data_id);
   }
 
