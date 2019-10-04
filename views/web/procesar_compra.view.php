@@ -59,11 +59,10 @@
             });
   }
   actualizar_carrito();
-  function eliminar() {
+  function eliminar(elem) {
 console.log('eliminando');
-// En teoria es asi...
-var data = $(this).attr("data-id");
-console.log(data);
+    data_id = $(elem).data('id');
+   console.log(data_id);
   }
 
 </script>
