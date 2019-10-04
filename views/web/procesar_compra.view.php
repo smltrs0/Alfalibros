@@ -19,7 +19,7 @@
         ?>
         <!-- Animated test -->
         <div class="card animated bounceInDown">
-             <form>
+           
             <div class="card-header">
                 Finalizar orden de compra
             </div>
@@ -33,7 +33,7 @@
                 <input class="btn btn-block" type="submit" value="Finalizar Compra">
                
             </div>
-         </form>
+         
         </div>
         <!-- /.content -->
     </div>
