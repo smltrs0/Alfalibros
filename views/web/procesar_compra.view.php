@@ -22,18 +22,21 @@
            
             <div class="card-header">
                 Finalizar orden de compra
-            </div>
+            </div> 
+            <form action="#" class="form-inline" >
             <div class="card-body">
-               
-            <ul>
+          
                  <div id="carrito"></div>
+
+            <ul>
+               
             </ul>
             </div>
             <div class="card-footer">
                 <input class="btn btn-block" type="submit" value="Finalizar Compra">
                
             </div>
-         
+          </form>  
         </div>
         <!-- /.content -->
     </div>
@@ -58,7 +61,7 @@
        {
           console.log(data[item].item_name);
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<li id="+ data[item].item_id+" class='list-group-item'>"+data[item].item_name+" <input class='' value='"+data[item].item_loot+"'><button  onclick=eliminar(this); data-id="+ data[item].item_id+" href='#' class='close'><span>&times;</span></button></li></li>";
+         listado += "<div id="+ data[item].item_id+" class='form-row'><div class='col-md-8 mb-3'><label class='form-control-label'>"+data[item].item_name+"</label></div> <div class='col-md-4 mb-3'><div class='input-group'><div class='input-group-prepend'><span class='input-group-text' id='inputGroupPrepend'>Cantidad</span></div><input class='form-control' type='number' value='"+data[item].item_loot+"'><button  onclick=eliminar(this); data-id="+ data[item].item_id+" href='#' class='close ml-5'><span>&times;</span></button></div></div></div>";
         }
         $("#carrito").html(listado);
         
