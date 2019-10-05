@@ -14,7 +14,7 @@
        {
           console.log(data[item].item_name);
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onclick='eliminar(this)' data-id="+ data[item].item_id+" href='#' class='close'><span>&times;</span></button></li></li>";
+         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onclick='eliminar_del_carrito(this)' data-id="+ data[item].item_id+" href='#' class='close'><span>&times;</span></button></li></li>";
           total+=data[item].item_price*data[item].item_loot;
         }
         iva=(total*12)/100;
@@ -26,8 +26,9 @@
     }       
             });
   }
+
   // intentando tomar el id a ver si funciona asi..
- function eliminar(elem){
+ function eliminar_del_carrito(elem){
            console.log('eliminando');
     // con data.('id') es que capturamos un valor dato a un elemento en este caso estoy usando data-id="3" para almacenar el id del elemento que se vera afectado al hacer click.
     data_id = $(elem).data('id');
@@ -40,18 +41,18 @@
     type: "POST",
             url: "controller/eliminar_elemento_carrito.php",
             data: id,
-            success: function(data){
+            success: function(data)
+            {
                 // Actualizamos la lista en el card-body
                 actualizar_carrito();
             }
 
    });
 }
+
 $(document).ready(function(){ 
   // Funcion para actualizar el carrito siempre que sufra cambios
-
    actualizar_carrito();
-
 
 // Boton agregar al carrito
 $(".form-item").submit(function(e)
@@ -71,7 +72,9 @@ $(".form-item").submit(function(e)
           console.log(data);
           alert('Agregado al carrito');
           // Como ya se agrego correctamente cambiamos el texto del boton
-          button_content.html('Agregado <i class="fas fa-sync fa-spin"></i>');
+          button_content.html('Actualizar <i class="fas fa-sync fa-spin"></i>');
+          button_content.removeClass('btn-outline-primary');
+          button_content.addClass('btn-primary');
 
           if (data=='actualizado') 
           {
@@ -82,7 +85,6 @@ $(".form-item").submit(function(e)
               {
                   alert('error; ' + eval(error));
               }
-
       })
       e.preventDefault(); // Permite que se pueda presionar nuevamente el boton
 });
@@ -104,7 +106,6 @@ $("#limpiar_carrito").click(function ()
           alert('Carrito vaciado con exito');
           location.reload();
           // Tampoco se actualiza el carrito al llamar a la funcion por lo que fuy por lo facil y actualizo la pagina.
-          
         }
         else
         {
@@ -118,21 +119,9 @@ $("#limpiar_carrito").click(function ()
   
     
 
-
 });
 
 
-
-  //al hacer click en el link remove-item Eliminar un articulo del carrito
-  $("#shopping-cart-results").on('click', 'a.remove-item', function(e) {
-    e.preventDefault(); 
-    var pcode = $(this).attr("data-code"); //tomamos el codigo del producto
-    $(this).parent().fadeOut(); // Efecto fade para eliminar el elemento de la lista
-    $.getJSON( "carrito_controller.php", {"remove_code":pcode} , function(data){ 
-      $("#cart-info").html(data.items); // Actualizamos el contador de itens de cart-info
-      $(".cart-box").trigger( "click" ); //trigger click on cart-box to update the items list
-    });
-  });
    
 
       

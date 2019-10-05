@@ -105,7 +105,7 @@
          for (var item in data)// Con el siclo for recorremos todo el objeto
        {
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<div id="+ data[item].item_id+" class='form-row'><div class='col-4'><p class='text-dark'>"+data[item].item_name+"</p></div><div class='col-4'><p class=' text-dark'>"+data[item].item_price+moneda+"</p></div><div class='col-4 mb-3'><p class='text-dark'>"+data[item].item_loot+"<button  onclick=eliminar_item(this); data-id="+ data[item].item_id+" href='#' class='close mr-5'><span>&times;</span></button></p></div></div>";
+         listado += "<div id="+ data[item].item_id+" class='form-row'><div class='col-4'><p class='text-dark'>"+data[item].item_name+"</p></div><div class='col-4'><p class=' text-dark'>"+data[item].item_price+moneda+"</p></div><div class='col-4 mb-3'><p class='text-dark'>"+data[item].item_loot+"<button  onclick=eliminar_del_carrito(this); data-id="+ data[item].item_id+" href='#' class='close mr-5'><span>&times;</span></button></p></div></div>";
          total+=data[item].item_price*data[item].item_loot;
         }
         // Listamos los articulos en el carrito de compra
@@ -121,28 +121,6 @@
             });
   };
   procesando_compra();
-  function eliminar_item(elem) 
-  {
-    console.log('eliminando');
-    // con data.('id') es que capturamos un valor dato a un elemento en este caso estoy usando data-id="3" para almacenar el id del elemento que se vera afectado al hacer click.
-    data_id = $(elem).data('id');
-    // Este puto fade me tomo 2 horas y era con un puto +...
-    $('#'+data_id).fadeToggle('slow' );
-   console.log(data_id);
-   // Aqui va el codigo que capturara el id y lo eliminara del $_SESSION['carrito']por su id haciendo unset... puede ser con ajax
-   var id = 'id='+ data_id;
-   $.ajax({
-    type: "POST",
-            url: "controller/eliminar_elemento_carrito.php",
-            data: id,
-            success: function(data){
-                // Actualizamos la lista en el card-body
-                procesando_compra();
-                actualizar_carrito();
-            }
-
-   });
-  }
 
   // aqui va el codigo que serializa el formulario y lo manda por ajax a php..
 
