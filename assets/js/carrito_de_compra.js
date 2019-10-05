@@ -6,11 +6,17 @@
     url: "controller/get_carrito.php",
     success : function(data) 
     {
-      $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
-         console.log(data);//objeto testeando :v
-         var listado="";// Definimos para que no de error
-         var total= new Number();
-         for (var item in data)// Con el siclo for recorremos todo el objeto
+      if (data==null) {
+        // El carrito de compra esta vacio
+            console.log('carrito de compra vacio');
+
+          }else {
+            $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
+             console.log(data);//objeto testeando :v
+             var listado="";// Definimos para que no de error
+             var total= new Number();
+             for (var item in data)// Con el siclo for recorremos todo el objeto
+
        {
           console.log(data[item].item_name);
           // Concatenamos los objetos existentes para imprimir la lista de los productos
@@ -23,6 +29,8 @@
         $("#total_carrito").html("Total Neto:"+total_neto+" BsS");
         $("#lista-carrito").html(listado);
         
+          }
+
     }       
             });
   }
@@ -45,8 +53,8 @@
             {
                 // Actualizamos la lista en el card-body
                 actualizar_carrito();
+                actualizar_orden_de_compra();
             }
-
    });
 }
 

@@ -82,7 +82,7 @@
 <script>
 
       // este script es solo para procesar compra, no es necesario hacerlo global
-  function procesando_compra() 
+  function actualizar_orden_de_compra() 
   { 
     $.ajax({
     "method":"POST",
@@ -90,13 +90,11 @@
     url: "controller/get_carrito.php",
     success : function(data) 
     {
-
         if (data == null) {
             console.log('carrito vacio');
             $("#card_carrito").html("<div class='alert alert-warning text-center'><p class='text-dark'><strong>El carrito de compra esta vació!</strong></p></div><a class='alert-link text-warning text-center m-3' href='libros'><i class='fa fa-arrow-circle-left'></i> Ver libros</a>");
             // aqui tendria que ir una funcion global que actualice la lista del carrito de compra
                  $("#cantidad").html("0");
-
         }else {
                  $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
          var listado="";// Definimos para que no de error
@@ -120,9 +118,10 @@
     }       
             });
   };
-  procesando_compra();
 
-  // aqui va el codigo que serializa el formulario y lo manda por ajax a php..
+  $(document).ready(function(){
+      actualizar_orden_de_compra();
+  });
 
 </script>
 </body>
