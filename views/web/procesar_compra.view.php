@@ -44,8 +44,13 @@
                      <div class="text-dark" id="iva"> </div>
                     </div>
                 </div>
+                <div class="row justify-content-end">
+                    <div class="col-4">
+                     <div class="text-dark" id="total_neto"> </div>
+                    </div>
+                </div>
                 <div class="form-group row mt-3">
-                    <label  class="col-2 col-form-label">Cliente</label>
+                    <label  class="col-2 col-form-label">Cliente:</label>
                     <div class="col-9">
                   <input type="text" class="form-control"  placeholder="Selecciona un cliente">
                 </div>
@@ -54,7 +59,6 @@
                         <span class="fa-stack">
                             <i class="fas fa-user fa-stack-1x"></i>
                             <i class="fas fa-plus fa-stack-5x" ></i>
-                          
                         </span>
                     </a>
                 </div>
@@ -90,7 +94,7 @@
         if (data == null) {
             console.log('carrito vacio');
             $("#card_carrito").html("<div class='alert alert-warning text-center'><p class='text-dark'><strong>El carrito de compra esta vació!</strong></p></div><a class='alert-link text-warning text-center m-3' href='libros'><i class='fa fa-arrow-circle-left'></i> Ver libros</a>");
-            // aqui tendria que ir una funcion global que actualice la lista del carrito de compr
+            // aqui tendria que ir una funcion global que actualice la lista del carrito de compra
                  $("#cantidad").html("0");
 
         }else {
