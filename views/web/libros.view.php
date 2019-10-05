@@ -56,7 +56,6 @@ require(TEMPLATES.'breadcrumb.php');
                                   <strong class="text-success">DISPONIBLE</strong>
                                     <input class="form-control" type="number" name="product_cantidad" value="1" min="1">
                                   <button type="submit" class="mt-1 btn-block btn-outline-primary btn-sm">Agregar al carrito</button>
-
                               <?php else: ?>
 
                                   <p class="text-danger">NO DISPONIBLE</p>

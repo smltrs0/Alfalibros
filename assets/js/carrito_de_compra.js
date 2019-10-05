@@ -1,6 +1,3 @@
-$(document).ready(function(){ 
-
-  // Funcion para actualizar el carrito siempre que sufra cambios
   function actualizar_carrito() 
   { 
     $.ajax({
@@ -17,7 +14,7 @@ $(document).ready(function(){
        {
           console.log(data[item].item_name);
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onclick='eliminar()' data-id="+ data[item].item_id+"href='#' class='close'><span>&times;</span></button></li></li>";
+         listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onclick='eliminar(this)' data-id="+ data[item].item_id+" href='#' class='close'><span>&times;</span></button></li></li>";
           total+=data[item].item_price*data[item].item_loot;
         }
         iva=(total*12)/100;
@@ -29,14 +26,31 @@ $(document).ready(function(){
     }       
             });
   }
-
-
-// intentando tomar el id a ver si funciona asi..
+  // intentando tomar el id a ver si funciona asi..
  function eliminar(elem){
-    var dataId = $(elem).data("id");
-    console.log(dataId);
-}
+           console.log('eliminando');
+    // con data.('id') es que capturamos un valor dato a un elemento en este caso estoy usando data-id="3" para almacenar el id del elemento que se vera afectado al hacer click.
+    data_id = $(elem).data('id');
+    // Este puto fade me tomo 2 horas y era con un puto +...
+    $('#'+data_id).fadeToggle('slow' );
+   console.log(data_id);
+   // Aqui va el codigo que capturara el id y lo eliminara del $_SESSION['carrito']por su id haciendo unset... puede ser con ajax
+   var id = 'id='+ data_id;
+   $.ajax({
+    type: "POST",
+            url: "controller/eliminar_elemento_carrito.php",
+            data: id,
+            success: function(data){
+                // Actualizamos la lista en el card-body
+                actualizar_carrito();
+            }
 
+   });
+}
+$(document).ready(function(){ 
+  // Funcion para actualizar el carrito siempre que sufra cambios
+
+   actualizar_carrito();
 
 
 // Boton agregar al carrito
@@ -58,6 +72,7 @@ $(".form-item").submit(function(e)
           alert('Agregado al carrito');
           // Como ya se agrego correctamente cambiamos el texto del boton
           button_content.html('Agregado <i class="fas fa-sync fa-spin"></i>');
+
           if (data=='actualizado') 
           {
             console.log('producto actualizado');
@@ -118,7 +133,7 @@ $("#limpiar_carrito").click(function ()
       $(".cart-box").trigger( "click" ); //trigger click on cart-box to update the items list
     });
   });
-      actualizar_carrito();
+   
 
       
 });
