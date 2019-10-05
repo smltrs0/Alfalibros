@@ -24,7 +24,7 @@
             <div class="card-header">
                 Finalizar orden de compra
             </div> 
-            <form action="#" class="form-inline" >
+            <form action="#" >
             <div class="card-body">
                     <div class="form-row">
                     <!--colocar o no colocar la foto...-->
@@ -44,15 +44,22 @@
                      <div class="text-dark" id="iva"> </div>
                     </div>
                 </div>
-                <div class="row justify-content-end">
-                    <div class="col-4">
-                     <p class="font-weight-bold text-dark" id="total_neto"></p>
-                    </div>
+                <div class="form-group row mt-3">
+                    <label  class="col-2 col-form-label">Cliente</label>
+                    <div class="col-9">
+                  <input type="text" class="form-control"  placeholder="Selecciona un cliente">
                 </div>
-                
-            <ul>
-               
-            </ul>
+                <div class="col-1">
+                    <a href="#" title="Agregar un Nuevo Cliente">
+                        <span class="fa-stack">
+                            <i class="fas fa-user fa-stack-1x"></i>
+                            <i class="fas fa-plus fa-stack-5x" ></i>
+                          
+                        </span>
+                    </a>
+                </div>
+              </div>
+
             </div>
             <div class="card-footer">
                 <input class="btn btn-block font-weight-bold text-primary" type="submit" value="Finalizar Compra">
@@ -83,7 +90,7 @@
         if (data == null) {
             console.log('carrito vacio');
             $("#card_carrito").html("<div class='alert alert-warning text-center'><p class='text-dark'><strong>El carrito de compra esta vació!</strong></p></div><a class='alert-link text-warning text-center m-3' href='libros'><i class='fa fa-arrow-circle-left'></i> Ver libros</a>");
-            // aqui tendria que ir una funcion global que actualice la lista del carrito de compra en lugar de reemplazar como lo estoy haciendo ahorita
+            // aqui tendria que ir una funcion global que actualice la lista del carrito de compr
                  $("#cantidad").html("0");
 
         }else {
@@ -94,7 +101,7 @@
          for (var item in data)// Con el siclo for recorremos todo el objeto
        {
           // Concatenamos los objetos existentes para imprimir la lista de los productos
-         listado += "<div id="+ data[item].item_id+" class='form-row'><div class='col-4'><p class='text-dark'>"+data[item].item_name+"</p></div><div class='col-4'><p class=' text-dark'>"+data[item].item_price+moneda+"</p></div><div class='col-4 mb-3'><div class='input-group'><input class='form-control' type='number' value='"+data[item].item_loot+"'><button  onclick=eliminar_item(this); data-id="+ data[item].item_id+" href='#' class='close ml-5'><span>&times;</span></button></div></div></div>";
+         listado += "<div id="+ data[item].item_id+" class='form-row'><div class='col-4'><p class='text-dark'>"+data[item].item_name+"</p></div><div class='col-4'><p class=' text-dark'>"+data[item].item_price+moneda+"</p></div><div class='col-4 mb-3'><p class='text-dark'>"+data[item].item_loot+"<button  onclick=eliminar_item(this); data-id="+ data[item].item_id+" href='#' class='close mr-5'><span>&times;</span></button></p></div></div>";
          total+=data[item].item_price*data[item].item_loot;
         }
         // Listamos los articulos en el carrito de compra
