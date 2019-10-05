@@ -15,6 +15,7 @@
     <!-- Content -->
     <div class="content">
         <?php 
+
             require(TEMPLATES.'breadcrumb.php');
         ?>
         <!-- Animated test -->
@@ -25,7 +26,17 @@
             </div> 
             <form action="#" class="form-inline" >
             <div class="card-body">
-                <div class="form-row mb-3">
+
+                 <?php if (!isset($_SESSION['carrito'])): ?>
+                     <div class="alert alert-warning text-center">
+                        <p class="text-dark">
+                            <strong>El carrito de compra esta vació!</strong>
+                        </p>
+                        <a class="alert-link text-warning" href="libros">
+                            <i class="fa fa-arrow-circle-left"></i> Ver libros</a>
+                    </div>
+                 <?php else: ?>
+                    <div class="form-row mb-3">
                     <!--colocar o no colocar la foto...-->
                     <div class="col-4"><p class="font-weight-bold text-dark">Nombre del libro</p></div>
                      <div class="col-4"><p class="font-weight-bold text-dark">Precio</p></div>
@@ -35,17 +46,17 @@
                  <div id="carrito"></div>
                   <div class="row justify-content-end">
                     <div class="col-4">
-                      <p class="text-dark" id="total">Total: </p> 
+                        <div class="text-dark" id="total"></div>
                     </div>
                 </div>
                  <div class="row justify-content-end">
                     <div class="col-4">
-                      <p class="text-dark" id="iva"> Iva: </p>
+                     <div class="text-dark" id="iva"> </div>
                     </div>
                 </div>
                 <div class="row justify-content-end">
                     <div class="col-4">
-                      <p class="text-dark" id="total_neto">Total Neto: </p> 
+                     <p class="font-weight-bold text-dark" id="total_neto"></p>
                     </div>
                 </div>
                 
@@ -54,9 +65,11 @@
             </ul>
             </div>
             <div class="card-footer">
-                <input class="btn btn-block" type="submit" value="Finalizar Compra">
+                <input class="btn btn-block text-danger" type="submit" value="Finalizar Compra">
                
             </div>
+                 <?php endif ?>
+
           </form>  
         </div>
         <!-- /.content -->
@@ -75,7 +88,14 @@
     url: "controller/get_carrito.php",
     success : function(data) 
     {
-      $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
+        var contador_elementos_carrito=Object.keys(data).length;
+
+        if (contador_elementos_carrito == 0) {
+
+            console.log('carrito vacio');
+
+        }else {
+                 $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
          var listado="";// Definimos para que no de error
          var moneda=" BsS.";
          var total= new Number(); // tenemos que definir que es un numero por que si no, funciona como una cadena de texto
@@ -85,12 +105,14 @@
          listado += "<div id="+ data[item].item_id+" class='form-row'><div class='col-4'><p class='text-dark'>"+data[item].item_name+"</p></div><div class='col-4'><p class=' text-dark'>"+data[item].item_price+moneda+"</p></div><div class='col-4 mb-3'><div class='input-group'><input class='form-control' type='number' value='"+data[item].item_loot+"'><button  onclick=eliminar(this); data-id="+ data[item].item_id+" href='#' class='close ml-5'><span>&times;</span></button></div></div></div>";
          total+=data[item].item_price*data[item].item_loot;
         }
+        // Listamos los articulos en el carrito de compra
+        $("#carrito").html(listado);
         iva=(total*12)/100;
         total_neto= (iva+total);
-        $("#iva").append(iva+moneda);
-        $("#total").append(total+moneda);
-        $("#carrito").html(listado);
-         $("#total_neto").append(total_neto+moneda);
+        $("#iva").html("Iva: "+iva+moneda);
+        $("#total").html("Total: "+total+moneda);
+         $("#total_neto").html("Total Neto:"+total_neto+moneda);
+        }
         
     }       
             });

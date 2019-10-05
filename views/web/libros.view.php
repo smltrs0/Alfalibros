@@ -1,6 +1,7 @@
 <?php     
 require(TEMPLATES.'head.php');
 require(TEMPLATES.'scripts.php');
+
  ?>
 
 <body>
