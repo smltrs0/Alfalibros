@@ -83,6 +83,7 @@ $(".form-item").submit(function(e)
         },
               error: function (error)
               {
+                  // eval nos regresa una cadena de texto
                   alert('error; ' + eval(error));
               }
       })
