@@ -26,9 +26,10 @@
                        
                         <ul class="sub-menu children dropdown-menu">
                         <div id="lista-carrito"></div>
-
+<p class="text-right" id="total_carrito"></p>
                              <li><a href="procesar-compra" class="btn-block btn bg-instagram text-white">Procesar compra</a>
                              </li>
+
                              <li class="text-center">
                                  <a class="btn-block btn" id="limpiar_carrito">
                                     limpiar carrito de compra
