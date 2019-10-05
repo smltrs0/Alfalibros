@@ -119,4 +119,6 @@ $("#limpiar_carrito").click(function ()
     });
   });
       actualizar_carrito();
+
+      
 });
