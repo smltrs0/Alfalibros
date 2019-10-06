@@ -130,17 +130,47 @@ $(document).ready(function() {
 
 });
 
-$.get( "controller/get_clientes.php", function() {
-})
-  .done(function(clientes_json) {
-    console.log(clientes_json)
-    $(".select_client").select2({
-  data: clientes_json
-});
-  })
-  .fail(function() {
-    alert( "error" );
-  });
+var $ajax = $(".select_client");
+
+function formatRepo (repo) {
+  
+  if (repo.loading) return repo.text;
+  console.log(repo.loading);
+  var markup = "<div class='select2-result-repository clearfix'>" +
+      "<div class='select2-result-repository__meta'>";
+
+  if (repo.description) {
+    markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+  }
+
+  markup += "<div class='select2-result-repository__statistics'>" +
+    "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>" +
+    "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" +
+    "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>" +
+    "</div>" +
+    "</div></div>";
+
+  return markup;
+}
+
+function formatRepoSelection (repo) {
+  return repo.full_name || repo.text;
+}
+
+      $('.select_client').select2({
+        placeholder: 'Selecciona una categoría',
+        ajax: {
+          url: 'controller/get_clientes.php',
+          dataType: 'json',
+          delay: 250,
+          processResults: function (data) {
+            return {
+              results: data
+            };
+          },
+          cache: true
+        }
+      });
 
 </script>
 </body>
