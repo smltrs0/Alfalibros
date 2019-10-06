@@ -468,12 +468,11 @@
 			
 
 		}
-		static public function get_cliente()
+		static public function get_cliente($id)
 		{
 			// Conexion a la base de datos
 			self::$connection = db_connector::get_connection();
-			$sentencia = self::$connection->query('SELECT *
-												           FROM cliente');
+			$sentencia = self::$connection->query("SELECT * FROM `cliente` WHERE nombre LIKE '%$id%' OR apellido LIKE '%$id%' OR documento LIKE '%$id%' LIMIT 10");
 
 					return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		}

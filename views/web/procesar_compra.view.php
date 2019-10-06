@@ -54,7 +54,6 @@
                     <label  class="col-2 col-form-label">Cliente:</label>
                     <div class="col-9">
                         <select class="select_client form-control" name="">
-                          <option value='0'>- Selecciona un cliente -</option>
                         </select>
 
                 </div>
@@ -130,32 +129,9 @@ $(document).ready(function() {
 
 });
 
-var $ajax = $(".select_client");
 
-function formatRepo (repo) {
-  
-  if (repo.loading) return repo.text;
-  console.log(repo.loading);
-  var markup = "<div class='select2-result-repository clearfix'>" +
-      "<div class='select2-result-repository__meta'>";
 
-  if (repo.description) {
-    markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
-  }
 
-  markup += "<div class='select2-result-repository__statistics'>" +
-    "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>" +
-    "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" +
-    "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>" +
-    "</div>" +
-    "</div></div>";
-
-  return markup;
-}
-
-function formatRepoSelection (repo) {
-  return repo.full_name || repo.text;
-}
 
       $('.select_client').select2({
         placeholder: 'Selecciona un cliente',
@@ -168,8 +144,25 @@ function formatRepoSelection (repo) {
             };
           },
           cache: true
-        }
+
+        }, placeholder: "Selecciona un cliente",
+              minimumInputLength: 2,
+              // Esta es parte de la traduccion del script
+                      language: {
+
+    noResults: function() {
+
+      return "No hay clientes con estos datos";        
+    },
+    searching: function() {
+
+      return "Buscando..";
+    },
+    inputTooShort:function(e){var t=e.minimum-e.input.length,n="Escribe "+t+" car";return t==1?n+="ácter":n+="acteres para buscar",n}
+  }
       });
+
+
 
 </script>
 </body>

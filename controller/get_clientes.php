@@ -1,9 +1,11 @@
 <?php 
 // Este algoritmo solo esta pensado para un select dinamico no para mostar todos los clientes
+
+		$cliente=$_GET['q'];
 	    require('../config.path.php');
 	    require(TOOLS.'db_connector.php');
 	    require(TOOLS.'get.php');
-		$get = get::get_cliente();
+		$get = get::get_cliente($cliente);
 
 
 
