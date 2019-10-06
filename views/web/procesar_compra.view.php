@@ -158,11 +158,10 @@ function formatRepoSelection (repo) {
 }
 
       $('.select_client').select2({
-        placeholder: 'Selecciona una categoría',
+        placeholder: 'Selecciona un cliente',
         ajax: {
           url: 'controller/get_clientes.php',
           dataType: 'json',
-          delay: 250,
           processResults: function (data) {
             return {
               results: data
