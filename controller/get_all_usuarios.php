@@ -7,7 +7,6 @@ $result = $usuario->get_all();
 $output = array();
 $data = array();
 
-
 foreach($result as $row)
 {
 	$image = '';

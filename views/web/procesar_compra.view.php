@@ -55,7 +55,7 @@
                   <input type="text" class="form-control"  placeholder="Selecciona un cliente">
                 </div>
                 <div class="col-1">
-                    <a href="#" title="Agregar un Nuevo Cliente">
+                    <a href="#" title="Agregar un Nuevo Cliente"  data-toggle="modal" data-target="#add_cliente">
                         <span class="fa-stack">
                             <i class="fas fa-user fa-stack-1x"></i>
                             <i class="fas fa-plus fa-stack-5x" ></i>
@@ -73,6 +73,8 @@
 
           </form>  
         </div>
+
+              <?php require(VIEWS_MODAL.'agregar_cliente.modal.php'); ?>
         <!-- /.content -->
     </div>
     <!-- /#right-panel -->

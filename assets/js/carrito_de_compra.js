@@ -9,7 +9,8 @@
       if (data==null) {
         // El carrito de compra esta vacio
             console.log('carrito de compra vacio');
-
+            $("#lista-carrito").html("<div class='alert alert-warning'>El carrito de compra esta vaciao :v</div>");
+            $("#total_carrito").addClass('sr-only');
           }else {
             $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
              console.log(data);//objeto testeando :v
@@ -19,10 +20,12 @@
 
        {
           console.log(data[item].item_name);
-          // Concatenamos los objetos existentes para imprimir la lista de los productos
+          // Lista de los productos del carrito
          listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onclick='eliminar_del_carrito(this)' data-id="+ data[item].item_id+" href='#' class='close'><span>&times;</span></button></li></li>";
           total+=data[item].item_price*data[item].item_loot;
         }
+        // Botones del carrito de compra
+        listado+='<li><a href="procesar-compra" class="btn-block btn bg-instagram text-white">Procesar compra</a></li><li class="text-center"><a class="btn-block btn" id="limpiar_carrito" onclick=limpiar_carrito();>limpiar carrito de compra<span class="fa-stack"><i class="fa fa-shopping-cart fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i></span></a></li>';
         iva=(total*12)/100;
         total_neto= (iva+total);
         console.log(total_neto);
@@ -99,10 +102,11 @@ $(".form-item").submit(function(e)
 });
 
 
-//Boton limpiar carrito
-$("#limpiar_carrito").click(function ()
-{
-  var vaciado= confirm("¿Esta seguro que desea vaciar el carrito?");
+});
+
+function limpiar_carrito(){
+
+    var vaciado= confirm("¿Esta seguro que desea vaciar el carrito?");
   console.log(vaciado);
   if (vaciado == true) 
   {
@@ -126,12 +130,5 @@ $("#limpiar_carrito").click(function ()
   }
 
   
-    
-
-});
-
-
    
-
-      
-});
+}

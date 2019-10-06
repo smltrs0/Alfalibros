@@ -18,7 +18,7 @@ require(TEMPLATES.'menu.php');
 require(TEMPLATES.'breadcrumb.php');
  ?>
  <div class="row">
-  <div class="card">
+  <div class="card col-12">
 <?php if (!empty($libro)): ?>
       <div class="card-header mb-3">
            <div class="text-center">
@@ -27,7 +27,7 @@ require(TEMPLATES.'breadcrumb.php');
            </div>
             </div>
     <div class="row">
-    <div class=" col-sm-12 col-lg-6">
+    <div class="col-sm-12 col-lg-6">
        <div class="m-1"> 
         <?php if(!is_null($libro['ruta_imagen'])): ?>
        <!-- class height-27 mantiene las imagenes siempre en 275 px -->

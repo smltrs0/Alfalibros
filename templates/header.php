@@ -27,18 +27,6 @@
                         <ul class="sub-menu children dropdown-menu">
                         <div id="lista-carrito"></div>
 <p class="text-right" id="total_carrito"></p>
-                             <li><a href="procesar-compra" class="btn-block btn bg-instagram text-white">Procesar compra</a>
-                             </li>
-
-                             <li class="text-center">
-                                 <a class="btn-block btn" id="limpiar_carrito">
-                                    limpiar carrito de compra
-                                    <span class="fa-stack">
-                                      <i class="fa fa-shopping-cart fa-stack-1x"></i>
-                                      <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
-                                    </span>
-                                </a> 
-                             </li>
                         </ul>
                     </li>
                          
