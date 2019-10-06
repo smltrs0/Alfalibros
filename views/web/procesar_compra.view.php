@@ -50,10 +50,10 @@
                      <div class="text-dark" id="total_neto"> </div>
                     </div>
                 </div>
-                <div class="form-group row mt-3">
+                <div class="form-row mt-3">
                     <label  class="col-2 col-form-label">Cliente:</label>
                     <div class="col-9">
-                        <select class="select_client form-control" name="">
+                        <select class="select_client form-control" name="cliente">
                         </select>
 
                 </div>
@@ -117,7 +117,7 @@
         total_neto= (iva+total);
         $("#iva").html("Iva: "+iva+moneda);
         $("#total").html("Total: "+total+moneda);
-         $("#total_neto").html("Total Neto:"+total_neto+moneda);
+         $("#total_neto").html("Total Neto:"+total_neto.toFixed(2)+moneda);
         }
         
     }       
@@ -126,17 +126,11 @@
 
 $(document).ready(function() { 
     actualizar_orden_de_compra();
-
-});
-
-
-
-
-
-      $('.select_client').select2({
+// Select Buscador
+ $('.select_client').select2({
         placeholder: 'Selecciona un cliente',
         ajax: {
-          url: 'controller/get_clientes.php',
+          url: 'controller/buscador_cliente.php',
           dataType: 'json',
           processResults: function (data) {
             return {
@@ -151,17 +145,20 @@ $(document).ready(function() {
                       language: {
 
     noResults: function() {
-
       return "No hay clientes con estos datos";        
     },
     searching: function() {
-
       return "Buscando..";
     },
     inputTooShort:function(e){var t=e.minimum-e.input.length,n="Escribe "+t+" car";return t==1?n+="ácter":n+="acteres para buscar",n}
   }
       });
 
+});
+
+
+
+     
 
 
 </script>

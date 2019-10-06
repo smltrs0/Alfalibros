@@ -468,7 +468,7 @@
 			
 
 		}
-		static public function get_cliente($id)
+		static public function buscador_cliente($id)
 		{
 			// Conexion a la base de datos
 			self::$connection = db_connector::get_connection();

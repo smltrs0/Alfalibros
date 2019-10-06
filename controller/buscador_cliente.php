@@ -5,7 +5,7 @@
 	    require('../config.path.php');
 	    require(TOOLS.'db_connector.php');
 	    require(TOOLS.'get.php');
-		$get = get::get_cliente($cliente);
+		$get = get::buscador_cliente($cliente);
 
 
 
