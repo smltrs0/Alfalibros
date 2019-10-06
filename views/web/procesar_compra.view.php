@@ -2,6 +2,7 @@
 // Deshabilitamos errores de php 
     require(TEMPLATES.'head.php');
  ?>
+ 
 <body>
 <?php
     require(TEMPLATES.'menu.php');
@@ -52,7 +53,10 @@
                 <div class="form-group row mt-3">
                     <label  class="col-2 col-form-label">Cliente:</label>
                     <div class="col-9">
-                  <input type="text" class="form-control"  placeholder="Selecciona un cliente">
+                        <select class="select_client form-control" name="">
+                          <option value='0'>- Selecciona un cliente -</option>
+                        </select>
+
                 </div>
                 <div class="col-1">
                     <a href="#" title="Agregar un Nuevo Cliente"  data-toggle="modal" data-target="#add_cliente">
@@ -121,8 +125,21 @@
             });
   };
 
-  $(document).ready(function(){
-      actualizar_orden_de_compra();
+$(document).ready(function() { 
+    actualizar_orden_de_compra();
+
+});
+
+$.get( "controller/get_clientes.php", function() {
+})
+  .done(function(clientes_json) {
+    console.log(clientes_json)
+    $(".select_client").select2({
+  data: clientes_json
+});
+  })
+  .fail(function() {
+    alert( "error" );
   });
 
 </script>

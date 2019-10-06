@@ -468,6 +468,15 @@
 			
 
 		}
+		static public function get_cliente()
+		{
+			// Conexion a la base de datos
+			self::$connection = db_connector::get_connection();
+			$sentencia = self::$connection->query('SELECT *
+												           FROM cliente');
+
+					return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+		}
 	}
 
 ?>

@@ -4,7 +4,7 @@ $id= $_POST["user_id"];
 
 if (!empty($id)) 
 {
- include_once '../classes/Usuarios_model.php';
+ include_once '../models/Usuarios_model.php';
  $usuario = new Usuarios();
  $usuario = $usuario->get_usuario($id);
  foreach($usuario as $row)
