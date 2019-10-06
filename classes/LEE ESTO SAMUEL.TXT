@@ -1,1 +1,0 @@
-Para no mover algo que no debo con estas clases muevelas tu a la carpeta de models para borrar esta carpeta

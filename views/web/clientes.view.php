@@ -21,7 +21,7 @@ require (TEMPLATES.'breadcrumb.php');
             <div class="row">
               <div class="card shadow-blue"> 
                 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_cliente">
  <i class="fa fa-plus"></i> Agregar cliente
 </button>
               <?php require(VIEWS_MODAL.'agregar_cliente.modal.php'); ?>

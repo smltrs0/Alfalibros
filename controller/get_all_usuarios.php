@@ -1,5 +1,5 @@
 <?php
-include_once '../classes/Usuarios_model.php';
+include_once '../models/Usuarios_model.php';
 
 $usuario = new Usuarios();
 $result = $usuario->get_all();
