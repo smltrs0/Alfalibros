@@ -29,7 +29,7 @@
         iva=(total*12)/100;
         total_neto= (iva+total);
         console.log(total_neto);
-        $("#total_carrito").html("Total Neto:"+total_neto+" BsS");
+        $("#total_carrito").html("Total Neto:"+total_neto.toFixed(2)+" BsS");
         $("#lista-carrito").html(listado);
         
           }
