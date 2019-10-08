@@ -29,8 +29,6 @@
 		$cantidad = $_POST['cantidad'];
 		$libro = $_POST['libro']; 
 
-		"INSERT INTO `detalles_factura` (`id_detalles`, `id_producto`, `cantidad`, `precio`, `id_factura`) VALUES (NULL, '4', '1', '', '29');"
-
 		// un if que valide que los 2 procesos se realizaron correctamente y haga un return en base a ello, es para mostrar un alerta :v
 
 
