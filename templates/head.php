@@ -35,8 +35,8 @@ session_start();
     <!--Datatables-->
     <link rel="stylesheet" type="text/css" href="assets/datatables/datatables.min.css"/>
     <script type="text/javascript" src="assets/datatables/datatables.min.js"></script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+    <!--Select2-->
+    <link href="./assets/select2/select2.min.css" rel="stylesheet" />
+    <script src="./assets/select2/select2.min.js"></script>
 
 </head>

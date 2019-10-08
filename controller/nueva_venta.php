@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
@@ -32,6 +33,8 @@
 		// un if que valide que los 2 procesos se realizaron correctamente y haga un return en base a ello, es para mostrar un alerta :v
 
 
+
+		/*
 		$venta = new venta();
 		if($venta->set_values($cliente,$libro,$cantidad,$forma_de_pago))
 		{
@@ -44,10 +47,22 @@
 		
 
 		header('location: ../ventas.php');
+		*/
 	}
 	else
 	{
-		die('NO SE HA RECIBIDO NINGUN DATO');
+		echo ('NO SE HA RECIBIDO NINGUN DATO');
+
+
+		// Preparando el array con los datos necesarios 
+		echo "<pre>";
+		foreach ($_SESSION['carrito'] as $key => $items) {
+			// Creamos un array con solo los datos que vamos a insertar en la tabla detalle venta
+			$arrayName [] = ['id_producto' => $items['item_id'],'cantidad' =>$items['item_loot'],'precio'=>$items['item_price'], 'id_factura'=> "id de la factura"];
+		}
+		print_r($arrayName);
+
+
 	}
 
 
