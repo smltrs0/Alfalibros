@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 07, 2019 at 12:01 AM
+-- Generation Time: Oct 08, 2019 at 01:07 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -104,6 +104,20 @@ INSERT INTO `cliente` (`id`, `id_tipo_de_documento`, `documento`, `nombre`, `ape
 (2, 1, 25695518, 'Kledany', 'Barzola', 'Urb. La Paragua', '+584120890503'),
 (3, 1, 123456789, 'Prueba', 'Prueba', 'Prueba', '+584648519'),
 (4, 1, 24186725, 'Samuel', 'Trias', 'Marhuanta', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detalles_factura`
+--
+
+CREATE TABLE `detalles_factura` (
+  `id_detalles` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio` varchar(255) NOT NULL,
+  `id_factura` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -395,6 +409,14 @@ ALTER TABLE `cliente`
   ADD KEY `FK_id_tipo_de_documento` (`id_tipo_de_documento`);
 
 --
+-- Indexes for table `detalles_factura`
+--
+ALTER TABLE `detalles_factura`
+  ADD PRIMARY KEY (`id_detalles`),
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `id_detalles_factura` (`id_factura`);
+
+--
 -- Indexes for table `factura`
 --
 ALTER TABLE `factura`
@@ -492,6 +514,12 @@ ALTER TABLE `cliente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `detalles_factura`
+--
+ALTER TABLE `detalles_factura`
+  MODIFY `id_detalles` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `factura`
 --
 ALTER TABLE `factura`
@@ -560,6 +588,13 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `cliente`
   ADD CONSTRAINT `FK_id_tipo_de_documento` FOREIGN KEY (`id_tipo_de_documento`) REFERENCES `tipo_de_documento` (`id_tipo_de_documento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `detalles_factura`
+--
+ALTER TABLE `detalles_factura`
+  ADD CONSTRAINT `detalles_factura_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `libro` (`id_libro`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalles_factura_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `factura`
