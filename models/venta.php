@@ -10,6 +10,7 @@
 		private $cantidad;
 		private $forma_de_pago;
 		private $precio_neto;
+		private $id_factura;
 
 		public function set_values($cliente, $libro, $cantidad, $forma_de_pago)
 		{
@@ -124,6 +125,20 @@
 			$sentencia->execute(array(':cantidad_post_venta'	=> $cantidad_post_venta,
 									  ':id_info_libro'			=> $this->libro));
 		}
+
+
+		public function registrar_factura($cliente,$forma_de_pago)
+		{
+			# codigo de la insercion
+			
+			return $stm->lastInsertId();
+		}
+		public function registrar_detalles_factura($id_factura,$cantidad,$libro)
+		{	
+			// Este es el id regresado luego de hacer la insercion correctamente en la tabla factura
+
+		}
 	}
+
 
 ?>
