@@ -13,11 +13,15 @@
 	    require(TOOLS.'finanzas.php');
 	    require(MODELS.'venta.php');
 
-	    // Estos datos seran insertados en la tabla factura la cual guardara esa informacion, aparte tiene que hacer una return de el id de la factura que se creo, hay una funcion que hace esto, ya que sera la llave foranea de detalle factura.
+	    // Estos datos seran insertados en la tabla factura la cual guardara esa informacion, aparte tiene que hacer una return de el id de la factura que se creo, la funcion se llama lastInsertId() , ya que sera la llave foranea de detalle factura.
 		$cliente = $_POST['cliente'];
 		$forma_de_pago = $_POST['forma_de_pago'];
 
 
+
+
+
+		/*esta funcion tiene que validar que se ejecute la funcion anterior*/
 
 		// Esto hay que convertirlo en un objeto que almacene el id del libro y la cantidad 
 		// ya que no solo se registrara la venta de un solo item
