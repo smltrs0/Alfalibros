@@ -25,7 +25,7 @@
             <div class="card-header">
                 Finalizar orden de compra
             </div> 
-            <form action="#" >
+            <form id="formulario" action="controller/nueva_venta.php" >
             <div class="card-body">
                     <div class="form-row">
                     <!--colocar o no colocar la foto...-->
@@ -66,10 +66,14 @@
                     </a>
                 </div>
               </div>
+              <div class="form-row">
+                <input type="Number" name="method" value="1">
+                
+              </div>
 
             </div>
             <div class="card-footer">
-                <input class="btn btn-block font-weight-bold text-primary" type="submit" value="Finalizar Compra">
+                <input class="btn btn-block font-weight-bold text-primary"  id="boton_enviar" type="submit" value="Finalizar Compra">
                
             </div>
 
@@ -156,7 +160,33 @@ $(document).ready(function() {
 
 });
 
+$('#boton_enviar').click(function(evt) {
+  $.ajax({
+    type: 'POST',
+    data: $('#formulario').serialize(),
+    url: 'controller/nueva_venta.php',
+    beforeSend: function(){
+      $('#boton_enviar').attr('disabled', true);
+    },
+    success: function(response) {
+      console.log(response);
+      if (response== 'Error=2') {
+        alert('Ningun campo puede estar vacio');
+      }else if(response.indexOf('COMPLETE') != -1) {
+        var id = response.replace(/[^\d]/g, '');
+          // Renderizado de el bonton para imprimir la factura
+ $('#card_carrito').html('<div class="card-body"><div class="alert alert-success text-center">Se ha completado el registro con exito!</div>  <div class="row"><div class="col-auto mr-auto"><a class="alert-link text-warning text-center m-3" href="libros"><i class="fa fa-arrow-circle-left"></i> Ver libros</a></div><div class="col-auto"><a class="alert-link align-content-end text-primary text-center m-3" href="'+id+'"><i class="fa fa-print"></i> Imprimir Factura</a></div></div>');
+   $('#boton_enviar').attr('disabled', true);
+      }
 
+    },
+    error: function(msg){
+      console.log(msg);
+      $('#boton_enviar').attr('disabled', false);
+    }
+   });
+  evt.preventDefault();
+});
 
      
 
