@@ -172,10 +172,11 @@ $('#boton_enviar').click(function(evt) {
       console.log(response);
       if (response== 'Error=2') {
         alert('Ningun campo puede estar vacio');
+          $('#boton_enviar').attr('disabled', false);
       }else if(response.indexOf('COMPLETE') != -1) {
         var id = response.replace(/[^\d]/g, '');
           // Renderizado de el bonton para imprimir la factura
- $('#card_carrito').html('<div class="card-body"><div class="alert alert-success text-center">Se ha completado el registro con exito!</div>  <div class="row"><div class="col-auto mr-auto"><a class="alert-link text-warning text-center m-3" href="libros"><i class="fa fa-arrow-circle-left"></i> Ver libros</a></div><div class="col-auto"><a class="alert-link align-content-end text-primary text-center m-3" href="'+id+'"><i class="fa fa-print"></i> Imprimir Factura</a></div></div>');
+ $('#card_carrito').html('<div class="card-body"><div class="alert alert-success text-center">Se ha completado el registro con exito!</div>  <div class="row"><div class="col-auto mr-auto"><a class="alert-link text-warning text-center m-3" href="libros"><i class="fa fa-arrow-circle-left"></i> Ver libros</a></div><div class="col-auto"><a class="alert-link align-content-end text-primary text-center m-3" href="factura?id='+id+'"><i class="fa fa-print"></i> Imprimir Factura</a></div></div>');
    $('#boton_enviar').attr('disabled', true);
       }
 
