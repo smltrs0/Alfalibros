@@ -1,8 +1,6 @@
 <?php 
-session_start();
 
-	if($_SERVER['REQUEST_METHOD'] == 'POST')
-	{
+	//{
 		// CARGANDO LAS CONSTANTES DE RUTAS
 	    require('../config.path.php');
 
@@ -13,56 +11,45 @@ session_start();
 	    require(TOOLS.'get.php');
 	    require(TOOLS.'finanzas.php');
 	    require(MODELS.'venta.php');
-
+	    	$venta = new venta();
 	    // Estos datos seran insertados en la tabla factura la cual guardara esa informacion, aparte tiene que hacer una return de el id de la factura que se creo, la funcion se llama lastInsertId() , ya que sera la llave foranea de detalle factura.
-		$cliente = $_POST['cliente'];
-		$forma_de_pago = $_POST['forma_de_pago'];
 
+session_start();
 
-
-
-
-		/*esta funcion tiene que validar que se ejecute la funcion anterior*/
-
-		// Esto hay que convertirlo en un objeto que almacene el id del libro y la cantidad 
-		// ya que no solo se registrara la venta de un solo item
-		//  hay que descomponer esos 2 datos de la variable $_SESSION['carrito'] y despues de insertarlos en la base de datos hacer unset()  a ella.
-		$cantidad = $_POST['cantidad'];
-		$libro = $_POST['libro']; 
-
-		// un if que valide que los 2 procesos se realizaron correctamente y haga un return en base a ello, es para mostrar un alerta :v
-
-
-
-		/*
-		$venta = new venta();
-		if($venta->set_values($cliente,$libro,$cantidad,$forma_de_pago))
-		{
-			$venta->save_on_db();
-		}
-		else
-		{
-			die('ERROR AL CARGAR EL OBJETO');
-		}
-		
-
-		header('location: ../ventas.php');
-		*/
-	}
-	else
-	{
-		echo ('NO SE HA RECIBIDO NINGUN DATO');
-
-
-		// Preparando el array con los datos necesarios 
-		echo "<pre>";
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+					
+					if (isset($_POST['cliente']) && !empty($_POST['cliente']) && isset($_POST['method']) && !empty($_POST['method'])) {
+						$cliente = $_POST['cliente'];
+						$forma_de_pago = $_POST['method'];
+					
+				    	$id_factura = $venta->registrar_factura($cliente,$forma_de_pago);
+				    	 print($id_factura);
+				    	 // Si se insertan los datos en la tabla factura 
+				    	 	if ($id_factura==0)
+				    	 	{
+								echo "No se insertaron los datos de la factura, algun campo esta vacio o ocurrio un error interno.";
+							}else{
+								// Preparando el array con los datos necesarios 
+	
 		foreach ($_SESSION['carrito'] as $key => $items) {
 			// Creamos un array con solo los datos que vamos a insertar en la tabla detalle venta
-			$arrayName [] = ['id_producto' => $items['item_id'],'cantidad' =>$items['item_loot'],'precio'=>$items['item_price'], 'id_factura'=> "id de la factura"];
+			$arrayName [] = ['id_producto' => $items['item_id'],'cantidad' =>$items['item_loot'],'precio'=>$items['item_price'], 'id_factura'=> $id_factura];
 		}
-		print_r($arrayName);
-
-
+								// Insertamos los detalles de la factura
+							$res = $venta->registrar_detalles_factura($arrayName);
+							if ($res == TRUE) 
+							{
+								// Se insertaron los datos en la base correctamente asi que eliminamos el carrito de compra
+								unset($_SESSION['carrito']);
+								echo "COMPLETE";
+							}
+								}
+						
+				
+					}else {
+						// echo 'No pueden existir campos vacíos o sin definir';
+						echo 'Error=2';
+					}
 	}
 
 

@@ -123,95 +123,62 @@
 		}
 
 
+
+
 		public function registrar_factura($cliente,$forma_de_pago)
 		{
-			# codigo de la insercion
-			
-			return $stm->lastInsertId();
+			$connection = $this->connection = db_connector::get_connection();
+      		$fecha = get::today_date();
+			$sentencia = $this->connection->prepare('INSERT INTO factura
+													 VALUES(
+													 NULL,
+													 :cliente,
+													 :forma_de_pago,
+													 :fecha_facturacion, 
+													 NULL, 
+													 NULL)
+													 ');
+			$sentencia->execute(array(':cliente'			=> $cliente,
+									  ':forma_de_pago'		=> $forma_de_pago,
+									  'fecha_facturacion'	=> $fecha));
+			return $connection->lastInsertId();
 		}
 		
-		public function registrar_detalles_factura($id_factura,$cantidad,$libro)
+		public function registrar_detalles_factura($array)
 		{	
-			// Este es el id regresado luego de hacer la insercion correctamente en la tabla factura
-			// 
-			# Ejemplo de insert...
-			   $database = $connection;
-		      	$sql=  "INSERT INTO detalles_factura () VALUES (:id_factura, :cantidad)";
-		        $query = $database->prepare($sql);
-		       $query->execute(array(':id_factura' => $id_factura, ':cantidad' => $cantidad));	
+			 	$this->connection = db_connector::get_connection();
+				$this->connection->beginTransaction(); // Espera hasta que termine toda la insercion de los datos para hacer un report
+				$insert_values = array();
+				foreach($array as $d)
+				{
+				$question_marks[] = '('  . $this->separador_de_array('?', sizeof($d)) . ')';
+				$insert_values = array_merge($insert_values, array_values($d)); //Combina los elementos de uno o más arrays juntándolos de modo que los valores de uno se anexan al final del anterior. Retorna el array resultante.
+				$datafields = array_keys($d);
+				}
+				$sql = "INSERT INTO detalles_factura (" . implode(",", $datafields ) . ") VALUES " . implode(',', $question_marks);
+				$sentencia = $this->connection->prepare ($sql);
+				try 
+				{
+				$sentencia->execute($insert_values);
+				} catch (PDOException $e){
+				echo $e->getMessage();
+				}
+				return $this->connection->commit();
+				}
+				/* Marcadores para las declaraciones preparadas como por ejemplo(?,?,?)  */
+				function separador_de_array($text, $count=0, $separator=","){
+				$result = array();
+				// vemos si solo es un array
+				if($count > 0){
+				for($x=0; $x<$count; $x++){
+				$result[] = $text;
+				}
+				}
+				return implode($separator, $result);
+			}
 
-
-	 			 $stmt = $db->stmt_init(); 
-	 			 $stmt->prepare("INSERT INTO mitabla (fld1, fld2, fld3, fld4) VALUES(?, ?, ?, ?)"); foreach($myarray as $row) 
-	 			 { 
-	 			 	$stmt->bind_param('idsb', 
-	 			 		$row['fld1'], $row['fld2'], 
-	 			 		$row['fld3'], $row['fld4']); 
-	 			 	$stmt->execute(); 
-	 			 } 
-	 			 	$stmt->close(); 
 		}
 
-
-
-    /* Initializing Database Information */
-
-    var $host = 'localhost';
-    var $user = 'root';
-    var $pass = '';
-    var $database = "database";
-    var $dbh;
-
-    /* Connecting Datbase */
-
-    public function __construct(){
-        try {
-            $this->dbh = new PDO('mysql:host='.$this->host.';dbname='.$this->database.'', $this->user, $this->pass);
-            //print "Connected Successfully";
-        } 
-        catch (PDOException $e) {
-            print "Error!: " . $e->getMessage() . "<br/>";
-            die();
-        }
-    }
-/* Insert Multiple Rows in a table */
-
-    public function insertMultiple($table,$rows){
-
-        $this->dbh->beginTransaction(); // also helps speed up your inserts.
-        $insert_values = array();
-        foreach($rows as $d){
-            $question_marks[] = '('  . $this->placeholders('?', sizeof($d)) . ')';
-            $insert_values = array_merge($insert_values, array_values($d));
-            $datafields = array_keys($d);
-        }
-
-        $sql = "INSERT INTO $table (" . implode(",", $datafields ) . ") VALUES " . implode(',', $question_marks);
-
-        $stmt = $this->dbh->prepare ($sql);
-        try {
-            $stmt->execute($insert_values);
-        } catch (PDOException $e){
-            echo $e->getMessage();
-        }
-        return $this->dbh->commit();
-    }
-
-    /*  placeholders for prepared statements like (?,?,?)  */
-
-    function placeholders($text, $count=0, $separator=","){
-        $result = array();
-        if($count > 0){
-            for($x=0; $x<$count; $x++){
-                $result[] = $text;
-            }
-        }
-
-        return implode($separator, $result);
-    }
-
-
-	}
 
 
 ?>
