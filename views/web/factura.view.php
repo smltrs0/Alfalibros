@@ -53,7 +53,7 @@ var res = $.getJSON("controller/get_factura.php", { id: id}, function(respuesta)
 
 });
 
-
+    console.log(res);
 
 function render_pdf_eframe() {
 

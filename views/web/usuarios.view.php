@@ -1,16 +1,21 @@
-<html>
-<head>
-		<title>Usuarios</title>
-		<!--aqui tengo que meter esto en local-->
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css"/>
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.css"/>
-		 
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.js"></script>
-	</head>
-	<body>
+<?php 
+  require (TEMPLATES.'head.php');
+?>
+<body>
+  <?php
+    require (TEMPLATES.'menu.php');
+   ?>
+
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+        <?php 
+        require (TEMPLATES.'header.php');
+         ?>
+        <!-- Content -->
+        <div class="content">
+<?php 
+require (TEMPLATES.'breadcrumb.php');
+ ?>
 		<div class="container">			
 			<div class="card">
 				
@@ -256,3 +261,13 @@ $(document).ready(function()
 	// Creo que ya esta casi toda la validación por parte del front end
 });
 </script>
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /#right-panel -->
+<?php 
+require (TEMPLATES.'scripts.php');
+ ?>
+
+</body>
+</html>
