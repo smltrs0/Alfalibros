@@ -1,2 +1,0 @@
-# Alfalibros
-Proyecto academico
