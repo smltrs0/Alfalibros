@@ -3,7 +3,7 @@
 	class usuario
 	{
 		private $connection;
-
+		private $id;
 		private $nombre;
 		private $apellido;
 		private $cedula;
@@ -15,52 +15,79 @@
 		private $respuesta;
 		private $image = NULL;
 
-		public function set_values($nombre, $apellido, $cedula, $email, $username, $nivel, $clave, $clave_rep, $pregunta, $respuesta, $image = false)
+		public function crear($nombre, $apellido, $cedula, $username, $email, $clave, $cargo, $pregunta, $respuesta, $image)
 		{
-			if(!empty($nombre) && !empty($apellido) && !empty($cedula) && !empty($email) && !empty($username) && !empty($nivel) && !empty($clave) && !empty($pregunta) && !empty($respuesta))
-			{
-				if(ctype_digit($cedula) && check::email($email) && ctype_digit($nivel) && ctype_digit($pregunta) && check::cleaned_input($clave) && check::cleaned_input($respuesta) && ($clave == $clave_rep))
-				{
-					if(check::set_id('user_level',$nivel) && check::set_id('pregunta_de_seguridad',$pregunta))
-					{
-						$this->nombre = cleaning::input($nombre);
-						$this->apellido = cleaning::input($apellido);
-						$this->cedula = $cedula;
-						$this->email = cleaning::input($email);
-						$this->username = cleaning::input($username);
-						$this->nivel = $nivel;
-						$this->clave = $clave;
-						$this->pregunta = $pregunta;
-						$this->respuesta = $respuesta;
+			// Aqui hay que usar la nueva conexion y estara listo!
+			$sentencia = $connection->prepare("
+			INSERT INTO usuarios (id, nombre, apellido, cedula, username, email, clave, cargo, pregunta, respuesta, image) 
+			VALUES (NULL, :nombre, :apellido, :cedula, :username, :email, :clave, :cargo, :pregunta, :respuesta, :image)
+			");
 
-						if($image)
-						{
-							if(check::image($image))
-							{
-								$this->image = get::new_file_path('usuario',$image);
-							}
-							else
-							{
-								return false;
-							}
-						}
-					}
-					else
-					{
-						return false;
-					}
-
-					return true;
+			$result = $sentencia->execute(
+				array(
+					':nombre'	=>	$nombre,
+					':apellido'	=>	$apellido,
+					':cedula'	=>	$cedula,
+					':username'	=>	$username,
+					':email'	=>	$email,
+					':clave'	=>	$clave,
+					':cargo'	=>	$cargo,
+					':pregunta'	=> $pregunta,
+					':respuesta'	=>	$respuesta,
+					':image'		=>	$image
+				)
+			);
+				if(!empty($result))
+				{	//si se agrego correctamente regresa un true
+					return TRUE;
+				}else{
+					return FALSE;
 				}
-			}
 
-			return false;
-		}
+		}	
 
-		public function save_on_db()
+		public function editar($id, $nombre, $apellido, $cedula, $username, $email, $clave, $cargo, $pregunta, $respuesta, $image)
 		{
-
+			$sentencia = $connection->prepare(
+			"UPDATE usuarios 
+			SET 
+			username = :username,
+			nombre = :nombre,
+			apellido = :apellido, 
+			cedula = :cedula, 
+			email = :email,
+			cargo=:cargo, 
+			clave = MD5(:clave), 
+			pregunta = :p_seguridad, 
+			respuesta=:respuesta, 
+			image = :image  
+			WHERE id = :id
+			"
+		);
+		$result = $sentencia->execute(
+			array(
+				':username'	=>	$username,
+				':nombre'	=>	$nombre,
+				':apellido'	=>	$apellido,
+				':cedula'	=>	$cedula,
+				':email'	=>	$email,
+				':cargo'	=>	$cargo,
+				':clave'	=>	$clave,
+				':p_seguridad'	=>	$pregunta,
+				':respuesta'	=>	$respuesta,
+				':image'		=>	$image,
+				':id'			=>	$id
+			)
+		);
+				if(!empty($result))
+				{	//si se agrego correctamente regresa un true
+					return TRUE;
+				}else{
+					return FALSE;
+				}	
+			
 		}
-	}
 
+
+	}
 ?>
