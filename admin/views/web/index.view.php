@@ -116,7 +116,7 @@
                                     <div class="widget-description mt-0 text-success">
                                         <i class="fa fa-arrow-up"></i>
                                         <span class="pl-1">46%</span>
-                                        <span class="text-muted opacity-8 pl-1">Inclemento de ventas</span>
+                                        <span class="text-muted opacity-8 pb-3 pl-1">Incremento de ventas</span>
                                     </div>
                                 </div>
                             </div>

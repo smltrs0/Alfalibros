@@ -40,6 +40,8 @@ if (!isset($_SESSION['username'])) {
     <link rel="stylesheet" type="text/css" href="./assets/select2/select2.min.css" />
     <script type="text/javascript" src="./assets/select2/select2.min.js"></script>
 
-
+    <!-- jspdf -->
+    <script src="./assets/jspdf/jspdf.min.js"></script>
+<script src="./assets/jspdf/jspdf.plugin.autotable.js"></script>
     
 </head>

@@ -25,6 +25,8 @@ RewriteRule ^perfil$ perfil.php
 RewriteRule ^detalle_libro$ detalle_libro.php
 RewriteRule ^procesar-compra$ procesar-compra.php 
 RewriteRule ^factura$ factura.php
+RewriteRule ^proveedores$ proveedores.php
+
 
 ##Bloquea determinadas requests que se unan para insercion de sql
 RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]

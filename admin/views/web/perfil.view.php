@@ -21,7 +21,7 @@ require (TEMPLATES.'breadcrumb.php');
 <div class="row">
                 <div class="card p-3 col-5 mr-3">
                     <div class="card-header">Cambiar foto de perfil</div>
-<img src="uploaded_files/users/<?php echo  $_SESSION['image'];?>">
+<img class="card-img-top" src="uploaded_files/users/<?php echo  $_SESSION['image'];?>">
                 <input type="file" name="" class="mt-4">
              </div>
              <div class="card p-3 col-6">

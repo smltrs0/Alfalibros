@@ -29,10 +29,10 @@
                         <a href="usuarios.php"> <i class="menu-icon fa fa-users"></i>Usuarios </a>
                     </li>
                     <li>
-                        <a href="#"> <i class="menu-icon fa fa-truck"></i>Proveedores </a>
+                        <a href="proveedores"> <i class="menu-icon fa fa-truck"></i>Proveedores </a>
                     </li>
                     <li>
-                        <a href="#"> <i class="menu-icon fa fa-file-pdf"></i>Reportes </a>
+                        <a href="reportes"> <i class="menu-icon fa fa-file-pdf"></i>Reportes </a>
                     </li>
                   
                 </ul>
