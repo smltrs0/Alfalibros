@@ -2,7 +2,7 @@
 $username = 'root';
 $password = '';
 $connection = new PDO( 'mysql:host=localhost;dbname=alfalibros', $username, $password );
-
+// esto lo dejamos aqui
 function upload_image()
 {
 	if(isset($_FILES["user_image"]))
@@ -29,8 +29,8 @@ if(isset($_POST["operation"]))
 		// Use MD5 para mayor rapidez pero lo ideal es usar un encriptado con algoritmo de encriptado para
 		// mayor seguridad
 		$statement = $connection->prepare("
-			INSERT INTO usuarios (id, nombre, apellido, cedula, username, email, clave, id_pregunta, respuesta_pregunta, cargo, pregunta, respuesta, image) 
-			VALUES (NULL, :nombre, :apellido, :cedula, :username, :email, :clave, :id_pregunta, :respuesta_pregunta, :cargo, :pregunta, :respuesta, :image)
+			INSERT INTO usuarios (id, nombre, apellido, cedula, username, email, clave, cargo, pregunta, respuesta, image) 
+			VALUES (NULL, :nombre, :apellido, :cedula, :username, :email, :clave, :cargo, :pregunta, :respuesta, :image)
 		");
 		$result = $statement->execute(
 			array(
@@ -40,8 +40,6 @@ if(isset($_POST["operation"]))
 				':username'	=>	$_POST["username"],
 				':email'	=>	$_POST["email"],
 				':clave'	=>	$_POST["clave"],
-				':id_pregunta'	=>	$_POST["p_seguridad"],
-				':respuesta_pregunta'	=>	$_POST["respuesta"],
 				':cargo'	=>	$_POST["user_level"],
 				':pregunta'	=> $_POST['p_seguridad'],
 				':respuesta'	=>	$_POST['respuesta'],
@@ -87,7 +85,7 @@ if(isset($_POST["operation"]))
 				':apellido'	=>	$_POST["apellido"],
 				':cedula'	=>	$_POST["cedula"],
 				':email'	=>	$_POST["email"],
-				':cargo'	=>	$_POST["cargo"],
+				':cargo'	=>	$_POST["user_level"],
 				':clave'	=>	$_POST["clave"],
 				':p_seguridad'	=>	$_POST["p_seguridad"],
 				':respuesta'	=>	$_POST["respuesta"],
@@ -100,6 +98,7 @@ if(isset($_POST["operation"]))
 			echo true;
 		}
 	}
+
 	// ahora el peo es como pasamos esto a programacion orientada a objetos?
 	// ya se 2 funciones con self::...
 

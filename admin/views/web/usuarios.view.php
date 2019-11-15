@@ -66,6 +66,9 @@ require (TEMPLATES.'breadcrumb.php');
 		// le asignamos la variable dataTable al evento que rendesiza la tabla para posteriormente actualizarla siempre que hagamos un cambio en ella
     var dataTable = $('#users').DataTable( {
         "ajax": "controller/get_all_usuarios.php",
+        "language": {
+            "url": "scripts/js/traducciones/Spanish.json" // traducimos al español datatable
+            },
         "columns": [
           { "data": "image" },
             { "data": "nombre" },
@@ -121,7 +124,7 @@ $(document).ready(function()
 			if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)
 			{
 				// Se dispara in alerta si el formato no es el correcto 
-				alert("Invalid Image File");
+				alert("Formato del avatar es invalido.");
 				// Limpiamos el input ya que el formato no es el correcto
 				$('#user_image').val('');
 				return false;
@@ -129,7 +132,7 @@ $(document).ready(function()
 		}
 		// Solo hacemos una validación de todos los campos para escribir menos código :v y menos if :v
 		// viva la flojera .-.  
-		if(nombre != '' && apellido != '' && cedula != '' && email != '' && clave != '' && rep_clave !='')
+		if(nombre != '' && apellido != '' && cedula != '' && email != '' && username != '' && cargo != '' && clave != '' && rep_clave !=''&& p_seguridad != '' && respuesta!= '')
 		{
 			if (clave==rep_clave) 
 			{
@@ -141,12 +144,13 @@ $(document).ready(function()
 				processData:false,
 				success:function(data)
 				{
+					console.log(data);
 					// La función nos regresa un true si se agrego o actualizo
 					if (data==true) 
-					{
+					{	
+						$('#userModal').modal('hide');
 						// Limpiamos los campos del formulario en el modal
 						$('#user_form')[0].reset();
-						$('#userModal').modal('hide');
 						// Ocultamos el modal
 						// Mostramos un alerta 
 						$('#AlertAdd').fadeIn(1000);
@@ -158,9 +162,14 @@ $(document).ready(function()
 					   // Recargamos la tabla ya que sufrió cambios
 						dataTable.ajax.reload();
 					}else{
-						// Por ahora solo mostramos un  error por consola
-						console.log( 'Error '+ data );
+						if (data=='') {
+							$("#cargo").focus();
+							alert("Es necesario que selecciones un nivel de usuario.");
+						}else{
+							console.log( 'Error '+ data );
 						alert('No se pudieron guardar los datos en la base de datos, error interno.');
+						}
+						
 					}
 				}
 			});
@@ -204,6 +213,8 @@ $(document).ready(function()
 				$('#cedula').val(data.cedula);
 				$('#email').val(data.email);
 				// Se esta usando MD5 como algoritmo de encriptado y solo permite el encriptado en una dirección por lo cual cuando se actualiza cualquier dato del usuario es necesario actualizar la contraseña 
+				$('#nivel').val(data.cargo);
+				$('#p_seguridad').val(data.pregunta);
 				$('#clave').val(data.clave);
 				$('#rep_clave').val(data.clave);
 				$('#cargo').val(data.cargo);

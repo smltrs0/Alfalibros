@@ -1,19 +1,21 @@
 <?php 
     // CARGANDO LAS CONSTANTES DE RUTAS
     require('../config.path.php');
-    // CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
     require(TOOLS.'db_connector.php');
     require(TOOLS.'delete.php');
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$id=$_POST['id'];
-		    $cliente = delete::cliente($id);
+			$tabla="cliente";
+		    $cliente = delete::eliminar($id,$tabla);
 			   if ($cliente==TRUE) 
 				   {
 				   	echo "Eliminado correctamente";
+				   }elseif($cliente==FALSE){
+				   	echo "No se pudo eliminar, puede que existan datos vinculados con este cliente o que este cliente no exista.";
 				   }else{
-				   	echo "No se pudo eliminar, al parecer hay datos vinculados con este cliente.";
+				   	echo "Error".$cliente;
 				   }
 
 

@@ -69,7 +69,7 @@ require (TEMPLATES.'breadcrumb.php');
                       {
                        // $('#Tabla').dataTable.reload();
                         alert(data);
-                        location.reload()
+                        //location.reload()
                           // Actualizamos la lista en el card-body
                       }
            });

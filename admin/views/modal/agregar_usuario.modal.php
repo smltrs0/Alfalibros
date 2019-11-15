@@ -13,7 +13,7 @@
 					<label>Primer Apellido</label>
 					<input type="text" name="apellido" id="apellido" class="form-control" />
 					<label>Cedula</label>
-					<input type="text" name="cedula" id="cedula" class="form-control">
+					<input type="number" name="cedula" id="cedula" class="form-control">
 					<label>Correo</label>
 					<input type="email" name="email" id="email" class="form-control">
 					<label>Nombre de usuario</label>
@@ -29,12 +29,12 @@
 						<?php endforeach ?>
 					</select>
 					<label>Contraseña</label>
-					<input type="password" name="clave" id="clave" class="form-control">
+					<input type="password" name="clave" id="clave" class="form-control" new-password>
 					<label>Repetir Contraseña</label>
-					<input type="password" name="rep_clave" id="rep_clave" class="form-control">
+					<input type="password" name="rep_clave" id="rep_clave" class="form-control" new-password>
 					<p id="error-pass" class="text-danger"></p>
 					<label>Pregunta de seguridad</label>
-					<select name="p_seguridad" class="form-control">
+					<select name="p_seguridad" class="form-control" id="p_seguridad">
 						<option value="">Seleccione una pregunta de seguridad</option>
 						<?php foreach ($preguntas as $key): ?>
 								
