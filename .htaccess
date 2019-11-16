@@ -15,6 +15,7 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 
 RewriteRule ^catalogo$ catalogo.php
 RewriteRule ^acerca$ acerca.php
+RewriteRule ^contactanos$ contactanos.php
 
 ##Bloquea determinadas requests que se unan para insercion de sql
 RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
