@@ -2,25 +2,25 @@
 
 	class usuario
 	{
-		private $connection;
-		private $id;
-		private $nombre;
-		private $apellido;
-		private $cedula;
-		private $email;
-		private $username;
-		private $nivel;
-		private $clave;
-		private $pregunta;
-		private $respuesta;
-		private $image = NULL;
+		static private $connection;
+		static private $id;
+		static private $nombre;
+		static private $apellido;
+		static private $cedula;
+		static private $email;
+		static private $username;
+		static private $nivel;
+		static private $clave;
+		static private $pregunta;
+		static private $respuesta;
+		static private $image = NULL;
 
-		public function crear($nombre, $apellido, $cedula, $username, $email, $clave, $cargo, $pregunta, $respuesta, $image)
+		static public function crear($nombre, $apellido, $cedula, $username, $email, $clave, $cargo, $pregunta, $respuesta, $image)
 		{
-			// Aqui hay que usar la nueva conexion y estara listo!
-			$sentencia = $connection->prepare("
+			self::$connection = db_connector::get_connection();
+			$sentencia = self::$connection->prepare("
 			INSERT INTO usuarios (id, nombre, apellido, cedula, username, email, clave, cargo, pregunta, respuesta, image) 
-			VALUES (NULL, :nombre, :apellido, :cedula, :username, :email, :clave, :cargo, :pregunta, :respuesta, :image)
+			VALUES (NULL, :nombre, :apellido, :cedula, :username, :email, MD5(:clave) , :cargo, :pregunta, :respuesta, :image)
 			");
 
 			$result = $sentencia->execute(
@@ -46,9 +46,10 @@
 
 		}	
 
-		public function editar($id, $nombre, $apellido, $cedula, $username, $email, $clave, $cargo, $pregunta, $respuesta, $image)
+		static public function editar($id, $nombre, $apellido, $cedula, $username, $email, $clave, $cargo, $pregunta, $respuesta, $image)
 		{
-			$sentencia = $connection->prepare(
+			self::$connection = db_connector::get_connection();
+			$sentencia = self::$connection->prepare(
 			"UPDATE usuarios 
 			SET 
 			username = :username,
@@ -84,7 +85,7 @@
 					return TRUE;
 				}else{
 					return FALSE;
-				}	
+				}
 			
 		}
 

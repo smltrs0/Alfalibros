@@ -144,7 +144,6 @@ $(document).ready(function()
 				processData:false,
 				success:function(data)
 				{
-					console.log(data);
 					// La función nos regresa un true si se agrego o actualizo
 					if (data==true) 
 					{	
@@ -215,8 +214,8 @@ $(document).ready(function()
 				// Se esta usando MD5 como algoritmo de encriptado y solo permite el encriptado en una dirección por lo cual cuando se actualiza cualquier dato del usuario es necesario actualizar la contraseña 
 				$('#nivel').val(data.cargo);
 				$('#p_seguridad').val(data.pregunta);
-				$('#clave').val(data.clave);
-				$('#rep_clave').val(data.clave);
+				// $('#clave').val(data.clave);
+				// $('#rep_clave').val(data.clave);
 				$('#cargo').val(data.cargo);
 				$('#p_seguridad').val(data.pregunta);
 				$('#respuesta').val(data.respuesta);

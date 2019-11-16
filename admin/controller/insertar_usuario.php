@@ -1,8 +1,11 @@
 <?php
-$username = 'root';
-$password = '';
-$connection = new PDO( 'mysql:host=localhost;dbname=alfalibros', $username, $password );
-// esto lo dejamos aqui
+
+	    require('../config.path.php');
+	    // CARGANDO EL ARCHIVO DEl HELPERS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS
+	    require(TOOLS.'db_connector.php');
+		require(MODELS.'usuario.php');
+
+
 function upload_image()
 {
 	if(isset($_FILES["user_image"]))
@@ -14,6 +17,19 @@ function upload_image()
 		return $new_name;
 	}
 }
+	if (isset($_POST["user_id"])) {
+		$id = $_POST["user_id"];
+	}
+	$nombre = $_POST["nombre"];
+	$apellido = $_POST["apellido"];
+	$cedula = $_POST["cedula"];
+	$username = $_POST["username"];
+	$email = $_POST["email"];
+	$clave = $_POST["clave"];
+	$cargo = $_POST["user_level"];
+	$pregunta = $_POST["p_seguridad"];
+	$respuesta = $_POST["respuesta"];
+
 
 if(isset($_POST["operation"]))
 {
@@ -26,26 +42,9 @@ if(isset($_POST["operation"]))
 		{
 			$image = upload_image();
 		}
-		// Use MD5 para mayor rapidez pero lo ideal es usar un encriptado con algoritmo de encriptado para
-		// mayor seguridad
-		$statement = $connection->prepare("
-			INSERT INTO usuarios (id, nombre, apellido, cedula, username, email, clave, cargo, pregunta, respuesta, image) 
-			VALUES (NULL, :nombre, :apellido, :cedula, :username, :email, :clave, :cargo, :pregunta, :respuesta, :image)
-		");
-		$result = $statement->execute(
-			array(
-				':nombre'	=>	$_POST["nombre"],
-				':apellido'	=>	$_POST["apellido"],
-				':cedula'	=>	$_POST["cedula"],
-				':username'	=>	$_POST["username"],
-				':email'	=>	$_POST["email"],
-				':clave'	=>	$_POST["clave"],
-				':cargo'	=>	$_POST["user_level"],
-				':pregunta'	=> $_POST['p_seguridad'],
-				':respuesta'	=>	$_POST['respuesta'],
-				':image'		=>	$image
-			)
-		);
+		
+		$result = usuario::crear($nombre, $apellido, $cedula, $username, $email, $clave, $cargo, $pregunta, $respuesta, $image);
+		
 		if(!empty($result))
 		{	//si se agrego correctamente regresa un true
 			echo true;
@@ -62,47 +61,16 @@ if(isset($_POST["operation"]))
 		{
 			$image = $_POST["hidden_user_image"];
 		}
-		$statement = $connection->prepare(
-			"UPDATE usuarios 
-			SET 
-			username = :username,
-			nombre = :nombre,
-			apellido = :apellido, 
-			cedula = :cedula, 
-			email = :email,
-			cargo=:cargo, 
-			clave = MD5(:clave), 
-			pregunta = :p_seguridad, 
-			respuesta=:respuesta, 
-			image = :image  
-			WHERE id = :id
-			"
-		);
-		$result = $statement->execute(
-			array(
-				':username'	=>	$_POST["username"],
-				':nombre'	=>	$_POST["nombre"],
-				':apellido'	=>	$_POST["apellido"],
-				':cedula'	=>	$_POST["cedula"],
-				':email'	=>	$_POST["email"],
-				':cargo'	=>	$_POST["user_level"],
-				':clave'	=>	$_POST["clave"],
-				':p_seguridad'	=>	$_POST["p_seguridad"],
-				':respuesta'	=>	$_POST["respuesta"],
-				':image'		=>	$image,
-				':id'			=>	$_POST["user_id"]
-			)
-		);
-		if(!empty($result))
-		{
+
+		$usuario = usuario::editar($id, $nombre, $apellido, $cedula, $username, $email, $clave, $cargo, $pregunta, $respuesta, $image);
+
+		if(!empty($usuario))
+		{	//si se agrego correctamente regresa un true
 			echo true;
 		}
+
 	}
 
-	// ahora el peo es como pasamos esto a programacion orientada a objetos?
-	// ya se 2 funciones con self::...
-
-	// CREANDO LA CLASE USUARIO DEJAME ESO A MI PERO PRIMERO ESTOY CONCENTRADO EN EL MODULO DE VENTAS PARA HABILITARLO
 }
 
 ?>
