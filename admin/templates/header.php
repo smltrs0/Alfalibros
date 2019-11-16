@@ -2,7 +2,7 @@
         <header id="header" class="header shadow">
             <div class="top-left">
                 <div class="navbar-header">
-                        <a class="navbar-brand" href="./"><img src="images/logo.png" height="60px" alt="Logo"></a>
+                        <a class="navbar-brand" href="inicio"><img src="images/logo.png" height="60px" alt="Logo"></a>
                     <!--  <img src="images/logo.png" alt="">  -->
                     
                     

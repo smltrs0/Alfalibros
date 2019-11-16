@@ -27,15 +27,16 @@ if (!isset($_SESSION['username'])) {
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/webgradients.css">
+    <!-- Animated css -->
     <link rel="stylesheet" type="text/css" href="./assets/css/animate.css">
     <!--Font-awesome-->
-    <link rel="stylesheet" type="text/css" href="assets/css/all.css">
-    <script type="text/javascript" src="assets/js/Chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/css/all.css">
+    <script type="text/javascript" src="./assets/js/Chart.js"></script>
 
      <!--Datatables-->
-    <link rel="stylesheet" type="text/css" href="assets/datatables/datatables.min.css"/>
-   <script type="text/javascript" src="assets/datatables/datatables.min.js"></script>
-   <script type="text/javascript" src="assets/css/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/datatables/datatables.min.css"/>
+   <script type="text/javascript" src="./assets/datatables/datatables.min.js"></script>
+   <script type="text/javascript" src="./assets/css/bootstrap.min.js"></script>
     <!--Select2-->
     <link rel="stylesheet" type="text/css" href="./assets/select2/select2.min.css" />
     <script type="text/javascript" src="./assets/select2/select2.min.js"></script>

@@ -148,6 +148,11 @@ $(document).ready(function()
 					if (data==true) 
 					{	
 						$('#userModal').modal('hide');
+						if ($('.modal-backdrop').is(':visible')) 
+			                {
+			                  $('body').removeClass('modal-open'); 
+			                  $('.modal-backdrop').remove(); 
+			                };
 						// Limpiamos los campos del formulario en el modal
 						$('#user_form')[0].reset();
 						// Ocultamos el modal

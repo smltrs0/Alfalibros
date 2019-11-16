@@ -47,7 +47,7 @@ require(TEMPLATES.'breadcrumb.php');
                   echo "Precio: ".$libro['precio']." </br>";
                   echo "Categoria: ".$libro['categoria']."</br>";
                   echo "Lanzamiento: ".$libro['fecha_lanzamiento']."</br>";
-                  echo "Sinopsis:<p class='text-justify'> ".$libro['sinopsis']."</p>";
+                  echo "Sinopsis:<p class='text-justify'> ".substr($libro['sinopsis'], 0,600)."...</p>";
  ?>
 
             </div>

@@ -39,8 +39,11 @@ require (TEMPLATES.'breadcrumb.php');
                   <label >Fecha final</label>
                   <input type="date" class="form-control" >
                 </div>
-                <button class="btn btn-block royal_garden text-white"> Generar reporte en PDF <i class="fa fa-print"></i></button>
+                <button onclick="generarGrafica();" class="btn btn-block royal_garden text-white"> Generar reporte reporte <i class="fa fa-chart"></i></button>
             </div>
+            <hr class="mb-5">
+            <canvas id="speedChart">
+            </canvas>
        </div>
     </div>
 
@@ -55,12 +58,82 @@ require (TEMPLATES.'breadcrumb.php');
   </div>
 </div>
             
-        </div>
 
+
+        </div>
         <!-- /.content -->
     </div>
     <!-- /#right-panel -->
     <script type="text/javascript">
+function generarGrafica() {
+    var speedCanvas = document.getElementById("speedChart");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var speedData = {
+  labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre","Octubre","Noviembre"],
+  datasets: [{
+    label: "Ventas",
+    data: [20, 59, 75, 20, 20, 55, 40, 12, 45, 24, 60],
+    lineTension: 0,
+    fill: false,
+    borderColor: 'orange',
+    backgroundColor: 'transparent',
+    pointBorderColor: 'orange',
+    pointBackgroundColor: 'rgba(255,150,0,0.5)',
+    borderDash: [5, 5],
+    pointRadius: 5,
+    pointHoverRadius: 10,
+    pointHitRadius: 30,
+    pointBorderWidth: 2,
+    pointStyle: 'rectRounded'
+  }]
+};
+
+var chartOptions = {
+  legend: {
+    display: true,
+    position: 'top',
+    labels: {
+      boxWidth: 80,
+      fontColor: 'black'
+    }
+  },
+  scales: {
+    xAxes: [{
+      gridLines: {
+        display: false,
+        color: "gray"
+      },
+      scaleLabel: {
+        display: true,
+        labelString: "Meses del año",
+        fontColor: "green"
+      }
+    }],
+    yAxes: [{
+      gridLines: {
+        color: "gray",
+        borderDash: [2, 5],
+      },
+      scaleLabel: {
+        display: true,
+        labelString: "Ventas por dias",
+        fontColor: "green"
+      }
+    }]
+  }
+};
+
+var lineChart = new Chart(speedCanvas, {
+  type: 'line',
+  data: speedData,
+  options: chartOptions
+});
+}
+
+        ///// este es el reporte para el pdf :v ///
 DownloadSchedulePDF = function () {
     var doc = new jsPDF('p', 'pt');
     doc.setFontSize(12);

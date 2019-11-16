@@ -90,5 +90,22 @@
 		}
 
 
+		static public function id($id)
+		{
+			if(!self::$connection)
+			{
+				self::$connection = db_connector::get_connection();
+			}
+				
+				$sentencia = self::$connection->prepare(
+						"SELECT * FROM usuarios 
+						WHERE id = '$id' 
+						LIMIT 1"
+					);
+					$sentencia->execute();
+					$result = $sentencia->fetchAll();
+
+					return $result;
+		}
 	}
 ?>

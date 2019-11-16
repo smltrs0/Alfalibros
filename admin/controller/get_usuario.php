@@ -6,9 +6,12 @@ $id= $_POST["user_id"];
 
 if (!empty($id)) 
 {
- include_once '../models/Usuarios_model.php';
- $usuario = new Usuarios();
- $usuario = $usuario->get_usuario($id);
+	require('../config.path.php');
+	require(TOOLS.'db_connector.php');
+	require(MODELS.'usuario.php');
+
+$usuario = usuario::id($id);
+$output = array();
  foreach($usuario as $row)
 	{
 		$output["username"] = 	$row["username"];

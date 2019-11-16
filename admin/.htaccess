@@ -26,6 +26,8 @@ RewriteRule ^detalle_libro$ detalle_libro.php
 RewriteRule ^procesar-compra$ procesar-compra.php 
 RewriteRule ^factura$ factura.php
 RewriteRule ^proveedores$ proveedores.php
+RewriteRule ^usuarios$ usuarios.php
+RewriteRule ^inicio$ index.php
 
 
 ##Bloquea determinadas requests que se unan para insercion de sql

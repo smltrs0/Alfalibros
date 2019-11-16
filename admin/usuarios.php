@@ -8,10 +8,8 @@
     require(TOOLS.'check.php');
     require(TOOLS.'cleaning.php');
     require(TOOLS.'get.php');
-
-    $user_levels = get::all_items('user_level');
+ $user_levels = get::all_items('user_level');
     $preguntas = get::all_items('pregunta_de_seguridad');
-
     // CARGANDO EL VIEW DEL DOCUMENTO
     require(VIEWS_WEB.'usuarios.view.php');
 

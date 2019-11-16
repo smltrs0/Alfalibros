@@ -1,6 +1,6 @@
 
 <!-- Modal -->
-<div class="modal fade" id="add_cliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="modal-body">
-       <form method="POST" action="controller/nuevo_cliente.php">
+       <form method="POST" action="controller/nuevo_cliente.php" id="cliente_form">
 
           <div class="form-group">
             <label>Tipo de documento</label>
@@ -25,35 +25,36 @@
 
           <div class="form-group">
             <label>N° Documento sin puntos ni espacios</label>
-            <input class="form-control" type="text" name="cedula">
+            <input class="form-control" type="text" name="cedula" id="cedula">
           </div>
 
           <div class="form-group">
             <label>Nombre</label>
-            <input class="form-control" type="text" name="nombre">
+            <input class="form-control" type="text" name="nombre" id="nombre">
           </div>
 
           <div class="form-group">
             <label>Apellido</label>
-            <input class="form-control" type="text" name="apellido">
+            <input class="form-control" type="text" name="apellido" id="apellido">
           </div>
 
           <div class="form-group">
             <label>Direccion</label>
-            <input class="form-control" type="text" name="direccion">
+            <input class="form-control" type="text" name="direccion" id="direccion">
           </div>
 
           <div class="form-group">
             <label>Telefono</label>
-            <input class="form-control" type="text" name="telefono" pattern="\x2b[0-9]+" size="20" placeholder="+584XXXXXXXXX">
+            <input class="form-control" type="text" name="telefono" pattern="\x2b[0-9]+" size="20" placeholder="+584XXXXXXXXX" id="telefono">
           </div>
        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button> 
-      </form>
-      </div>
+          <input type="hidden" name="id" id="id" />
+          <input type="hidden" name="operation" id="operation" />
+          <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
     </div>
   </div>
 </div>

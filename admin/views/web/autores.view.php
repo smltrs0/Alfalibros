@@ -1,129 +1,188 @@
 <?php 
-require(TEMPLATES.'head.php');
- ?>
-
+  require (TEMPLATES.'head.php');
+?>
 <body>
   <?php
-require(TEMPLATES.'menu.php');
+    require (TEMPLATES.'menu.php');
    ?>
 
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <?php 
-        require(TEMPLATES.'header.php');
+        require (TEMPLATES.'header.php');
          ?>
         <!-- Content -->
         <div class="content">
 <?php 
-require(TEMPLATES.'breadcrumb.php');
+require (TEMPLATES.'breadcrumb.php');
  ?>
- <div class="row">
-              <div class="card shadow-blue"> 
-              <?php require(VIEWS_MODAL.'agregar_autor.modal.php');
-                    require(VIEWS_MODAL.'editar_autor.modal.php');
-               ?>
-              </div>
-            </div>
-
-            <!-- Animated test -->
-            <div class="card p-3 col-12">
-
-                <table id="Tabla" class="table">
-    <thead>
-        <tr>
-            <th width="10%">id</th>
-            <th width="80%">Nombre</th>
-            <th width="10%"> Accion</th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="container">     
+      <div class="card">
         
-    </tbody>
-</table>
-             </div>
+        <div class="card-body">
+          <div class="table-responsive table-sm">
+        <div align="right">
+          <button type="button" id="add_button" data-toggle="modal" data-target="#autorModal" class="btn btn-info ">Agregar</button>
+        </div>
+          <div class="alert alert-success" id="AlertDelete" style="display:none;">
+              <strong>Eliminado!</strong> correctamente!
+            </div>
+            <div class="alert alert-success text-center" id="AlertAdd" style="display:none;">
+              <strong>Todo bien </strong> todo correcto!
+            </div>
+        <br />
+        <table id="proveedores" class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th >Id</th>
+              <th width="70%" >Nombre</th>
+              <th >Editar</th>
+              <th >Eliminar</th>
+            </tr>
+          </thead>
+        </table>
+        
+      </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!--Inicio modal-->
+<?php 
+
+  require(VIEWS_MODAL.'agregar_autor.modal.php');
+
+?>
+<!--Final modal-->
+<script type="text/javascript" language="javascript">
+
+    var dataTable = $('#proveedores').DataTable( {
+        "ajax": "controller/get_all_autores.php",
+        "language": {
+            "url": "scripts/js/traducciones/Spanish.json"
+            },
+        "columns": [
+           { "data": "id" },
+              { "data": "nombre" },
+                { "data": "edit" },
+                  { "data": "delete" }
+        ]
+    } );
+
+$(document).ready(function()
+{   
+      $('#add_button').click(function()
+      {
+        $('#error-pass').text("");
+        $('#autor_form')[0].reset();
+        $('.modal-title').text("Agregar autor");
+        $('#action').val("Agregar");
+        $('#operation').val("Add")
+    });
+
+  $(document).on('submit', '#autor_form', function(event)
+    {
+     event.preventDefault();
+      var nombre = $('#nombre').val();
+      var id = $('#id').val();
+      if (nombre != ''){
+        var respuestas= $.ajax({
+        url:"controller/insertar_proveedor.php",
+        method:'POST',
+        data:new FormData(this),
+        contentType:false,
+        processData:false,
+        success:function(data)
+        {
+          if (data==true) 
+          { 
+            $('#autorModal').modal('hide');
+            if ($('.modal-backdrop').is(':visible')) 
+                {
+                  $('body').removeClass('modal-open'); 
+                  $('.modal-backdrop').remove(); 
+                };
+            $('#autor_form')[0].reset();
+            $('#AlertAdd').fadeIn(1000);
+              setTimeout(function() 
+              { 
+                 $('#AlertAdd').fadeOut(1000); 
+              }, 5000);
+            dataTable.ajax.reload();
+          }
+        },
+      error: function (data)
+                {
+                  alert('ERROR: '+data);
+                }
+      });
+console.log(respuestas);
+      }else{
+        alert('todos los datos son necesarios');
+      }
+    
+    });
+  
+  $(document).on('click', '.update', function(){
+    var id = $(this).attr("id");
+    $.ajax({
+      url:"controller/get_autor.php",
+      method:"POST",
+      data:{id:id},
+      dataType:"json",
+      success:function(data)
+      { 
+        $('.modal-title').text("Editar autor");
+        $('#autorModal').modal('show');
+        $('#autor').val(data.autor);
+        $('#id').val(data.id);
+        $('#action').val("Editar");
+        $('#operation').val("Edit");
+      },
+      error: function (data)
+                {
+                  alert('ERROR: '+data);
+                }
+    })
+  });
+  
+  $(document).on('click', '.delete', function(){
+    var id = $(this).attr("id");
+    if(confirm("Seguro quieres eliminar ?"))
+    {
+      $.ajax({
+        url:"controller/eliminar_proveedor.php",
+        method:"POST",
+        data:{id:id},
+        // La función success se ejecuta si no ocurrió ningún fallo durante la ejecución
+        success:function(data)
+        {
+          console.log(data);
+          $('#AlertDelete').fadeIn(1000);
+              setTimeout(function() 
+              { 
+                 $('#AlertDelete').fadeOut(1000); 
+              }, 5000);
+           // Recargamos la tabla ya que sufrió cambios
+          dataTable.ajax.reload();
+        }
+      });
+    }
+    else
+    {
+      return false; 
+    }
+  });
+  
+});
+</script>
         </div>
         <!-- /.content -->
     </div>
     <!-- /#right-panel -->
-
-     <script>
-            function eliminarAutor(elem) {
-        var eliminarElemento = confirm("¿Esta seguro que deseas eliminar este elemento?");
-        if ( eliminarElemento == true) 
-        {
-            data_id = $(elem).data('target');
-            var id = 'id='+ data_id;
-           $.ajax({
-                    type: "POST",
-                    url: "eliminar.php",
-                    data: id,
-                    success: function(data)
-                      {
-                        console.log(data_id);
-                          // Actualizamos la lista en el card-body
-                      }
-           });
-        }
-
- }
- function editarAutor(argument) {
-     data_id = $(argument).data('target');
-            var id = 'id='+ data_id;
-           $.ajax({
-                    type: "POST",
-                    url: "controller/get_autor.php",
-                    data: id,
-                    dataType:"json",
-                    success: function(data)
-                      {
-                        $('#editarAutorModal').modal('show');
-                        $('#idAutor').val(data_id);
-                        $('#autorNombre').val(data.autor);
-                        
-                        console.log(data.autor);
-                          // Actualizamos la lista en el card-body
-                      }
-           });
-  }
-             // Esta parte se encarga de renderizar la tabla usando ajax
-    $.ajax({
-    "method":"POST",
-    url: "controller/get_autores.php",
-    success : function(data) {
-        var res = JSON.parse(data);//A la variable le almacena todo el json codificado
-        console.log(res);
-                                //para poder renderizarlo en la tabla, sin esto no funciona!
-        $('#Tabla').dataTable( {
-            "language": {
-            "url": "scripts/js/traducciones/Spanish.json" // traducimos al español datatable
-            },
-                "processing": true,
-                data : res,
-                columns: [
-                {"data" : "id_autor"},
-                {"data" : "autor"},
-                //la idea es disparar un evento que abra un modal ya sea tanto para actualizar como para eliminar(confirmando la eliminacion)
-                {
-            "data": null,
-            render:function(data, type, row)
-            {
-              return '<button onclick="editarAutor(this)"  data-target='+data['id_autor']+' class="editar btn btn-warning btn-sm text-white"><i class="fa fa-edit"></i></button> <a onclick="eliminarAutor(this)" data-target='+data['id_autor']+' class="eliminar btn btn-danger btn-sm text-white"><i class="fa fa-trash"></i></a>';
-            },
-            "targets": -1
-        },
-                        ]
-                                });
-                             }       
-            });
-
-$(document).ready(function(){
-
-
-
-});
-     </script>
 <?php 
-require(TEMPLATES.'scripts.php');
+require (TEMPLATES.'scripts.php');
  ?>
 
 </body>

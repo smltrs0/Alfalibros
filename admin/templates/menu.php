@@ -5,7 +5,7 @@
                 <ul class="nav navbar-nav">
                         <li class="menu-title">Inicio</li>
                     <li class="active">
-                        <a href="index.php"><i class="menu-icon fas fa-home"></i>Inicio </a>
+                        <a href="inicio"><i class="menu-icon fas fa-home"></i>Inicio </a>
                     </li>
                     <li>
                         <a href="clientes"> <i class="menu-icon fa fa-user"></i>Clientes </a>
@@ -21,12 +21,12 @@
                             <a href="libros"><i class="menu-icon fa fa-book"></i> Libros </a>
                         </li>
                         <li>
-                            <a href="autores.php"><i class="menu-icon fa fa-feather-alt"></i> Autores </a>
+                            <a href="autores"><i class="menu-icon fa fa-feather-alt"></i> Autores </a>
                         </li>
-                        <li><a href="categorias.php"><i class="menu-icon fa fa-tasks"></i>Categorías </a></li>
+                        <li><a href="categorias"><i class="menu-icon fa fa-tasks"></i>Categorías </a></li>
                     <li class="menu-title">Administrador</li>
                     <li>
-                        <a href="usuarios.php"> <i class="menu-icon fa fa-users"></i>Usuarios </a>
+                        <a href="usuarios"> <i class="menu-icon fa fa-users"></i>Usuarios </a>
                     </li>
                     <li>
                         <a href="proveedores"> <i class="menu-icon fa fa-truck"></i>Proveedores </a>

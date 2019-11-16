@@ -501,6 +501,18 @@
 
 					return $sentencia->fetch(PDO::FETCH_ASSOC);
 		}
+		static public function get_all_usuarios()
+		{
+			if(!self::$connection)
+			{
+				self::$connection = db_connector::get_connection();
+			}
+			$query = "SELECT * FROM usuarios ";
+			$statement = self::$connection->prepare($query);
+			$statement->execute();
+			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+			return $result;
+		}
 
 
 		static public function get_user($username,$clave)
@@ -519,6 +531,17 @@
 			else {
 				return FALSE;
 			}
+		}
+
+		static public function all_proveedores()
+		{
+			// Conexion a la base de datos
+			self::$connection = db_connector::get_connection();
+			$sentencia = self::$connection->query("SELECT * FROM `proveedor` 
+													INNER JOIN tipo_de_documento
+                                                     ON proveedor.cod_tipo_documento = tipo_de_documento.id_tipo_de_documento");
+
+					return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		}
 	}
 
