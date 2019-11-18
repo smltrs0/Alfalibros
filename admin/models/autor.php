@@ -1,40 +1,76 @@
-<?php
-
+<?php 
 
 	class autor
 	{
-		private $connection;
+		static private $connection;
+		static private $id;
+		static private $autor;
 
-		private $autor;
-
-		public function set_values($autor)
+		static public function crear($autor)
 		{
-			if(!empty($autor))
+			if(!self::$connection)
 			{
-				$autor = cleaning::input($autor);
-
-				$this->autor = $autor;
-
-				return true;
+				self::$connection = db_connector::get_connection();
 			}
-			else
-			{
-				return false;
-			}
+			$sentencia = self::$connection->prepare("
+			INSERT INTO autor ( autor) 
+			VALUES ( :autor)
+			");
+
+			$result = $sentencia->execute(
+				array(
+					':autor'	=>	$autor
+				)
+			);
+				if(!empty($result))
+				{	//si se agrego correctamente regresa un true
+					return TRUE;
+				}else{
+					return FALSE;
+				}
+		}	
+
+		static public function editar($id, $autor)
+		{
+			self::$connection = db_connector::get_connection();
+			$sentencia = self::$connection->prepare(
+			"UPDATE autor
+			SET 
+			autor = :autor 
+			WHERE id = :id
+			"
+		);
+		$result = $sentencia->execute(
+			array(
+				':autor'	=>	$autor,
+				':id'			=>	$id
+			)
+		);
+				if(!empty($result))
+				{	//si se agrego correctamente regresa un true
+					return TRUE;
+				}else{
+					return FALSE;
+				}
+			
 		}
 
-		public function save_on_db()
+
+		static public function id($id)
 		{
-			if(!$this->connection)
+			if(!self::$connection)
 			{
-				$this->connection = db_connector::get_connection();
+				self::$connection = db_connector::get_connection();
 			}
-
-			$sentencia = $this->connection->prepare('INSERT INTO autor
-													 VALUES(NULL, :autor)');
-
-			$sentencia->execute(array(':autor' => $this->autor));
+				
+				$sentencia = self::$connection->prepare(
+						"SELECT * FROM autor 
+						WHERE id = '$id' 
+						LIMIT 1"
+					);
+					$sentencia->execute();
+					$result = $sentencia->fetchAll();
+					return $result;
 		}
 	}
-
 ?>

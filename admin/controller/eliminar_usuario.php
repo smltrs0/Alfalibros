@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				   {
 				   	echo "Eliminado correctamente";
 				   }elseif($cliente==FALSE){
-				   	echo "No se pudo eliminar,  que no exista.";
+				   	echo "No se pudo eliminar,  puede que no exista.";
 				   }else{
 				   	echo "Error".$cliente;
 				   }

@@ -44,8 +44,6 @@
 					</select>
 					<label>Respuesta</label>
 					<input type="text" name="respuesta" id="respuesta" class="form-control">
-					<!-- <textarea name="respuesta" id="respuesta" class="form-control"></textarea> -->
-					<!-- UN BR? RILI? :V -->
 					<br />
 					<label>Selecciona un avatar para tu usuario</label>
 					<input class="form-control-file" type="file" name="user_image" id="user_image" />

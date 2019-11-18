@@ -39,7 +39,7 @@ require (TEMPLATES.'breadcrumb.php');
                   <label >Fecha final</label>
                   <input type="date" class="form-control" >
                 </div>
-                <button onclick="generarGrafica();" class="btn btn-block royal_garden text-white"> Generar reporte reporte <i class="fa fa-chart"></i></button>
+                <button onclick="generarGrafica();" class="btn btn-block royal_garden text-white"> Generar reporte reporte <i class="fa fa-chart-area"></i></button>
             </div>
             <hr class="mb-5">
             <canvas id="speedChart">
@@ -51,8 +51,8 @@ require (TEMPLATES.'breadcrumb.php');
   <div class="tab-pane fade" id="libros" role="tabpanel" aria-labelledby="libros-tab">
     <div class="card shadow">
         <div class="card-body">
-            <p class="text-center">Se genrara un reporte con todos los libros que estan registrados jusnto con su cantidad actual.</p>
-            <button onclick="DownloadSchedulePDF()" class="btn btn-block perfect_white"> Generar reporte en PDF <i class="fa fa-print"></i></button>
+            <p class="text-center">Se generara un reporte con todos los libros que estan registrados jusnto con su cantidad actual.</p>
+            <button onclick="DownloadSchedulePDF();" class="btn btn-block perfect_white"> Generar reporte en PDF <i class="fa fa-print"></i></button>
         </div>
     </div>
   </div>

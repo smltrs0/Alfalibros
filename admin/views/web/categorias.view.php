@@ -1,53 +1,51 @@
-<?php 
-  require (TEMPLATES.'head.php');
+<?php
+require (TEMPLATES.'head.php');
 ?>
 <body>
   <?php
-    require (TEMPLATES.'menu.php');
-   ?>
-
-    <!-- Right Panel -->
-    <div id="right-panel" class="right-panel">
-        <?php 
-        require (TEMPLATES.'header.php');
-         ?>
-        <!-- Content -->
-        <div class="content">
-<?php 
-require (TEMPLATES.'breadcrumb.php');
- ?>
-    <div class="container">     
-      <div class="card">
-        
-        <div class="card-body">
-          <div class="table-responsive table-sm">
-        <div align="right">
-          <button type="button" id="add_button" data-toggle="modal" data-target="#categoriaModal" class="btn btn-info ">Agregar</button>
-        </div>
-          <div class="alert alert-success" id="AlertDelete" style="display:none;">
-              <strong>Eliminado!</strong> correctamente!
+  require (TEMPLATES.'menu.php');
+  ?>
+  <!-- Right Panel -->
+  <div id="right-panel" class="right-panel">
+    <?php
+    require (TEMPLATES.'header.php');
+    ?>
+    <!-- Content -->
+    <div class="content">
+      <?php
+      require (TEMPLATES.'breadcrumb.php');
+      ?>
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive table-sm">
+              <div align="right">
+                <button type="button" id="add_button" data-toggle="modal" data-target="#categoriaModal" class="btn btn-info ">Agregar</button>
+              </div>
+              <div class="alert alert-success" id="AlertDelete" style="display:none;">
+                <strong>Eliminado!</strong> correctamente!
+              </div>
+              <div class="alert alert-success text-center" id="AlertAdd" style="display:none;">
+                <strong>Todo bien </strong> todo correcto!
+              </div>
+              <br />
+              <table id="proveedores" class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th >Id</th>
+                    <th width="70%" >Nombre</th>
+                    <th >Editar</th>
+                    <th >Eliminar</th>
+                  </tr>
+                </thead>
+              </table>
+              
             </div>
-            <div class="alert alert-success text-center" id="AlertAdd" style="display:none;">
-              <strong>Todo bien </strong> todo correcto!
-            </div>
-        <br />
-        <table id="proveedores" class="table table-hover table-sm">
-          <thead>
-            <tr>
-              <th >Id</th>
-              <th width="70%" >Nombre</th>
-              <th >Editar</th>
-              <th >Eliminar</th>
-            </tr>
-          </thead>
-        </table>
-        
-      </div>
+          </div>
         </div>
       </div>
-    </div>
-  </body>
-</html>
+    </body>
+  </html>
 <!--Inicio modal-->
 <?php 
 
@@ -146,7 +144,6 @@ console.log(respuestas);
                 }
     })
   });
-  
   $(document).on('click', '.delete', function(){
     var id = $(this).attr("id");
     if(confirm("Seguro quieres eliminar ?"))

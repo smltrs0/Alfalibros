@@ -1,11 +1,15 @@
+
   <!--Menu principal izquierdo-->
     <aside id="left-panel" class="left-panel pt-3">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" id="mimenu">
                         <li class="menu-title">Inicio</li>
-                    <li class="active">
-                        <a href="inicio"><i class="menu-icon fas fa-home"></i>Inicio </a>
+                    <li class="<?php 
+  if ($paginaActual=="autores")
+  echo " class='current'";
+?>">
+                        <a href="inicio"><i class="menu-icon fas fa-home home "></i>Inicio </a>
                     </li>
                     <li>
                         <a href="clientes"> <i class="menu-icon fa fa-user"></i>Clientes </a>

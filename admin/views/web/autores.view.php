@@ -57,7 +57,7 @@ require (TEMPLATES.'breadcrumb.php');
 <!--Final modal-->
 <script type="text/javascript" language="javascript">
 
-    var dataTable = $('#proveedores').DataTable( {
+    var dataTable = $('#proveedores').DataTable({
         "ajax": "controller/get_all_autores.php",
         "language": {
             "url": "scripts/js/traducciones/Spanish.json"
@@ -68,7 +68,7 @@ require (TEMPLATES.'breadcrumb.php');
                 { "data": "edit" },
                   { "data": "delete" }
         ]
-    } );
+    });
 
 $(document).ready(function()
 {   
@@ -88,13 +88,14 @@ $(document).ready(function()
       var id = $('#id').val();
       if (nombre != ''){
         var respuestas= $.ajax({
-        url:"controller/insertar_proveedor.php",
+        url:"controller/insertar_autor.php",
         method:'POST',
         data:new FormData(this),
         contentType:false,
         processData:false,
         success:function(data)
         {
+          console.log(data);
           if (data==true) 
           { 
             $('#autorModal').modal('hide');

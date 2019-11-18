@@ -30,7 +30,7 @@
 					<input type="text" name="direccion" id="direccion" class="form-control">
 					
 					<label>Telefono</label>
-					<input type="number" name="telefono" id="telefono" class="form-control">
+					<input type="text" name="telefono" id="telefono" class="form-control" pattern="\x2b[0-9]+" size="20" placeholder="+584XXXXXXXXX">
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" name="id" id="id" />

@@ -16,20 +16,20 @@
 <?php 
 require (TEMPLATES.'breadcrumb.php');
  ?>
-    <div class="container">     
-      <div class="card">
-        
-        <div class="card-body">
-          <div class="table-responsive table-sm">
+<div class="container">
+  <div class="card">
+    
+    <div class="card-body">
+      <div class="table-responsive table-sm">
         <div align="right">
           <button type="button" id="add_button" data-toggle="modal" data-target="#clienteModal" class="btn btn-info ">Agregar</button>
         </div>
-          <div class="alert alert-success" id="AlertDelete" style="display:none;">
-              <strong>Eliminado!</strong> correctamente!
-            </div>
-            <div class="alert alert-success text-center" id="AlertAdd" style="display:none;">
-              <strong>Todo bien </strong> todo correcto!
-            </div>
+        <div class="alert alert-success" id="AlertDelete" style="display:none;">
+          <strong>Eliminado!</strong> correctamente!
+        </div>
+        <div class="alert alert-success text-center" id="AlertAdd" style="display:none;">
+          <strong>Todo bien </strong> todo correcto!
+        </div>
         <br />
         <table id="tablaClientes" class="table table-hover table-sm">
           <thead>
@@ -47,9 +47,9 @@ require (TEMPLATES.'breadcrumb.php');
         </table>
         
       </div>
-        </div>
-      </div>
     </div>
+  </div>
+</div>
   </body>
 </html>
 <!--Inicio modal-->
@@ -96,7 +96,7 @@ $(document).ready(function()
       var id = $('#id').val();
       if (nombre != ''){
         var respuestas= $.ajax({
-        url:"controller/insertar_proveedor.php",
+        url:"controller/insertar_cliente.php",
         method:'POST',
         data:new FormData(this),
         contentType:false,
@@ -165,7 +165,7 @@ console.log(respuestas);
     if(confirm("Seguro quieres eliminar ?"))
     {
       $.ajax({
-        url:"controller/eliminar_proveedor.php",
+        url:"controller/eliminar_cliente.php",
         method:"POST",
         data:{id:id},
         // La función success se ejecuta si no ocurrió ningún fallo durante la ejecución
