@@ -137,7 +137,7 @@
 													 :fecha_facturacion, 
 													 NULL, 
 													 NULL)
-													 ');
+													 '); // Aun falta terminar eso!!!!!!!!!!.........
 			$sentencia->execute(array(':cliente'			=> $cliente,
 									  ':forma_de_pago'		=> $forma_de_pago,
 									  'fecha_facturacion'	=> $fecha));

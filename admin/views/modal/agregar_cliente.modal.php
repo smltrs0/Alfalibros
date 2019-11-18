@@ -14,7 +14,7 @@
 
           <div class="form-group">
             <label>Tipo de documento</label>
-            <select class="form-control" name="tipo_de_documento">
+            <select class="form-control" name="tipo_de_documento" id="tipo_de_documento" required>
               <option value="">Seleccione un tipo de documento:</option>
               <?php foreach ($tipos_de_documento as $key): ?>
                 <option value="<?php echo $key['id_tipo_de_documento']; ?>"><?php echo $key['tipo_de_documento']; ?></option>
@@ -25,22 +25,22 @@
 
           <div class="form-group">
             <label>N° Documento sin puntos ni espacios</label>
-            <input class="form-control" type="text" name="cedula" id="cedula">
+            <input class="form-control" type="number" name="cedula" id="cedula" required>
           </div>
 
           <div class="form-group">
             <label>Nombre</label>
-            <input class="form-control" type="text" name="nombre" id="nombre">
+            <input class="form-control" type="text" name="nombre" id="nombre" required>
           </div>
 
           <div class="form-group">
             <label>Apellido</label>
-            <input class="form-control" type="text" name="apellido" id="apellido">
+            <input class="form-control" type="text" name="apellido" id="apellido" required>
           </div>
 
           <div class="form-group">
             <label>Direccion</label>
-            <input class="form-control" type="text" name="direccion" id="direccion">
+            <input class="form-control" type="text" name="direccion" id="direccion" required>
           </div>
 
           <div class="form-group">

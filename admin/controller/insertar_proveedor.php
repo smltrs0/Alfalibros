@@ -40,7 +40,6 @@ if(isset($_POST["operation"]))
 		}else{
 			echo false;
 		}
-		echo "$result";
 	}
 	
 }

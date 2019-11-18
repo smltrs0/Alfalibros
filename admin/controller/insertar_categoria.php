@@ -4,24 +4,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	    require('../config.path.php');
 	    require(TOOLS.'db_connector.php');
-		require(MODELS.'autor.php');
-		$autor_obj = new autor();
+		require(MODELS.'categoria.php');
+		$categoria_obj = new categoria();
 
 if(isset($_POST["operation"]))
 {
 	if($_POST["operation"] == "Add")
 	{
-		$autor = $_POST['autor'];
-		$res = $autor_obj->crear($autor);
+		$categoria = $_POST['categoria'];
+		$res = $categoria_obj->crear($categoria);
 		echo $res;
 	}
 
 	if($_POST["operation"] == "Edit")
 	{
 		$id = $_POST['id'];
-		$autor = $_POST['autor'];
+		$categoria = $_POST['categoria'];
 
-		$res = $autor_obj->editar($id, $autor);
+		$res = $categoria_obj->editar($id, $categoria);
 
 		echo $res;
 

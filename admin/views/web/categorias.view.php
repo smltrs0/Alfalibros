@@ -86,7 +86,7 @@ $(document).ready(function()
       var id = $('#id').val();
       if (nombre != ''){
         var respuestas= $.ajax({
-        url:"controller/insertar_proveedor.php",
+        url:"controller/insertar_categoria.php",
         method:'POST',
         data:new FormData(this),
         contentType:false,
@@ -134,7 +134,7 @@ console.log(respuestas);
         $('.modal-title').text("Editar categoria");
         $('#categoriaModal').modal('show');
         $('#categoria').val(data.categoria);
-        $('#id').val(data.id);
+        $('#id').val(data.id_categoria);
         $('#action').val("Editar");
         $('#operation').val("Edit");
       },
@@ -149,7 +149,7 @@ console.log(respuestas);
     if(confirm("Seguro quieres eliminar ?"))
     {
       $.ajax({
-        url:"controller/eliminar_proveedor.php",
+        url:"controller/eliminar_categoria.php",
         method:"POST",
         data:{id:id},
         // La función success se ejecuta si no ocurrió ningún fallo durante la ejecución

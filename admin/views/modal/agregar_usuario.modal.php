@@ -19,7 +19,7 @@
 					<label>Nombre de usuario</label>
 					<input type="text" name="username" id="username" class="form-control">
 					<label>Tipo de usuario</label>
-					<select name="user_level" id="nivel" class="form-control" >
+					<select name="user_level" id="nivel" class="form-control" required>
 						<option value="">Seleccione un tipo de usuario</option>
 
 						<?php foreach ($user_levels as $key): ?>
@@ -34,7 +34,7 @@
 					<input type="password" name="rep_clave" id="rep_clave" class="form-control" new-password>
 					<p id="error-pass" class="text-danger"></p>
 					<label>Pregunta de seguridad</label>
-					<select name="p_seguridad" class="form-control" id="p_seguridad">
+					<select name="p_seguridad" class="form-control" id="p_seguridad" required>
 						<option value="">Seleccione una pregunta de seguridad</option>
 						<?php foreach ($preguntas as $key): ?>
 								

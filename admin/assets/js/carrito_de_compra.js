@@ -97,7 +97,7 @@ $(".form-item").submit(function(e)
                   alert('error; ' + eval(error));
               }
       })
-      e.preventDefault(); // Permite que se pueda presionar nuevamente el boton
+      e.preventDefault(); 
 });
 
 

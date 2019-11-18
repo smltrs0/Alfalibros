@@ -6,9 +6,11 @@
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-			$id=$_POST['id'];
+						$id=$_POST['id'];
 			$tabla="cliente";
-		    $cliente = delete::eliminar($id,$tabla);
+			$columna='id';
+		    $cliente = delete::eliminar($id,$tabla,$columna);
+
 			   if ($cliente==TRUE) 
 				   {
 				   	echo "Eliminado correctamente";

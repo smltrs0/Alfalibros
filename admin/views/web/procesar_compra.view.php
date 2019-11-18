@@ -20,72 +20,73 @@
             require(TEMPLATES.'breadcrumb.php');
         ?>
         <!-- Animated test -->
-        <div class="card animated bounceInDown" id="card_carrito">
-           
-            <div class="card-header">
-                Finalizar orden de compra
-            </div> 
-            <form id="formulario" action="controller/nueva_venta.php" >
-            <div class="card-body">
-                    <div class="form-row">
-                    <!--colocar o no colocar la foto...-->
-                    <div class="col-4"><p class="font-weight-bold text-dark">Nombre del libro</p></div>
-                     <div class="col-4"><p class="font-weight-bold text-dark">Precio</p></div>
-                    <div class="col-4"><p class="font-weight-bold text-dark">Cantidad</p></div>
-                </div>
-          
-                 <div id="carrito"></div>
-                  <div class="row justify-content-end">
-                    <div class="col-4">
-                        <div class="text-dark" id="total"></div>
-                    </div>
-                </div>
-                 <div class="row justify-content-end">
-                    <div class="col-4">
-                     <div class="text-dark" id="iva"> </div>
-                    </div>
-                </div>
-                <div class="row justify-content-end">
-                    <div class="col-4">
-                     <div class="text-dark" id="total_neto"> </div>
-                    </div>
-                </div>
-                <div class="form-row mt-3">
-                    <label  class="col-2 col-form-label">Cliente:</label>
-                    <div class="col-9">
-                        <select class="select_client form-control" name="cliente">
-                        </select>
-
-                </div>
-                <div class="col-1">
-                    <a href="#" title="Agregar un Nuevo Cliente"  data-toggle="modal" data-target="#add_cliente">
-                        <span class="fa-stack">
-                            <i class="fas fa-user fa-stack-1x"></i>
-                            <i class="fas fa-plus fa-stack-5x" ></i>
-                        </span>
-                    </a>
-                </div>
-              </div>
-              <div class="form-row">
-                <select class="form-control" name="method">
-              <option value="">Seleccione una forma de pago:</option>
-              <?php foreach ($forma_de_pago as $key): ?>
-                <option value="<?php echo $key['id_formapago']; ?>"><?php echo $key['descripcion_formapago']; ?></option>
-              <?php endforeach ?>
-              <!-- ESTE LUEGO SE TRATARA CON JS PARA AGREGAR OTRO INPUT PARA AÑADIR EL NUEVO AUTOR -->
-            </select>
-                
-              </div>
-
-            </div>
-            <div class="card-footer">
-                <input class="btn btn-block font-weight-bold text-primary"  id="boton_enviar" type="submit" value="Finalizar Compra">
-               
-            </div>
-
-
-          </form>  
+<div class="card animated bounceInDown" id="card_carrito">
+  
+  <div class="card-header">
+    Finalizar orden de compra
+  </div>
+  <form id="formulario" action="controller/nueva_venta.php" >
+    <div class="card-body">
+      <div class="form-row">
+        <!--colocar o no colocar la foto...-->
+        <div class="col-4"><p class="font-weight-bold text-dark">Nombre del libro</p></div>
+        <div class="col-4"><p class="font-weight-bold text-dark">Precio</p></div>
+        <div class="col-4"><p class="font-weight-bold text-dark">Cantidad</p></div>
+      </div>
+      
+      <div id="carrito"></div>
+      <div class="row justify-content-end">
+        <div class="col-4">
+          <div class="text-dark" id="total"></div>
         </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-4">
+          <div class="text-dark" id="iva"> </div>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-4">
+          <div class="text-dark" id="total_neto"> </div>
+        </div>
+      </div>
+      <div class="form-row mt-3">
+        <div class="input-group mb-3">
+          <label  class="col-2 col-form-label">Cliente:</label>
+          <div class="col-9">
+            <select class="select_client form-control" name="cliente">
+            </select>
+          </div>
+          <div class="col-1">
+            <a href="#" title="Agregar un Nuevo Cliente"  data-toggle="modal" data-target="#clienteModal" id="add_button">
+              <span class="fa-stack">
+                <i class="fas fa-user fa-stack-1x"></i>
+                <i class="fas fa-plus fa-stack-5x" ></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        
+      </div>
+      <div class="form-row">
+        <div class="input-group input-group-sm mb-3">
+          <label class="col-2">Forma de pago:</label>
+          <select class="form-control col-9" name="method" required>
+            <option value="">Seleccione una forma de pago:</option>
+            <?php foreach ($forma_de_pago as $key): ?>
+            <option value="<?php echo $key['id_formapago']; ?>"><?php echo $key['descripcion_formapago']; ?></option>
+            <?php endforeach ?>
+            <!-- ESTE LUEGO SE TRATARA CON JS PARA AGREGAR OTRO INPUT PARA AÑADIR EL NUEVO AUTOR -->
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <input class="btn btn-block font-weight-bold text-primary"  id="boton_enviar" type="submit" value="Finalizar Compra">
+      
+    </div>
+  </form>
+</div>
 
               <?php require(VIEWS_MODAL.'agregar_cliente.modal.php'); ?>
         <!-- /.content -->
@@ -95,7 +96,51 @@
  require(TEMPLATES.'scripts.php');
 ?>
 <script>
+$('#add_button').click(function()
+      {
+        $('#error-pass').text("");
+        $('#cliente_form')[0].reset();
+         $('.modal-title').text("Agregar cliente");
+        $('#action').val("Agregar");
+        $('#operation').val("Add")
+    });
 
+$(document).on('submit', '#cliente_form', function(event)
+    {
+     event.preventDefault();
+      var nombre = $('#nombre').val();
+      var id = $('#id').val();
+      if (nombre != ''){
+        var respuestas= $.ajax({
+        url:"controller/insertar_cliente.php",
+        method:'POST',
+        data:new FormData(this),
+        contentType:false,
+        processData:false,
+        success:function(data)
+        {
+          if (data==true) 
+          { 
+            $('#clienteModal').modal('hide');
+            if ($('.modal-backdrop').is(':visible')) 
+                {
+                  $('body').removeClass('modal-open'); 
+                  $('.modal-backdrop').remove(); 
+                };
+            $('#cliente_form')[0].reset();
+          }
+        },
+      error: function (data)
+                {
+                  alert('ERROR: '+data);
+                }
+      });
+console.log(respuestas);
+      }else{
+        alert('todos los datos son necesarios');
+      }
+    
+    });
       // este script es solo para procesar compra, no es necesario hacerlo global
   function actualizar_orden_de_compra() 
   { 

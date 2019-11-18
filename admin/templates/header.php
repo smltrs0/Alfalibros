@@ -31,7 +31,6 @@
 
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="perfil.php"><i class="fas fa-user"></i>Mi Perfil</a>
-                            <a class="nav-link" href="#"><i class="fas fa-cog"></i>Configuracion</a>
                             <a class="nav-link" href="controller/desconectar.php"><i class="fa fa-power-off"></i>Salir</a>
                         </div>
                     </div>

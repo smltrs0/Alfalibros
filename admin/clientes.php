@@ -9,7 +9,6 @@
     require(TOOLS.'cleaning.php');
     require(TOOLS.'get.php');
 
-
     $clientes              = get::all_items('cliente');
     $tipos_de_documento    = get::all_items('tipo_de_documento');
 

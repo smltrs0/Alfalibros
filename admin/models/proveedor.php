@@ -17,19 +17,22 @@
 		{
 			self::$connection = db_connector::get_connection();
 			$sentencia = self::$connection->prepare("
-			INSERT INTO proveedor (id, cod_tipo_documento, nombre, apellido, documento, nombre_comercial, direccion, telefono) 
-			VALUES (NULL, :cod_tipo_documento, :nombre, :apellido, :documento, :nombre_comercial, :direccion, :telefono)
+			INSERT INTO usuarios (id, nombre, apellido, documento, cod_tipo_documento, nombre_comercial, clave, direccion, pregunta, telefono, image) 
+			VALUES (NULL, :nombre, :apellido, :documento, :cod_tipo_documento, :nombre_comercial, MD5(:clave) , :direccion, :pregunta, :telefono, :image)
 			");
 
 			$result = $sentencia->execute(
 				array(
-					':cod_tipo_documento'	=>	$cod_tipo_documento,
 					':nombre'	=>	$nombre,
 					':apellido'	=>	$apellido,
 					':documento'	=>	$documento,
+					':cod_tipo_documento'	=>	$cod_tipo_documento,
 					':nombre_comercial'	=>	$nombre_comercial,
+					':clave'	=>	$clave,
 					':direccion'	=>	$direccion,
-					':telefono'	=>	$telefono
+					':pregunta'	=> $pregunta,
+					':telefono'	=>	$telefono,
+					':image'		=>	$image
 				)
 			);
 				if(!empty($result))
@@ -45,15 +48,15 @@
 		{
 			self::$connection = db_connector::get_connection();
 			$sentencia = self::$connection->prepare(
-			"UPDATE proveedor 
+			"UPDATE proveedor
 			SET 
 			cod_tipo_documento = :cod_tipo_documento,
 			nombre = :nombre,
 			apellido = :apellido, 
 			documento = :documento, 
 			nombre_comercial = :nombre_comercial,
-			direccion = :direccion,
-			telefono=:telefono, 
+			direccion=:direccion, 
+			telefono=:telefono
 			WHERE id = :id
 			"
 		);
@@ -63,7 +66,7 @@
 				':nombre'	=>	$nombre,
 				':apellido'	=>	$apellido,
 				':documento'	=>	$documento,
-				':nombre_comercial' => $nombre_comercial,
+				':nombre_comercial'	=>	$nombre_comercial,
 				':direccion'	=>	$direccion,
 				':telefono'	=>	$telefono,
 				':id'			=>	$id
@@ -75,7 +78,6 @@
 				}else{
 					return FALSE;
 				}
-				echo "editar model";
 			
 		}
 

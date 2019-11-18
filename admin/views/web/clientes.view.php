@@ -145,6 +145,7 @@ console.log(respuestas);
         $('.modal-title').text("Editar cliente");
         $('#clienteModal').modal('show');
         $('#cedula').val(data.documento);
+        $('#tipo_de_documento').val(data.id_tipo_de_documento);
         $('#nombre').val(data.nombre);
         $('#apellido').val(data.apellido);
         $('#direccion').val(data.direccion);

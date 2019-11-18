@@ -37,15 +37,17 @@
 			"UPDATE autor
 			SET 
 			autor = :autor 
-			WHERE id = :id
+			WHERE id_autor = :id
 			"
 		);
-		$result = $sentencia->execute(
-			array(
-				':autor'	=>	$autor,
-				':id'			=>	$id
-			)
-		);
+
+		try{
+			$result = $sentencia->execute(array(':autor'	=>	$autor,
+												':id'			=>	$id));
+
+		}catch(PDOException $e){
+			return $e->getMessage();
+		}
 				if(!empty($result))
 				{	//si se agrego correctamente regresa un true
 					return TRUE;

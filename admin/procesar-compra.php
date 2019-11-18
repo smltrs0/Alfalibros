@@ -9,6 +9,8 @@
     require(TOOLS.'cleaning.php');
     require(TOOLS.'get.php');
 
+
+    $tipos_de_documento    = get::all_items('tipo_de_documento');
     $registro_ventas = get::all_items('factura');
     $clientes = get::all_items('cliente');
     $libros = get::all_items('info_libro');

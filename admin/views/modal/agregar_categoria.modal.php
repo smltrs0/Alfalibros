@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <label>Nombre</label>
-          <input type="text" name="categoria" id="categoria" class="form-control" />
+          <input required type="text" name="categoria" id="categoria" class="form-control" />
         <div class="modal-footer">
           <input type="hidden" name="id" id="id" />
           <input type="hidden" name="operation" id="operation" />

@@ -8,14 +8,14 @@
 				</div>
 				<div class="modal-body">
 					<label>Nombre</label>
-					<input type="text" name="nombre" id="nombre" class="form-control" />
+					<input type="text" name="nombre" id="nombre" class="form-control" required />
 					<br />
 					<label>Apellido</label>
-					<input type="text" name="apellido" id="apellido" class="form-control" />
+					<input type="text" name="apellido" id="apellido" class="form-control" required />
 					<div class="form-group">
             <label>Tipo de documento</label>
-            <select class="form-control" name="cod_tipo_documento">
-              <option value="NULL">Seleccione un tipo de documento:</option>
+            <select class="form-control" name="cod_tipo_documento" id="tipo_de_documento" required>
+              <option value="">Seleccione un tipo de documento:</option>
               <?php foreach ($tipos_de_documento as $key): ?>
                 <option value="<?php echo $key['id_tipo_de_documento']; ?>"><?php echo $key['tipo_de_documento']; ?></option>
               <?php endforeach ?>
@@ -23,14 +23,14 @@
             </select>
           </div>
 					<label>Documento</label>
-					<input type="number" name="documento" id="documento" class="form-control">
+					<input type="number" name="documento" id="documento" class="form-control" required>
 					<label>Nombre comercial</label>
 					<input type="text" name="nombre_comercial" id="nombre_comercial" class="form-control">
 					<label>Direccion</label>
-					<input type="text" name="direccion" id="direccion" class="form-control">
+					<input type="text" name="direccion" id="direccion" class="form-control" required>
 					
 					<label>Telefono</label>
-					<input type="text" name="telefono" id="telefono" class="form-control" pattern="\x2b[0-9]+" size="20" placeholder="+584XXXXXXXXX">
+					<input type="text" name="telefono" id="telefono" class="form-control" pattern="\x2b[0-9]+" size="20" placeholder="+584XXXXXXXXX" required>
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" name="id" id="id" />

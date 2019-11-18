@@ -16,8 +16,7 @@
 <?php 
 require (TEMPLATES.'breadcrumb.php');
  ?>
-
-            
+          
 <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="ventas-tab" data-toggle="tab" href="#ventas" role="tab" aria-controls="home" aria-selected="true">Reporte de ventas</a>

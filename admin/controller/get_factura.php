@@ -2,7 +2,7 @@
 
 include_once '../models/factura.php';
 
-$id=$_GET['id'];
+$id=36 ;//$_GET['id'];
 $usuario = new factura();
 $result = $usuario->get_factura($id);
 

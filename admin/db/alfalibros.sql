@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 14, 2019 at 01:13 PM
+-- Generation Time: Jan 01, 2013 at 04:41 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.11
 
@@ -38,18 +38,13 @@ CREATE TABLE `autor` (
 --
 
 INSERT INTO `autor` (`id_autor`, `autor`) VALUES
-(1, 'Oscar Ruiz'),
+(1, 'Oscar Ruizzzz'),
 (2, 'Kledany Barzola'),
 (3, 'Nuevo Autor'),
 (4, 'Samuel Trias'),
 (5, 'Dan Brown'),
 (6, 'Zuzane Collins'),
-(7, 'Otro autor'),
-(8, 'autor'),
-(9, 'prueba nueva clase'),
-(10, 'prueba nueva clase'),
-(11, 'ejemplo'),
-(12, 'test');
+(13, 'Dan Brow');
 
 -- --------------------------------------------------------
 
@@ -132,7 +127,14 @@ INSERT INTO `detalles_factura` (`id_detalles`, `id_producto`, `cantidad`, `preci
 (4, 3, 1, '12', 39),
 (5, 5, 1, '65', 40),
 (6, 8, 1, '54', 40),
-(7, 9, 1, '98', 40);
+(7, 9, 1, '98', 40),
+(8, 3, 1, '12', 41),
+(9, 5, 1, '65', 41),
+(10, 8, 1, '54', 41),
+(11, 3, 1, '12', 42),
+(12, 3, 2, '12', 43),
+(13, 5, 1, '65', 43),
+(14, 8, 1, '54', 43);
 
 -- --------------------------------------------------------
 
@@ -165,7 +167,10 @@ INSERT INTO `factura` (`id_factura`, `id_cliente`, `cod_formapago`, `fecha_factu
 (37, 1, 1, '2019-10-06', 1.44, 13.44),
 (38, 4, 1, '2019-11-12', 1.23, 12.34),
 (39, 1, 1, '2013-01-01', NULL, NULL),
-(40, 3, 1, '2019-11-14', NULL, NULL);
+(40, 3, 1, '2019-11-14', NULL, NULL),
+(41, 5, 1, '2019-11-14', NULL, NULL),
+(42, 5, 1, '2019-11-14', NULL, NULL),
+(43, 1, 1, '2013-01-01', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -236,10 +241,10 @@ CREATE TABLE `info_libro` (
 --
 
 INSERT INTO `info_libro` (`id_info_libro`, `id_libro`, `cantidad`, `precio`, `ruta_imagen`) VALUES
-(1, 3, 669, 12, NULL),
-(2, 5, 98451, 65, NULL),
+(1, 3, 669, 12, 'uploaded_files/img_books/2.jpg'),
+(2, 5, 98451, 65, 'uploaded_files/img_books/1.jpg'),
 (3, 8, 657, 54, NULL),
-(4, 9, 6486, 98, 'uploaded_files/img_books/vyniurqdu3oqjasqwcmb.jpeg');
+(4, 9, 6486, 98, 'uploaded_files/img_books/mbiopb90k4evsb1gwh0a.jpeg');
 
 -- --------------------------------------------------------
 
@@ -261,11 +266,11 @@ CREATE TABLE `libro` (
 --
 
 INSERT INTO `libro` (`id_libro`, `titulo`, `id_autor`, `id_categoria`, `fecha_lanzamiento`, `sinopsis`) VALUES
-(1, 'Prueba', 4, 3, '2018-11-29', 'Esta es una sinopsis'),
+(1, 'test', 4, 3, '2018-11-29', 'ld'),
 (2, 'Otro libro', 2, 4, '2018-10-29', 'otra sinopsis'),
-(3, 'Prueba sin imagen', 4, 3, '2017-09-28', 'Prueba'),
+(3, 'Pablo escobar Mi padre', 4, 3, '2017-09-28', 'Pasaron más de veinte años de silencio mientras recomponía mi vida en el exilio. Para cada cosa hay un tiempo y este libro, al igual que su autor, necesitaban un proceso de maduración, autocrítica y humildad. Solo así estaría listo para sentarme a escribir historias que aún hoy para la sociedad colombiana siguen siendo un interrogante.\r\nColombia también ha madurado para escuchar y por eso consideré que era hora de compartir con los lectores mi vida al lado del hombre que fue mi padre, a quien amé incondicionalmente y con quien por imperio del destino compartí momentos que marcaron una parte de la historia de Colombia.\r\nDesde el día en que nací hasta el día de su muerte, mi padre fue mi amigo, guía, maestro y consejero de bien. En vida, alguna vez le pedí que escribiera su verdadera historia, pero no estuvo de acuerdo: “Grégory, la historia hay que terminar de hacerla para poder escribirla”.\r\nJuré vengar la muerte de mi padre, pero rompí la promesa diez minutos después. Todos tenemos derecho a cambiar y desde hace más de dos décadas vivo inmerso en reglas claras de tolerancia, convivencia pacífica, diálogo, perdón, justicia y reconciliación.\r\nEste no es un libro de reproches; es un libro que plantea profundas reflexiones sobre cómo está diseñada nuestra patria y sus políticas, y por qué surgen de sus entrañas personajes como mi padre.\r\nSoy respetuoso de la vida y desde ese lugar escribí este libro; desde una perspectiva diferente y única en la que no tengo agenda oculta, contrario a la mayoría de los textos que circulan sobre mi papá.\r\nEste libro no es tampoco la verdad absoluta. Es un ejercicio de búsqueda y una aproximación a la vida de mi padre. Es una investigación personal e íntima. Es el redescubrimiento de un hombre con todas sus virtudes pero también con todos sus defectos. La mayor parte de estas anécdotas me las contó en las frías y largas noches del último año de su vida, alrededor de fogatas; otras me las dejó escritas cuando sus enemigos estaban muy cerca de aniquilarnos a todos.\r\nEste acercamiento a la historia de mi padre me llevó a personajes ocultos por años, que solo ahora estuvieron dispuestos a contribuir con este libro, para que mi juicio y el de la editorial no estuvieran nublados. Pero sobre todo para que nadie, nunca más, herede estos odios.\r\nNo siempre estuve al lado de mi padre, no me sé todas sus historias. Miente quien diga que las conoce en su totalidad. Me enteré de todas las memorias que contiene este libro, mucho tiempo después de que sucedieron los hechos. Mi padre jamás consultó ninguna de sus decisiones conmigo, ni con nadie; era un hombre que sentenciaba por su propia cuenta.\r\nMuchas ‘verdades’ de mi padre se saben a medias, o ni siquiera se conocen. Por eso contar su historia implicó muchos riesgos porque debía ser narrada con un enorme sentido de responsabilidad, porque lamentablemente mucho de lo que se ha dicho pareciera encajar a la perfección. Estoy seguro de que el filtro de acero que puso Planeta con el editor Edgar Téllez contribuyó al buen suceso de este proyecto.\r\nEsta es una exploración personal y profunda de las entrañas de un ser humano que además de ser mi padre lideró una organización mafiosa como no la conocía la humanidad.\r\nPido perdón públicamente a todas las víctimas de mi padre, sin excepciones; me duele en el alma profundamente que hayan sufrido los embates de una violencia indiscriminada y sin par en la que cayeron muchos inocentes. A todas esas almas les digo que hoy busco honrar la memoria de cada una de ellas, desde el fondo de la mía. Este libro estará escrito con lágrimas, pero sin rencores. Sin ánimos de denuncia, ni revanchismos y sin excusas para promover la violencia ni mucho menos para hacer apología del delito.\r\nEl lector se sorprenderá con el contenido de los primeros capítulos del libro porque revelo por primera vez el profundo conflicto que hemos vivido con mis parientes paternos. Son veintiún años de de-sencuentros que me han llevado a concluir que en el desenlace final que condujo a la muerte de mi padre varios de ellos contribuyeron activamente.\r\nNo me equivoco si digo que la familia de mi padre nos ha perseguido más que sus peores enemigos. Mis actos hacia ellos tuvieron siempre su origen en el amor y en el respeto absoluto por los valores familiares, que no debieron perderse ni en la peor de las guerras y menos por dinero. Dios y mi padre saben, que yo más que nadie soñé y quise creer que esta dolorosa tragedia familiar, fuese solo una pesadilla y no una realidad a la que me tuviera que enfrentar.\r\nA mi padre le agradezco su cruda sinceridad, aquella que por la fuerza del destino me tocó comprender pero sobre todo sin justificarlo en absoluto.\r\nAnte mi pedido de perdón en el documental “Pecados de mi Padre”, alguna vez los hijos de los líderes asesinados Luis Carlos Galán y Rodrigo Lara Bonilla me dijeron: “Usted también es una víctima” y mi respuesta sigue siendo la misma desde entonces: si acaso lo soy, seré el último en la larga lista de Colombianos.\r\nMi padre fue un hombre responsable por su destino, de sus actos, de sus elecciones de vida como papá, como individuo y —a su vez— como el bandido que le causó a Colombia y al mundo, unas heridas que no pierden vigencia. Sueño que algún día cicatricen y puedan transformarse para bien, para que nadie ose repetir esta historia, pero sí aprender de ella.\r\nNo soy un hijo que creció siendo ciegamente fiel a su padre, pues en vida le cuestioné duramente su violencia y sus métodos, y le pedí de todas las maneras posibles que abandonara sus odios, que depusiera sus armas, que encontrara soluciones no violentas a sus problemas.\r\nEn el universo de opiniones que hay en torno a la vida de mi padre, en una sola coincidimos todos: En su amor incondicional por esta, su única familia.\r\nSoy un ser humano que espera ser recordado por sus actos y no por los de su padre. Invito al lector a que no me olvide durante el paso por mis relatos, ni me confunda con mi padre, porque esta es también mi historia.'),
 (4, 'Inferno', 5, 3, '2017-10-29', 'awefaw'),
-(5, 'Inferno', 1, 9, '2020-02-02', 'ASDFASDF'),
+(5, 'La reina roja', 1, 9, '2020-02-02', 'ASDFASDF'),
 (6, 'Prueba con imn', 2, 2, '2018-11-30', 'prueba con imagen'),
 (7, 'Prueba con imn', 2, 2, '2018-11-30', 'prueba con imagen'),
 (8, 'Prueba img', 2, 2, '2018-11-30', 'prueba'),
@@ -304,10 +309,18 @@ CREATE TABLE `proveedor` (
   `cod_tipo_documento` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
+  `documento` int(20) NOT NULL,
   `nombre_comercial` varchar(20) NOT NULL,
   `direccion` varchar(20) DEFAULT NULL,
   `telefono` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `cod_tipo_documento`, `nombre`, `apellido`, `documento`, `nombre_comercial`, `direccion`, `telefono`) VALUES
+(7, 1, 'test', 'test', 21312, 'test', 'San José', '10');
 
 -- --------------------------------------------------------
 
@@ -363,10 +376,8 @@ CREATE TABLE `usuarios` (
   `username` text NOT NULL,
   `email` varchar(50) NOT NULL,
   `clave` varchar(255) NOT NULL,
-  `id_pregunta` int(11) NOT NULL,
-  `respuesta_pregunta` int(11) NOT NULL,
   `cargo` int(11) NOT NULL,
-  `pregunta` varchar(255) NOT NULL,
+  `pregunta` int(11) NOT NULL,
   `respuesta` varchar(255) NOT NULL,
   `image` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -375,36 +386,9 @@ CREATE TABLE `usuarios` (
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `cedula`, `username`, `email`, `clave`, `id_pregunta`, `respuesta_pregunta`, `cargo`, `pregunta`, `respuesta`, `image`) VALUES
-(2, 'samuel', 'trias', 0, 'smltrs', 'smltrs0@gmail.com', '63a9f0ea7bb98050796b649e85481845', 2, 1, 1, '', '', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `venta`
---
-
-CREATE TABLE `venta` (
-  `id_factura` int(11) NOT NULL,
-  `id_info_libro` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `total` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `venta`
---
-
-INSERT INTO `venta` (`id_factura`, `id_info_libro`, `cantidad`, `total`) VALUES
-(29, 1, 12, 144),
-(30, 1, 45, 540),
-(31, 1, 15, 180),
-(32, 2, 78, 51012),
-(33, 1, 78, 936),
-(34, 1, 10, 120),
-(35, 1, 54, 648),
-(36, 2, 21, 13734),
-(37, 1, 1, 12);
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `cedula`, `username`, `email`, `clave`, `cargo`, `pregunta`, `respuesta`, `image`) VALUES
+(3, 'samuel', 'Trias', 242, 'smltrs0', 'smltrs0@gmail.com', '63a9f0ea7bb98050796b649e85481845', 1, 1, 'xsd', '9.jpg'),
+(4, 'oscar', 'Ruiz', 21333222, 'oscar', 'oscar@gmail.com', '63a9f0ea7bb98050796b649e85481845', 1, 2, 'd', '7.jpg');
 
 --
 -- Indexes for dumped tables
@@ -503,14 +487,7 @@ ALTER TABLE `user_level`
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tipo` (`cargo`),
-  ADD KEY `FK2_id_pregunta` (`id_pregunta`);
-
---
--- Indexes for table `venta`
---
-ALTER TABLE `venta`
-  ADD KEY `FK_id_info_libro` (`id_info_libro`),
-  ADD KEY `FK_id_factura` (`id_factura`);
+  ADD KEY `pregunta` (`pregunta`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -520,7 +497,7 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT for table `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `categoria_libro`
@@ -538,13 +515,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT for table `detalles_factura`
 --
 ALTER TABLE `detalles_factura`
-  MODIFY `id_detalles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_detalles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `finanzas`
@@ -580,7 +557,7 @@ ALTER TABLE `pregunta_de_seguridad`
 -- AUTO_INCREMENT for table `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tipo_de_documento`
@@ -598,7 +575,7 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -608,7 +585,7 @@ ALTER TABLE `usuarios`
 -- Constraints for table `cliente`
 --
 ALTER TABLE `cliente`
-  ADD CONSTRAINT `FK_id_tipo_de_documento` FOREIGN KEY (`id_tipo_de_documento`) REFERENCES `tipo_de_documento` (`id_tipo_de_documento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_id_tipo_de_documento` FOREIGN KEY (`id_tipo_de_documento`) REFERENCES `tipo_de_documento` (`id_tipo_de_documento`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `detalles_factura`
@@ -621,8 +598,8 @@ ALTER TABLE `detalles_factura`
 -- Constraints for table `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `FK_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ref_formapago` FOREIGN KEY (`cod_formapago`) REFERENCES `forma_de_pago` (`id_formapago`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `ref_formapago` FOREIGN KEY (`cod_formapago`) REFERENCES `forma_de_pago` (`id_formapago`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `info_libro`
@@ -647,15 +624,8 @@ ALTER TABLE `proveedor`
 -- Constraints for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `FK2_id_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_de_seguridad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`cargo`) REFERENCES `user_level` (`id_user_level`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `venta`
---
-ALTER TABLE `venta`
-  ADD CONSTRAINT `FK_id_factura` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_id_info_libro` FOREIGN KEY (`id_info_libro`) REFERENCES `info_libro` (`id_info_libro`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`cargo`) REFERENCES `user_level` (`id_user_level`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`pregunta`) REFERENCES `pregunta_de_seguridad` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

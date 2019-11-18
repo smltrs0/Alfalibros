@@ -137,7 +137,7 @@ console.log(respuestas);
         $('.modal-title').text("Editar autor");
         $('#autorModal').modal('show');
         $('#autor').val(data.autor);
-        $('#id').val(data.id);
+        $('#id').val(data.id_autor);
         $('#action').val("Editar");
         $('#operation').val("Edit");
       },
@@ -153,7 +153,7 @@ console.log(respuestas);
     if(confirm("Seguro quieres eliminar ?"))
     {
       $.ajax({
-        url:"controller/eliminar_proveedor.php",
+        url:"controller/eliminar_autor.php",
         method:"POST",
         data:{id:id},
         // La función success se ejecuta si no ocurrió ningún fallo durante la ejecución
