@@ -9,7 +9,7 @@
       if (data==null) {
         // El carrito de compra esta vacio
             console.log('carrito de compra vacio');
-            $("#lista-carrito").html("<div class='alert alert-warning'>El carrito de compra esta vaciao :v</div>");
+            $("#lista-carrito").html("<div class='text-center'>El carrito de compra esta vacio</div>");
             $("#total_carrito").addClass('sr-only');
           }else {
             $("#cantidad").html(Object.keys(data).length); //Contamos la cantidad de objetos en el json para el icono de los elementos en el carrito
@@ -18,7 +18,7 @@
              for (var item in data)// Con el siclo for recorremos todo el objeto
 
        {
-          console.log(data[item].item_name);
+          //console.log(data[item].item_name);
           // Lista de los productos del carrito
          listado += "<li class='list-group-item'>"+data[item].item_name+" <span class='badge badge-primary badge-pill'>"+data[item].item_loot+"</span><button  onclick='eliminar_del_carrito(this)' data-id="+ data[item].item_id+" href='#' class='close'><span>&times;</span></button></li></li>";
           total+=data[item].item_price*data[item].item_loot;

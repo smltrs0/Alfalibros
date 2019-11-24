@@ -29,10 +29,11 @@
 			if($libro->set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis))
 			{
 				$libro->save_on_db();
+				echo "done";
 			}
 			else
 			{
-				die('ERROR AL CARGAR EL LIBRO');
+				die('</br>Error al guardar el libro');
 			}
 			
 		}
@@ -41,15 +42,16 @@
 			if($libro->set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis, $_FILES['img']))
 			{
 				$libro->save_on_db();
+				echo "done";
 			}
 			else
 			{
-				die('ERROR AL CARGAR EL LIBRO');
+				die('</br>Error al guardar el libro');
 			}
 			
 		}
 
-		header('location: ../agregar_libro.php');
+		//header('location: ../agregar_libro.php');
 
 
 	}

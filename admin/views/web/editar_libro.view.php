@@ -20,12 +20,6 @@ require(TEMPLATES.'breadcrumb.php');
  <div class="row">
   <div class="card col-12">
 <?php if (!empty($libro)): ?>
-      <div class="card-header mb-3">
-           <div class="text-center">
-                <strong><?php echo $libro['titulo']; ?></strong>
-               
-           </div>
-            </div>
     <div class="row">
     <div class="col-sm-12 col-lg-6">
        <div class="m-1"> 
@@ -39,24 +33,46 @@ require(TEMPLATES.'breadcrumb.php');
     </div>
     <div class=" col-sm-12 col-lg-6">
       <div class="card-body">
-              <?php 
-
-                  echo "id: ".$libro['id_libro']."</br>";
-                  echo "Autor: ".$libro['autor']."</br>";
-                  echo "Cantidad en existencia: ".$libro['cantidad']."</br>";
-                  echo "Precio: ".$libro['precio']." </br>";
-                  echo "Categoria: ".$libro['categoria']."</br>";
-                  echo "Lanzamiento: ".$libro['fecha_lanzamiento']."</br>";
-                  echo "Sinopsis:<p class='text-justify'> ".substr($libro['sinopsis'], 0,600)."...</p>";
- ?>
+ <form method="POST">
+  <div class="form-group">
+    <label>Titulo</label>
+    <input class="form-control" type="text" name="titulo" value="<?php echo $libro['titulo'] ?>">
+  </div>
+   <input class="form-control" type="text" name="id" value="<?php echo $libro['id_libro'] ?>" hidden>
+  <div class="form-group">
+    <label>Autor</label>
+   <select>
+     <option></option>
+   </select>
+  </div>
+  <div class="form-group">
+    <label>Cantidad</label>
+    <input class="form-control" type="text" name="cantidad" value="<?php echo $libro['cantidad'] ?>">
+  </div>
+  <div class="form-group">
+    Precio
+    <input class="form-control" type="text" name="precio" value="<?php echo $libro['precio'] ?>">
+  </div>
+  <div class="form-group">
+    <label>Categoria</label>
+   <select>
+     <option></option>
+   </select>
+  </div>
+  <div class="form-group">
+    Fecha de lanzamiento
+    <input class="form-control" type="date" name="fecha_lanzamiento" value="<?php echo $libro['fecha_lanzamiento'] ?>">
+  </div>
+  <textarea class="form-control" name="sinopsis"><?php echo $libro['sinopsis'] ?></textarea>
+   
+ </form>
 
             </div>
     </div>
   </div>
   <div class="card-footer">  
       <div class="text-center">
-          <a href="editar_libro.php?id=<?php echo $_GET['id'];?>" class="btn btn-primary" value="">Editar</a>
-          <a class="btn btn-danger" href="controller/eliminar_libro.php?id=<?php echo $_GET['id'];?>">Eliminar</a>
+          <input class="btn btn-primary" type="submit" name="" value="Guardar">
       </div>
   </div>
 <?php else: ?>

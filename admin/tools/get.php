@@ -522,15 +522,26 @@
 				self::$connection = db_connector::get_connection();
 			}
 
-			$sentencia = self::$connection->prepare('SELECT * FROM usuarios WHERE username = :username OR email= :username AND clave = MD5(:clave)');
-			$sentencia->execute(array(':clave' => $clave, ':username' => $username));
-			$sentencia = $sentencia->fetch(PDO::FETCH_ASSOC);
+			$input = trim($clave);		// "Trim" Limpia los espacios al inicio y final de los caracteres
+			$input = filter_var($input, FILTER_SANITIZE_STRING);
+
+			$sentencia = self::$connection->prepare('SELECT * FROM usuarios WHERE email = :username AND clave = MD5(:clave)');
+			$sentencia->bindParam("username",$username, PDO::PARAM_STR);
+			$sentencia->bindParam("clave",$input, PDO::PARAM_STR);
+			$sentencia->execute();
+			$count = $sentencia->rowCount();
+			if ($count) {
+				$sentencia = $sentencia->fetch(PDO::FETCH_ASSOC);
 			if (!empty($sentencia)) {
 				return $sentencia;
 			}
 			else {
 				return FALSE;
 			}
+			}else{
+				return FALSE ;
+			}
+			
 		}
 
 		static public function all_proveedores()
@@ -574,6 +585,18 @@
 					INNER JOIN autor AS a on l.id_autor = a.id_autor WHERE f.id_factura = $id");
 
 					return $sentencia->fetch(PDO::FETCH_ASSOC);
+	}
+
+	static	public function fecha_rango($fecha_inicio,$fecha_final)
+	{
+		self::$connection = db_connector::get_connection();
+		$sql = "SELECT * FROM factura 
+		INNER JOIN detalles_factura
+		ON factura.id_factura = detalles_factura.id_factura 
+		WHERE fecha_facturacion BETWEEN '2011-03-20' AND '2016-03-20'";
+
+		$sentencia = self::$connection->query($sql);
+		return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 

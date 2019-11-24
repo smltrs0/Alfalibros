@@ -12,6 +12,7 @@ if (isset($_SESSION['username'])) {
     <title>Entrar al sistema</title>
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/all.css">
 	<script src="assets/js/jquery.min.js"></script>
 
     <style>
@@ -41,7 +42,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  background-color: #fff;
 }
 
 .form-signin {
@@ -78,13 +79,24 @@ body {
     <link href="signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin" action="controller/login_controller.php" method="POST">
+ <div class="">
+   <a href="../"><i class="fa fa-angle-left fa-2x" style="position: fixed;" title="Regresar a la pagina principal"> </i></a>
+ </div>
+    <form class="form-signin" action="controller/login_controller.php" method="POST" id="login_form">
   <img class="mb-4" src="../img/favicon.png" alt="" width="200" height="200">
   <h1 class="h3 mb-3 font-weight-normal">Sistema de ingreso</h1>
-  <label for="inputUsername" class="sr-only">Nombre de usuario o correo</label>
-  <input type="text" id="inputUsername" name="email" class="form-control" placeholder="Nombre de usuario" required autofocus>
-  <label for="inputPassword" class="sr-only">Contraseña</label>
-  <input type="password" id="inputPassword" name="clave" class="form-control" placeholder="Contraseña" required>
+  
+  <div class="form-group">
+    <label for="inputUsername" class="sr-only">Correo electrónico</label>
+    <input type="text" id="inputUsername" name="email" class="form-control" placeholder="Correo electrónico" required autofocus>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword" class="sr-only">Contraseña</label>
+  <input type="password" id="inputPassword" name="clave" class="form-control" placeholder="Contraseña" required >
+  </div>
+  <div class="alert alert-danger" id="alert" style="display:none;">
+              <strong id="text-alert"></strong>
+            </div>
   <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> Recuerdame
@@ -96,8 +108,69 @@ body {
 
         <script type="text/javascript">
           $(document).ready( function () {
-    console.log('test');
-} );
+    $(document).on('submit', '#login_form', function(event)
+    { 
+      event.preventDefault();
+
+      $.ajax({
+        url: 'controller/login_controller.php',
+        type: 'POST',
+        contentType:false,
+        processData:false,
+        data:new FormData(this),
+      })
+      .done(function(data) {
+        if (data=='Error_1') {
+         $('#text-alert').html('Su usuario ha sido deshabilitado del sistema.');
+        $('#alert').fadeIn(1000);
+              setTimeout(function() 
+              { 
+              // Ocultamos el alerta
+                 $('#alert').fadeOut(1000); 
+              }, 10000);
+       }else if (data=='Error_2') {
+        $('#text-alert').html('Nombre de usuario o contraseña no son correctos.');
+        $('#alert').fadeIn(1000);
+              setTimeout(function() 
+              { 
+              // Ocultamos el alerta
+                 $('#alert').fadeOut(1000); 
+              }, 10000);
+       }else if (data=='Error_3') {
+         $('#text-alert').html('Los campos no pueden estar vacios.');
+        $('#alert').fadeIn(1000);
+              setTimeout(function() 
+              { 
+              // Ocultamos el alerta
+                 $('#alert').fadeOut(1000); 
+              }, 10000);
+       }else if(data=='Logueo_exitoso') {
+         $('#text-alert').html('Logueado con exito');
+         $('#alert').removeClass('alert-danger');
+          $('#alert').addClass('alert-success');
+        $('#alert').fadeIn(1000);
+              setTimeout(function() 
+              { 
+              // Ocultamos el alerta
+                 $('#alert').fadeOut(1000); 
+              }, 10000);
+        window.location.href='index.php';
+        }else{
+          alert("Error"+data);
+        }
+
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+      
+
+    });
+
+});
         </script>
 
 

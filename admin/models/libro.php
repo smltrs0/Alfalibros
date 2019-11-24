@@ -66,12 +66,12 @@
 					{
 						if(!check::set_id('autor', $autor))
 						{
-							echo 'el autor no existe';
+							echo 'El autor no existe';
 						}
 
 						if(!check::set_id('categoria', $categoria))
 						{
-							echo 'la categoria no existe';
+							echo 'La categoría no existe';
 						}
 
 						return false;
@@ -79,14 +79,14 @@
 				}
 				else
 				{
-					echo 'ALGUNO DE LOS CAMPOS NO CUMPLE CON LOS PARAMETROS NUMERICOS O DE FECHA';
+					echo 'Alguno de los campos no cumple con los parámetros de números o fecha';
 
 					return false;
 				}
 			}
 			else
 			{
-				echo 'ALGUNO DE LOS CAMPOS ESTA VACIO';
+				echo 'Alguno de los campos esta vació.';
 
 				return false;
 			}
