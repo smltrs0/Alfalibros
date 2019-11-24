@@ -10,7 +10,8 @@
     require(TOOLS.'get.php');
 
     $id_request = $_GET['id'];
-
+    $autores    = get::all_items('autor');
+    $categorias = get::all_items('categoria');
     $libro = get::libro_by_id($id_request);
 
 

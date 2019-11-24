@@ -124,5 +124,56 @@
 				move_uploaded_file($this->temp_file, '../'.$this->ruta_imagen);
 			}					
 		}
+		 public function editar($id_libro,$id_info_libro,$titulo,$autor,$categoria,$fecha_lanzamiento,$cantidad,$precio,$sinopsis)
+		{
+			
+			$this->connection = db_connector::get_connection();
+			$sentencia1 = $this->connection->prepare(
+			"UPDATE libro
+			SET 
+			titulo = :titulo,
+			id_autor = :id_autor, id_categoria = :id_categoria, 
+			fecha_lanzamiento = :fecha_lanzamiento,sinopsis=:sinopsis
+			WHERE id_libro = :id_libro
+			");
+		$result1 = $sentencia1->execute(
+			array(
+				':titulo'	=>	$titulo,
+				':id_autor'	=>	$autor,
+				':id_categoria'	=>	$categoria,
+				':fecha_lanzamiento'	=>	$fecha_lanzamiento,
+				':sinopsis'	=>	$sinopsis,
+				':id_libro'			=>	$id_libro
+			)
+		);
+		//
+				if(empty($result1))
+				{	die('Error');
+				}
+			//
+			$sentencia = $this->connection->prepare(
+			"UPDATE info_libro
+			SET 
+			cantidad = :cantidad,
+			precio = :precio
+			WHERE id_libro = :id_libro
+			AND id_info_libro = :id_info_libro
+			");
+		$result2 = $sentencia->execute(
+			array(
+				':cantidad'	=>	$cantidad,
+				':precio'	=>	$precio,
+				':id_libro'			=>	$id_libro,
+				':id_info_libro' => $id_info_libro
+			)
+		);
+		if(!empty($result2))
+				{	
+					return TRUE;
+				}else{
+					return FALSE;
+				}
+			
+		}
 	}
 ?>
