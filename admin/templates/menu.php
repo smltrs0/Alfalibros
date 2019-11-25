@@ -28,7 +28,8 @@
                             <a href="autores"><i class="menu-icon fa fa-feather-alt"></i> Autores </a>
                         </li>
                         <li><a href="categorias"><i class="menu-icon fa fa-tasks"></i>Categorías </a></li>
-                    <li class="menu-title">Administrador</li>
+                    <?php if ($cargo =='1'): ?>
+                        <li class="menu-title">Administrador</li>
                     <li>
                         <a href="usuarios"> <i class="menu-icon fa fa-users"></i>Usuarios </a>
                     </li>
@@ -38,6 +39,7 @@
                     <li>
                         <a href="reportes"> <i class="menu-icon fa fa-file-pdf"></i>Reportes </a>
                     </li>
+                    <?php endif ?>
                   
                 </ul>
             </div>

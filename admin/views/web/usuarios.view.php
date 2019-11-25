@@ -1,5 +1,6 @@
 <?php 
   require (TEMPLATES.'head.php');
+    if ($cargo=='1') {
 ?>
 <body>
   <?php
@@ -283,6 +284,12 @@ $(document).ready(function()
     <!-- /#right-panel -->
 <?php 
 require (TEMPLATES.'scripts.php');
+}else{
+	echo '<script>
+    alert("No tienes permiso para entrar a esta zona");
+    history.back(1);
+  </script>';
+}
  ?>
 
 </body>
