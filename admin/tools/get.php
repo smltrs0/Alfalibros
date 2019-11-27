@@ -84,14 +84,12 @@
 			}
 
 			$sentencia = self::$connection->prepare('SELECT *
-													 FROM info_libro
-													 INNER JOIN libro
-													 ON info_libro.id_libro = libro.id_libro
+													 FROM libro
 													 INNER JOIN autor
 													 ON libro.id_autor = autor.id_autor
 													 INNER JOIN categoria_libro
 													 ON libro.id_categoria = categoria_libro.id_categoria
-													 WHERE info_libro.id_info_libro = :id');
+													 WHERE libro.id_libro = :id');
 
 			$sentencia->execute(array(':id' => $id));
 
@@ -111,14 +109,11 @@
 			{
 				case 'info_libro':
 
-					$sentencia = self::$connection->query('SELECT *
-												           FROM info_libro
-												           INNER JOIN libro
-												           ON info_libro.id_libro = libro.id_libro
-												           INNER JOIN autor
-												           ON libro.id_autor = autor.id_autor
-												           INNER JOIN categoria_libro
-												           ON libro.id_categoria = categoria_libro.id_categoria');
+					$sentencia = self::$connection->query('SELECT * FROM libro
+                                                           INNER JOIN autor
+                                                           ON libro.id_autor = autor.id_autor
+                                                           INNER JOIN categoria_libro
+                                                           ON libro.id_categoria = categoria_libro.id_categoria');
 			  
 					$datos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -210,6 +205,15 @@
 
 				break;
 
+				case 'proveedor':
+
+					$sentencia = self::$connection->query('SELECT *
+													       FROM proveedor');
+
+					return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+				break;
+
 				
 				default:
 					die('tabla '.$table.' no configurada o inexistente');
@@ -229,7 +233,7 @@
 				case 'info_libro':
 					
 					$sentencia = self::$connection->query('SELECT SUM(cantidad)
-											               FROM info_libro');
+											               FROM libro');
 
 					$cantidad = $sentencia->fetch();
 
@@ -524,10 +528,11 @@
 
 			$input = trim($clave);		// "Trim" Limpia los espacios al inicio y final de los caracteres
 			$input = filter_var($input, FILTER_SANITIZE_STRING);
+			$inputmd5= md5($input);
 
-			$sentencia = self::$connection->prepare('SELECT * FROM usuarios WHERE email = :username AND clave = MD5(:clave)');
+			$sentencia = self::$connection->prepare("SELECT * FROM usuarios WHERE (username=:username or email=:username) AND clave=:clave");
 			$sentencia->bindParam("username",$username, PDO::PARAM_STR);
-			$sentencia->bindParam("clave",$input, PDO::PARAM_STR);
+			$sentencia->bindParam("clave",$inputmd5, PDO::PARAM_STR);
 			$sentencia->execute();
 			$count = $sentencia->rowCount();
 			if ($count) {
@@ -548,9 +553,9 @@
 		{
 			// Conexion a la base de datos
 			self::$connection = db_connector::get_connection();
-			$sentencia = self::$connection->query("SELECT * FROM `proveedor` 
-													INNER JOIN tipo_de_documento
-                                                     ON proveedor.cod_tipo_documento = tipo_de_documento.id_tipo_de_documento");
+			$sentencia = self::$connection->query("SELECT * FROM proveedor 
+                         INNER JOIN datos_personales ON proveedor.datos_personales = datos_personales.id_datos_personales
+                         INNER JOIN tipo_de_documento ON datos_personales.id_tipo_documento = tipo_de_documento.id_tipo_de_documento");
 
 					return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		}

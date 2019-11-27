@@ -28,6 +28,8 @@ RewriteRule ^factura$ factura.php
 RewriteRule ^proveedores$ proveedores.php
 RewriteRule ^usuarios$ usuarios.php
 RewriteRule ^inicio$ index.php
+RewriteRule ^database$ database.php
+RewriteRule ^abastecer$ abastecer.php
 
 
 ##Bloquea determinadas requests que se unan para insercion de sql

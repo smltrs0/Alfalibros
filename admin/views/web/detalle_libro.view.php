@@ -56,7 +56,7 @@ require(TEMPLATES.'breadcrumb.php');
   <div class="card-footer">  
       <div class="text-center">
           <a href="editar_libro.php?id=<?php echo $_GET['id'];?>" class="btn btn-primary" value="">Editar</a>
-          <a class="btn btn-danger" href="controller/eliminar_libro.php?id=<?php echo $_GET['id'];?>">Eliminar</a>
+          <a class="btn btn-danger" onClick="return confirm('Seguro deseas eliminar?')" href="controller/eliminar_libro.php?id=<?php echo $_GET['id'];?>">Eliminar</a>
       </div>
   </div>
 <?php else: ?>

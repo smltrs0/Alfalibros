@@ -7,13 +7,14 @@
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$id=$_POST['id'];
-			$tabla="proveedor";
-		    $cliente = delete::eliminar($id,$tabla);
+			$tabla='proveedor';
+			$columna='id';
+		    $cliente = delete::eliminar($id,$tabla,$columna);
 			   if ($cliente==TRUE) 
 				   {
 				   	echo "Eliminado correctamente";
 				   }elseif($cliente==FALSE){
-				   	echo "No se pudo eliminar,  que no exista.";
+				   	echo "No se pudo eliminar, es posible que no exista.";
 				   }else{
 				   	echo "Error".$cliente;
 				   }

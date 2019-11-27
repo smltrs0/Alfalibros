@@ -36,7 +36,7 @@ require(TEMPLATES.'breadcrumb.php');
             <?php foreach ($libros as $key): ?>
               <div class="card mb-2">
                 <form class="form-item">
-                  <a href="detalle_libro?id=<?php echo $key['id_info_libro']?>">
+                  <a href="detalle_libro?id=<?php echo $key['id_libro']?>">
                     <!--Aqui tendira que ir ?id=id para procesarlo por get-->
                       <?php if(!is_null($key['ruta_imagen'])): ?>
                           <!-- class height-27 mantiene las imagenes siempre en 275 px -->
@@ -46,7 +46,7 @@ require(TEMPLATES.'breadcrumb.php');
                       <?php endif ?>
                        </a>
                           <div class="card-body">
-                                <input name="product_code" type="hidden" value="<?php echo $key['id_info_libro']; ?>">
+                                <input name="product_code" type="hidden" value="<?php echo $key['id_libro']; ?>">
                               <h4 class="card-title"><?php echo $key['titulo']; ?></h4>
                               <p class="text-dark"><strong>Precio:</strong> <?php echo $key['precio']; ?> BsS</p>
                               <p class="card-text"><small class="text-dark"><?php echo $key['autor'] ?></small></p>

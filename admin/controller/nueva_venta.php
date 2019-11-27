@@ -21,8 +21,11 @@ session_start();
 					if (isset($_POST['cliente']) && !empty($_POST['cliente']) && isset($_POST['method']) && !empty($_POST['method'])) {
 						$cliente = $_POST['cliente'];
 						$forma_de_pago = $_POST['method'];
-					
-				    	$id_factura = $venta->registrar_factura($cliente,$forma_de_pago);
+					$total=0;
+		foreach ($_SESSION['carrito'] as $key => $items) {
+			 $total += $items['item_price'] * $items['item_loot'];
+		}
+				    	$id_factura = $venta->registrar_factura($cliente,$forma_de_pago,$total);
 				    	 print($id_factura);
 				    	 // Si se insertan los datos en la tabla factura 
 				    	 	if ($id_factura==0)
@@ -30,10 +33,12 @@ session_start();
 								echo "No se insertaron los datos de la factura, algun campo esta vacio o ocurrio un error interno.";
 							}else{
 								// Preparando el array con los datos necesarios 
-	
+	$total=0;
 		foreach ($_SESSION['carrito'] as $key => $items) {
 			// Creamos un array con solo los datos que vamos a insertar en la tabla detalle venta
 			$arrayName [] = ['id_producto' => $items['item_id'],'cantidad' =>$items['item_loot'],'precio'=>$items['item_price'], 'id_factura'=> $id_factura];
+
+			 $total += $items['item_price'] * $items['item_loot'];
 		}
 								// Insertamos los detalles de la factura
 							$res = $venta->registrar_detalles_factura($arrayName);

@@ -125,7 +125,7 @@
 
 
 
-		public function registrar_factura($cliente,$forma_de_pago)
+		public function registrar_factura($cliente,$forma_de_pago,$total)
 		{
 			$connection = $this->connection = db_connector::get_connection();
       		$fecha = get::today_date();
@@ -136,11 +136,12 @@
 													 :forma_de_pago,
 													 :fecha_facturacion, 
 													 NULL, 
-													 NULL)
+													 :total)
 													 '); // Aun falta terminar eso!!!!!!!!!!.........
 			$sentencia->execute(array(':cliente'			=> $cliente,
 									  ':forma_de_pago'		=> $forma_de_pago,
-									  'fecha_facturacion'	=> $fecha));
+									   ':total'		=> $total,
+									  ':fecha_facturacion'	=> $fecha));
 			return $connection->lastInsertId();
 		}
 		

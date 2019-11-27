@@ -35,6 +35,7 @@
 				<div class="modal-footer">
 					<input type="hidden" name="id" id="id" />
 					<input type="hidden" name="operation" id="operation" />
+					<input type="hidden" name="id_datos_personales" id="id_datos_personales" />
 					<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 				</div>

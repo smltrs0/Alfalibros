@@ -97,13 +97,17 @@
 			$this->connection = db_connector::get_connection();
 
 			$sentencia = $this->connection->prepare('INSERT INTO libro
-													 VALUES(NULL,:titulo,:autor,:categoria,:fecha_lanzamiento,:sinopsis)');
+													 VALUES(NULL,:titulo,:autor,:categoria,:fecha_lanzamiento,:cantidad,:precio,:ruta_imagen,:sinopsis)');
 
 			$sentencia->execute(array(':titulo'				=> $this->titulo,
 									  ':autor'				=> $this->autor,
 									  ':categoria'			=> $this->categoria,
 									  ':fecha_lanzamiento'	=> $this->fecha_lanzamiento,
-									  ':sinopsis'			=> $this->sinopsis));
+									  ':sinopsis'			=> $this->sinopsis,
+									   ':cantidad'		=> $this->cantidad,
+									  ':precio'			=> $this->precio,
+									  ':ruta_imagen'	=> $this->ruta_imagen
+									));
 
 			$sentencia = $this->connection->query('SELECT MAX(id_libro)
 												   FROM libro');
@@ -111,13 +115,6 @@
 
 			// var_dump($id_libro);
 
-			$sentencia = $this->connection->prepare('INSERT INTO info_libro
-													 VALUES(NULL,:libro,:cantidad,:precio,:ruta_imagen)');
-
-			$sentencia->execute(array(':libro'			=> $id_libro['MAX(id_libro)'],
-									  ':cantidad'		=> $this->cantidad,
-									  ':precio'			=> $this->precio,
-									  ':ruta_imagen'	=> $this->ruta_imagen));
 
 			if(!(is_null($this->ruta_imagen)))
 			{

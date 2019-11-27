@@ -34,10 +34,16 @@
                         <a href="usuarios"> <i class="menu-icon fa fa-users"></i>Usuarios </a>
                     </li>
                     <li>
+                        <a href="abastecer"> <i class="menu-icon fa fa-truck-loading"></i>Abastecer </a>
+                    </li>
+                    <li>
                         <a href="proveedores"> <i class="menu-icon fa fa-truck"></i>Proveedores </a>
                     </li>
                     <li>
                         <a href="reportes"> <i class="menu-icon fa fa-file-pdf"></i>Reportes </a>
+                    </li>
+                    <li>
+                        <a href="database"> <i class="menu-icon fa fa-database"></i>Base de datos </a>
                     </li>
                     <?php endif ?>
                   

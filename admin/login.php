@@ -101,6 +101,9 @@ body {
     <label>
       <input type="checkbox" value="remember-me"> Recuerdame
     </label>
+   <div class="form-group">
+   	 <label><a href="">Olvide mi contraseña</a></label>
+   </div>
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2019</p>

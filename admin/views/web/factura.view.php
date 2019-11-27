@@ -108,7 +108,7 @@ pdf.text(150, 70 + (i * 5), 'Total:              '+ total_factura);
 i++;
 pdf.text(150, 70 + (i * 5), 'IVA:                '+ iva);
 i++;
-pdf.text(150, 70 + (i * 5), 'Total Neto:    '+total_neto);
+pdf.text(150, 70 + (i * 5), 'Total Neto:    '+total_neto.toFixed(2));
 
  pdf.setFontSize(7);
 pdf.text("Tienda Alfalibros C.A: Paseo Heres cruce con calle Delepiani, Ciudad Bolívar, Estado Bolívar, Venezuela.", 50, 290);

@@ -9,7 +9,6 @@
 	$result = get::all_proveedores();
 	$output = array();
 	$data = array();
-
 foreach($result as $row)
 {
 

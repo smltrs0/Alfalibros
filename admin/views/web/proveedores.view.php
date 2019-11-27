@@ -126,6 +126,8 @@ $(document).ready(function()
                  $('#AlertAdd').fadeOut(1000); 
               }, 5000);
             dataTable.ajax.reload();
+          }else{
+            alert(data);
           }
         },
       error: function (data)
@@ -158,6 +160,7 @@ console.log(respuestas);
         $('#nombre_comercial').val(data.nombre_comercial);
         $('#direccion').val(data.direccion);
         $('#telefono').val(data.telefono);
+        $('#id_datos_personales').val(data.datos_personales);
         $('#id').val(data.id);
         $('#action').val("Editar");
         $('#operation').val("Edit");

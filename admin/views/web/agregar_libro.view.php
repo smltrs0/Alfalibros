@@ -36,7 +36,6 @@
                                 <option value="<?php echo $key['id_autor']; ?>"><?php echo $key['autor']; ?></option>
                             <?php endforeach ?>
                             <!-- ESTE LUEGO SE TRATARA CON JS PARA AGREGAR OTRO INPUT PARA AÑADIR EL NUEVO AUTOR -->
-                            <option value="nuevo_autor">Otro autor</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -48,7 +47,6 @@
                                 <option value="<?php echo $key['id_categoria']; ?>"><?php echo $key['categoria']; ?></option>
                             <?php endforeach ?>
                             <!-- ESTE LUEGO SE TRATARA CON JS PARA AGREGAR OTRO INPUT PARA AÑADIR EL NUEVO AUTOR -->
-                            <option value="nuevo_autor">Otra categoria</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -57,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label>Cantidad</label>
-                        <input class="form-control" type="number" name="cantidad" require>
+                        <input class="form-control" type="number" name="cantidad" min="1" require>
                     </div>
                     <div class="form-group">
                         <label>Precio</label>

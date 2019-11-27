@@ -33,14 +33,14 @@ require (TEMPLATES.'breadcrumb.php');
             <form id="reporte_fecha">
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label >Fecha de inicio</label>
+                  <label >Fecha inicio</label>
                   <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required>
                 </div>
                 <div class="form-group col-md-6">
                   <label >Fecha final</label>
                   <input type="date" class="form-control" name="fecha_final" id="fecha_final" required>
                 </div>
-                <button type="submit" class="btn btn-block royal_garden text-white"> Generar reporte reporte <i class="fa fa-chart-area"></i></button>
+                <button type="submit" class="btn btn-block royal_garden text-white"> Generar reporte <i class="fa fa-chart-area"></i></button>
             </div>
             <hr class="mb-5">
             <div id="imprimir">

@@ -2,6 +2,9 @@
 require('../config.path.php');
 require(TOOLS.'db_connector.php');
 require(MODELS.'proveedor.php');
+require (MODELS.'datos_personales.php');
+
+$datos_personales = new datos_personales();
 $proveedor = new proveedor();
 
 	if (isset($_POST["id"])) {
@@ -19,27 +22,38 @@ if(isset($_POST["operation"]))
 {
 	if($_POST["operation"] == "Add")
 	{
+
+		$id_datos_personales = $datos_personales->crear($cod_tipo_documento, $nombre, $apellido, $documento, $direccion, $telefono);
 		
-		$result = $proveedor->crear($cod_tipo_documento, $nombre, $apellido, $documento, $nombre_comercial, $direccion, $telefono);
-		
-		if(!empty($result))
-		{
-			echo true;
+		if ($id_datos_personales) {
+			$result = $proveedor->crear_proveedor($id_datos_personales, $nombre_comercial);
+			if ($result) {
+				echo TRUE;
+			}
 		}else{
-			echo false;
+			echo FALSE;
 		}
+		
 	}
 	elseif($_POST["operation"] == "Edit")
 	{
 
-		$result = $proveedor->editar($id, $cod_tipo_documento, $nombre, $apellido, $documento, $nombre_comercial, $direccion, $telefono);
+		$result = $proveedor->editar_proveedor($id,$nombre_comercial);
 
-		if(!empty($result))
-		{	
-			echo true;
-		}else{
+
+		if ($result) {
+			$id_datos_personales = $_POST['id_datos_personales'];
+			$res = $datos_personales->editar($id_datos_personales,$cod_tipo_documento,$nombre,$apellido,$documento,$direccion, $telefono);
+				
+				if ($result) {
+					echo TRUE;
+				}
+		} else {
 			echo false;
 		}
+
+
+		
 	}
 	
 }
