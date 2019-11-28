@@ -172,5 +172,31 @@
 				}
 			
 		}
+
+				 public function actualizar_cantidad($id_libro,$cantidad)
+		{
+			
+			$this->connection = db_connector::get_connection();
+			//
+			$sentencia = $this->connection->prepare(
+			"UPDATE libro
+			SET 
+			cantidad = :cantidad
+			WHERE id_libro = :id_libro
+			");
+		$result = $sentencia->execute(
+			array(
+				':cantidad'	=>	$cantidad,
+				':id_libro'			=>	$id_libro
+			)
+		);
+		if(!empty($result))
+				{	
+					return TRUE;
+				}else{
+					return FALSE;
+				}
+			
+		}
 	}
 ?>

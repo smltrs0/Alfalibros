@@ -76,9 +76,13 @@ $(document).on('submit', '#reporte_fecha', function(event)
     event.preventDefault();
     var fecha_inicio= $('#fecha_inicio').val();
     var fecha_final = $('#fecha_final').val();
-
+    var ahora = new Date();
 // Aun falta la validación de la fecha fe inicio no sea mayor a la fecha actual
-    if(fecha_final== '' || fecha_final == ''){
+if ((new Date(fecha_inicio).getTime() > new Date(ahora).getTime()) || (new Date(fecha_final).getTime() > new Date(ahora).getTime()) ) {
+  alert('no puedes seleccionar una fecha superior a la actual');
+
+}else{
+      if(fecha_final== '' || fecha_final == ''){
       alert('No puedes dejar campos vacios');
     }else if(fecha_final==fecha_inicio){
         alert('Por favor selecciona un rango mas amplio')
@@ -137,6 +141,7 @@ $(document).on('submit', '#reporte_fecha', function(event)
     
 
     }
+}
   });
 var button = document.getElementById("DownloadBooks");
 var tableData = {

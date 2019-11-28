@@ -44,7 +44,7 @@ require(TEMPLATES.'breadcrumb.php');
                         <label>Autor</label>
                         <select class="form-control" name="autor" id="autor" require>
                             <!-- ESTE OPTION ES UN SIMPLE PLACEHOLDER PARA QUE NO SE MUESTRE EL NOMBRE DEL PRIMER AUTOR Y ENVIA UN VALOR VACIO PARA QUE LUEGO SE PUEDA VERIFICAR Y RETORNAR ERROR EN EL CASO DE QUE EL USUARIO LO ENVIE COMO AUTOR -->
-                            <option value="">Seleccione un autor</option>
+                            <option value="<?php echo $libro['id_autor'] ?>"><?php echo $libro['autor'] ?></option>
                             <?php foreach ($autores as $key): ?>
                                 <option value="<?php echo $key['id_autor']; ?>"><?php echo $key['autor']; ?></option>
                             <?php endforeach ?>
@@ -64,7 +64,7 @@ require(TEMPLATES.'breadcrumb.php');
                         <label>Categoria</label>
                         <select class="form-control" name="categoria" id="categoria" required>
                             <!-- ESTE OPTION ES UN SIMPLE PLACEHOLDER PARA QUE NO SE MUESTRE EL NOMBRE DEL PRIMER AUTOR Y ENVIA UN VALOR VACIO PARA QUE LUEGO SE PUEDA VERIFICAR Y RETORNAR ERROR EN EL CASO DE QUE EL USUARIO LO ENVIE COMO AUTOR -->
-                            <option value="">Seleccione una categoria</option>
+                            <option value="<?php echo $libro['id_categoria'] ?>"><?php echo $libro['categoria'] ?></option>
                             <?php foreach ($categorias as $key): ?>
                                 <option value="<?php echo $key['id_categoria']; ?>"><?php echo $key['categoria']; ?></option>
                             <?php endforeach ?>

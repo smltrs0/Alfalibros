@@ -32,7 +32,7 @@ require (TEMPLATES.'breadcrumb.php');
        <div class="card-body ">
           
           <div class="form-group">
-            <form action="controller/backup.php">
+            <form action="controller/backup.php" id="backup">
               <input type="submit" class="btn btn-outline-success btn-block" value="Generar respaldo de la base de datos">
             </form>
           </div>
@@ -57,7 +57,10 @@ echo listar_archivos('controller/BackupLogs');
                ?>
        </div>
     </div>
-
+    <div class="container">
+      <div class="container" id="log_backup">
+      </div>
+    </div>
   </div>
   <div class="tab-pane fade" id="libros" role="tabpanel" aria-labelledby="libros-tab">
     <div class="card shadow">
@@ -65,7 +68,7 @@ echo listar_archivos('controller/BackupLogs');
            <form> 
             <div class="form-group text-center">
               <label>El fichero soportado es solo .SQL</label>
-               <input type="file" class="form-control" name="">
+               <input type="file" class="form-control-file btn btn-outline-warning" name="">
             </div>
             <div class="form-group"> 
                <input class="btn btn-success btn-block" type="submit" name="" value="Restaurar Base de datos">
@@ -84,6 +87,31 @@ echo listar_archivos('controller/BackupLogs');
     </div>
     <!-- /#right-panel -->
   
+  <script type="text/javascript">
+    $(document).on('submit', '#backup', function(event)
+    {
+      event.preventDefault();
+      $.ajax({
+        url:"controller/backup.php",
+        method:'POST',
+        data:new FormData(this),
+        contentType:false,
+        processData:false,
+      })
+      .done(function(data) {
+        $('#log_backup').html(data);
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+      
+    });
+
+  </script>
+
 <?php 
 require (TEMPLATES.'scripts.php');
 }else{

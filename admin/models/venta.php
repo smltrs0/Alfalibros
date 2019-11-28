@@ -152,28 +152,31 @@
 				$insert_values = array();
 				foreach($array as $d)
 				{
-				$question_marks[] = '('  . $this->separador_de_array('?', sizeof($d)) . ')';
-				$insert_values = array_merge($insert_values, array_values($d)); //Combina los elementos de uno o más arrays juntándolos de modo que los valores de uno se anexan al final del anterior. Retorna el array resultante.
-				$datafields = array_keys($d);
+					$question_marks[] = '('  . $this->separador_de_array('?', sizeof($d)) . ')';
+					$insert_values = array_merge($insert_values, array_values($d)); //Combina los elementos de uno o más arrays juntándolos de modo que los valores de uno se anexan al final del anterior. Retorna el array resultante.
+					$datafields = array_keys($d);
 				}
-				$sql = "INSERT INTO detalles_factura (" . implode(",", $datafields ) . ") VALUES " . implode(',', $question_marks);
+
+				$sql = "INSERT INTO detalles_factura (" . implode(",", $datafields ) . ") 
+									VALUES " . implode(',', $question_marks);
 				$sentencia = $this->connection->prepare ($sql);
-				try 
-				{
-				$sentencia->execute($insert_values);
+				try {
+					
+					$sentencia->execute($insert_values);
 				} catch (PDOException $e){
-				echo $e->getMessage();
+					echo $e->getMessage();
 				}
-				return $this->connection->commit();
-				}
+					return $this->connection->commit();
+		}
 				/* Marcadores para las declaraciones preparadas como por ejemplo(?,?,?)  */
 				function separador_de_array($text, $count=0, $separator=","){
 				$result = array();
 				// vemos si solo es un array
 				if($count > 0){
-				for($x=0; $x<$count; $x++){
-				$result[] = $text;
-				}
+					for($x=0; $x<$count; $x++)
+					{
+						$result[] = $text;
+					}
 				}
 				return implode($separator, $result);
 			}

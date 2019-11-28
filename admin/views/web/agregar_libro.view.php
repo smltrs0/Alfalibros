@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group">
                         <label>Fecha de Lanzamiento</label>
-                        <input class="form-control" type="date" name="fecha_lanzamiento" require>
+                        <input class="form-control" type="date" name="fecha_lanzamiento" id="fecha_lanzamiento" require>
                     </div>
                     <div class="form-group">
                         <label>Cantidad</label>
@@ -59,9 +59,18 @@
                     </div>
                     <div class="form-group">
                         <label>Precio</label>
-                        <input class="form-control" type="text" name="precio" require>
+                        <input class="form-control" type="number" name="precio" min="1" require>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
+                      <label>ISBN </label> <label style="font-size: 12px;">(Número Estándar Internacional de Libros)</label>
+                      <input type="text" class="form-control" minlength="10" name="" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Numero de paginas</label>
+                      <input class="form-control" type="number" min="1" name="">
+                    </div>
+                    <div class="mb-3 form-group">
+                      <label>Sinopsis</label>
                         <textarea class="form-control" placeholder="Sinopsis" name="sinopsis"></textarea>
 
                             <div class="form-group">
@@ -87,6 +96,14 @@
     $(document).on('submit', '#agregar_libro', function(event)
     { 
       event.preventDefault();
+
+    var fecha_lanzamiento = $('#fecha_lanzamiento').val();
+    var ahora = new Date();
+if ((new Date(fecha_lanzamiento).getTime() > new Date(ahora).getTime())) {
+
+    alert('La fecha de lanzamiento no puede ser superior a la fecha actual')
+}else{
+
 
       $.ajax({
         url: 'controller/nuevo_libro.php',
@@ -125,6 +142,9 @@
       .always(function() {
         console.log("complete");
       });
+}
+
+      
       
 
     });

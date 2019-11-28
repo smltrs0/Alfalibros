@@ -9,7 +9,7 @@
     require(TOOLS.'cleaning.php');
     require(TOOLS.'get.php');
 
-    $proveedor = get::all_items('proveedor');
+    $proveedor = get::all_proveedores();
 
     $libros = get::all_items('info_libro');
 

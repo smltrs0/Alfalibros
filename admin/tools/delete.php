@@ -15,9 +15,9 @@
 			$sentencia->execute();
 			$cuenta = $sentencia->rowCount();
 				if ($cuenta > 0) {
-					return TRUE ;
+					return true ;
 				}else{
-					throw new PDOException('NO SE PUDO ELIMINAR');
+					throw new PDOException(false);
 				}
 			} catch (PDOException $e)
         {

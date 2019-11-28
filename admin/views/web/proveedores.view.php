@@ -156,7 +156,7 @@ console.log(respuestas);
         $('#nombre').val(data.nombre);
         $('#apellido').val(data.apellido);
         $('#documento').val(data.documento);
-        $('#tipo_de_documento').val(data.cod_tipo_documento);
+        $('#tipo_de_documento').val(data.id_tipo_documento);
         $('#nombre_comercial').val(data.nombre_comercial);
         $('#direccion').val(data.direccion);
         $('#telefono').val(data.telefono);

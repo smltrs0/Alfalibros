@@ -25,8 +25,8 @@ require (TEMPLATES.'breadcrumb.php');
 				<div align="right">
 					<button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info ">Agregar</button>
 				</div>
-					<div class="alert alert-success" id="AlertDelete" style="display:none;">
-	    				<strong>Eliminado!</strong> correctamente!
+					<div class="alert alert-success text-center" id="AlertDelete" style="display:none;">
+	    				<strong id="delete">Eliminado! correctamente!</strong>
 	  				</div>
 	  				<div class="alert alert-success text-center" id="AlertAdd" style="display:none;">
 	    				<strong>Todo bien </strong> todo correcto!
@@ -255,10 +255,7 @@ $(document).ready(function()
 				// La función success se ejecuta si no ocurrió ningún fallo durante la ejecución
 				success:function(data)
 				{
-					console.log(data);
-					// Generamos una animacion, los 1000 es el tiempo que durara la animacion, el tiempo se
-					// mide en milisegundos 1000 milisegundos es igual a 1 seg
-					// Mostramos un alerta 
+					$('#delete').html(data);
 					$('#AlertDelete').fadeIn(1000);
 				   setTimeout(function() { 
 				   	// Ocultamos el alerta
@@ -266,6 +263,8 @@ $(document).ready(function()
 				   }, 5000);
 				   // Recargamos la tabla ya que sufrió cambios
 					dataTable.ajax.reload();
+					console.log(data);
+					
 				}
 			});
 		}

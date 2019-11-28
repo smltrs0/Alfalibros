@@ -116,12 +116,12 @@ class DatabaseBackup{
         $backupDirectory = ($backupDirectory == '') ? $this->backupDirectory : $backupDirectory;
         if($this->logDatabase($sql,$backupDirectory)){
             echo '<h4>Se ha creado un respaldo de la base de datos: <span style="color:#56FF3F">`'.$this->database.'` </span>exitosamente.<h4>';
-   echo "<input name='button' type='button' onclick='window.close();' value='Cerrar ventana' /> ";
+   echo "<input name='button' class='btn btn-warning btn-sm' type='button' onclick='location.reload()' value='Recargar' /> ";
             exit;
 
         }else{
             echo '<h2>¡Ups! Ha ocurrido un error generando el respaldo '.$this->database.'<h2>';
- echo "<input name='button' type='button' onclick='window.close();' value='Cerrar ventana' /> ";
+ echo "<input name='button' type='button' onclick='location.reload()' value='Recargar' /> ";
             exit;
         }
        

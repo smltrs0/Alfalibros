@@ -36,7 +36,10 @@ session_start();
 	$total=0;
 		foreach ($_SESSION['carrito'] as $key => $items) {
 			// Creamos un array con solo los datos que vamos a insertar en la tabla detalle venta
-			$arrayName [] = ['id_producto' => $items['item_id'],'cantidad' =>$items['item_loot'],'precio'=>$items['item_price'], 'id_factura'=> $id_factura];
+			$arrayName [] = ['id_producto' => $items['item_id'],
+			'cantidad' =>$items['item_loot'],
+			'precio'=>$items['item_price'], 
+			'id_factura'=> $id_factura];
 
 			 $total += $items['item_price'] * $items['item_loot'];
 		}

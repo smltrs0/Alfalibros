@@ -25,7 +25,7 @@
 
           <div class="form-group">
             <label>N° Documento sin puntos ni espacios</label>
-            <input class="form-control" type="number" name="cedula" id="cedula" required>
+            <input class="form-control" type="number" name="cedula" id="cedula" min="1"  required>
           </div>
 
           <div class="form-group">
