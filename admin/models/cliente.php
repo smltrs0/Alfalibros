@@ -10,23 +10,18 @@
 		static private $direccion;
 		static private $telefono = NULL;
 
-		static public function crear($tipo_de_documento, $cedula, $nombre, $apellido, $direccion, $telefono)
+		static public function crear($id_datos_personales)
 		{
 			if(!self::$connection)
 			{
 				self::$connection = db_connector::get_connection();
 			}
 
-			$sentencia = self::$connection->prepare('INSERT INTO cliente ( id_tipo_de_documento, documento, nombre, apellido, direccion, telefono ) 
-												     VALUES( :tipo_de_documento, :cedula, :nombre, :apellido, :direccion, :telefono)');
+			$sentencia = self::$connection->prepare('INSERT INTO cliente (datos_personales ) 
+												     VALUES( :id_datos_personales)');
 
 			$resultado = $sentencia->execute(array(
-									':tipo_de_documento'	=> $tipo_de_documento,
-									  ':cedula'			 	=> $cedula,
-									  ':nombre'				=> $nombre,
-									  ':apellido'			=> $apellido,
-									  ':direccion'			=> $direccion,
-									  ':telefono'			=> $telefono));
+									  ':id_datos_personales'			=> $id_datos_personales));
 			return $resultado;
 		}
 

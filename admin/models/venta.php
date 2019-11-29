@@ -181,6 +181,20 @@
 				return implode($separator, $result);
 			}
 
+		
+
+			public function actualizar_cantidad($options) {
+					$this->connection = db_connector::get_connection();
+				  $sql = 'UPDATE libro SET cantidad= ? WHERE id_libro = ?';
+				     $statement = $this->connection->prepare($sql);
+				    foreach($options as $questi => $value ) 
+				    {
+				        $statement->execute(array($value['cantidad'],$value['idlibro']));
+				        $count = $statement->rowCount();
+				       // echo $count > 0 ? $value['cantidad'].' Actualizado' : $value['idlibro'].'Error</br>';
+   					 }
+			}
+
 		}
 
 

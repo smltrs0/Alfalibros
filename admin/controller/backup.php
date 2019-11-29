@@ -1,4 +1,5 @@
 <?php
+require('../config.path.php');
 /*
  * @Author  :   Channaveer Hakari
  * @Email       :   channaveer888@gmail.com
@@ -29,11 +30,12 @@ class DatabaseBackup{
     
     /* Class Constructor */
     function __construct(){
+        $db_config = require(CONFIG.'database.php');
         /* Initialization of DB variables */
-        $this->hostname     =   'localhost';
-        $this->username     =   'root';
-        $this->password     =   '';
-        $this->database     =   'alfalibros';
+        $this->hostname     =   $db_config['host'];
+        $this->username     =   $db_config['user'];
+        $this->password     =   $db_config['password'];
+        $this->database     =   $db_config['dbname'];
         /* Call DB Initialization Function */
         $this->initalizeDB();
         
@@ -109,18 +111,18 @@ class DatabaseBackup{
                 }
                 $sql    .=  "); \n";
             }
-            echo 'Completado... <br/>';
+            echo '<span style="color:#56FF3F">Completado... </span><br/>';
         }
         $sql .= 'SET FOREIGN_KEY_CHECKS = 1;';
         /* If the 2nd parameter was not specified then default one will be passed */
         $backupDirectory = ($backupDirectory == '') ? $this->backupDirectory : $backupDirectory;
         if($this->logDatabase($sql,$backupDirectory)){
-            echo '<h4>Se ha creado un respaldo de la base de datos: <span style="color:#56FF3F">`'.$this->database.'` </span>exitosamente.<h4>';
-   echo "<input name='button' class='btn btn-warning btn-sm' type='button' onclick='location.reload()' value='Recargar' /> ";
+            echo '<p class="text-dark">Se ha generado un respaldo de la base de datos: <span style="color:#56FF3F">`'.$this->database.'` </span>exitosamente.<p>';
+   echo "<input name='button' class='btn btn-warning btn-sm text-white' type='button' onclick='location.reload()' value='Recargar' /> ";
             exit;
 
         }else{
-            echo '<h2>¡Ups! Ha ocurrido un error generando el respaldo '.$this->database.'<h2>';
+            echo '<p class="text-dark" >¡Ups! Ha ocurrido un error generando el respaldo '.$this->database.'</p>';
  echo "<input name='button' type='button' onclick='location.reload()' value='Recargar' /> ";
             exit;
         }

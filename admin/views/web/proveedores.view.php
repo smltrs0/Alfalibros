@@ -102,6 +102,8 @@ $(document).ready(function()
       var telefono = $('#telefono').val();
       var respuesta = $('#respuesta').val();
       var id = $('#id').val();
+
+
       if (nombre != '' && apellido  != '' && documento != '' && nombre_comercial != '' && cod_tipo_documento  != 'NULL' && direccion != '' && telefono != '' && respuesta != ''){
         var respuestas= $.ajax({
         url:"controller/insertar_proveedor.php",

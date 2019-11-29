@@ -13,7 +13,7 @@ $address = 'http://'.$_SERVER['HTTP_HOST'];
 echo "<a href=" .$address."><i class='fa fa-home'></i> Inicio</a>&nbsp;/";
 
 for($i = 0; $i < $count; $i++)
-	echo '&nbsp;&nbsp;<li class="breadcrumb-item"><a href="'.($address .= '/'.str_replace(".php","",$dirlist[$i])).'">'.ucwords(str_replace(".php","",$dirlist[$i])).'</a></li>';
+	echo '<li class="breadcrumb-item"><a href="'.($address .= '/'.str_replace(".php","",$dirlist[$i])).'">'.ucwords(str_replace(".php","",$dirlist[$i])).'</a></li>';
 ?>
   </ol>
 </nav>

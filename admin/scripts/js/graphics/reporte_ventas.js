@@ -21,7 +21,7 @@ $.ajax({
                     {
                         // data: [1,1,2,3,5,8,13,21,34,55,89,144],
                         data: [values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8],values[9],values[10],values[11],values[12]],
-                        label: "Ventas",
+                        label: "Generado por ventas",
                         borderColor: "#3e95cd",
                         fill: true
                     }

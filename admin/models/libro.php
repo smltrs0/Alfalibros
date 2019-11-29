@@ -15,9 +15,9 @@
 
 		public function set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis, $file = false)
 		{
-			if(!empty($titulo) && !empty($autor) && !empty($categoria) && !empty($fecha_lanzamiento) && !empty($cantidad) && !empty($precio))
+			if(!empty($titulo) && !empty($autor) && !empty($categoria) && !empty($fecha_lanzamiento) && !empty($precio))
 			{
-				if(ctype_digit($autor) && ctype_digit($categoria) && check::date($fecha_lanzamiento) && ctype_digit($cantidad) && is_numeric($precio))
+				if(ctype_digit($autor) && ctype_digit($categoria) && check::date($fecha_lanzamiento) && is_numeric($precio))
 				{
 					if(check::set_id('autor',$autor) && check::set_id('categoria', $categoria))
 					{
@@ -92,6 +92,28 @@
 			}
 		}
 
+		public function crear($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis,$image,$isbn)
+		{
+			$this->connection = db_connector::get_connection();
+			$sentencia = $this->connection->prepare('INSERT INTO libro (
+				id_libro, titulo, id_autor, id_categoria, fecha_lanzamiento, cantidad, precio, ruta_imagen, sinopsis, isbn)
+													 VALUES(NULL,:titulo,:autor,:categoria,:fecha_lanzamiento,:cantidad,:precio,:ruta_imagen,:sinopsis, :isbn)');
+
+			$result = $sentencia->execute(array(':titulo'				=> $titulo,
+									  ':autor'				=> $autor,
+									  ':categoria'			=> $categoria,
+									  ':fecha_lanzamiento'	=> $fecha_lanzamiento,
+									  ':sinopsis'			=> $sinopsis,
+									   ':cantidad'		=> $cantidad,
+									  ':precio'			=> $precio,
+									  ':ruta_imagen'	=> $image,
+									  ':isbn' => $isbn
+									));
+			return $result;
+		}
+
+
+
 		public function save_on_db()
 		{
 			$this->connection = db_connector::get_connection();
@@ -121,7 +143,7 @@
 				move_uploaded_file($this->temp_file, '../'.$this->ruta_imagen);
 			}					
 		}
-		 public function editar($id_libro,$id_info_libro,$titulo,$autor,$categoria,$fecha_lanzamiento,$cantidad,$precio,$sinopsis)
+		 public function editar($id_libro,$id_info_libro,$titulo,$autor,$categoria,$fecha_lanzamiento,$precio,$sinopsis)
 		{
 			
 			$this->connection = db_connector::get_connection();
@@ -130,13 +152,14 @@
 			SET 
 			titulo = :titulo,
 			id_autor = :id_autor, id_categoria = :id_categoria, 
-			fecha_lanzamiento = :fecha_lanzamiento,sinopsis=:sinopsis
+			fecha_lanzamiento = :fecha_lanzamiento,sinopsis=:sinopsis, precio = :precio
 			WHERE id_libro = :id_libro
 			");
 		$result1 = $sentencia1->execute(
 			array(
 				':titulo'	=>	$titulo,
 				':id_autor'	=>	$autor,
+				':precio'	=>	$precio,
 				':id_categoria'	=>	$categoria,
 				':fecha_lanzamiento'	=>	$fecha_lanzamiento,
 				':sinopsis'	=>	$sinopsis,
@@ -144,27 +167,8 @@
 			)
 		);
 		//
-				if(empty($result1))
-				{	die('Error');
-				}
-			//
-			$sentencia = $this->connection->prepare(
-			"UPDATE info_libro
-			SET 
-			cantidad = :cantidad,
-			precio = :precio
-			WHERE id_libro = :id_libro
-			AND id_info_libro = :id_info_libro
-			");
-		$result2 = $sentencia->execute(
-			array(
-				':cantidad'	=>	$cantidad,
-				':precio'	=>	$precio,
-				':id_libro'			=>	$id_libro,
-				':id_info_libro' => $id_info_libro
-			)
-		);
-		if(!empty($result2))
+		
+		if(!empty($result1))
 				{	
 					return TRUE;
 				}else{

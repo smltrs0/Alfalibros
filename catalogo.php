@@ -113,11 +113,11 @@ filter: brightness(50%);">
             <?php foreach ($libros as $key): ?>
               <div class="card mb-5">
                 <form class="form-item">
-                  <a href="detalle_libro?id=<?php echo $key['id_info_libro']?>">
+                  <a href="detalle_libro?id=<?php echo $key['id_libro']?>">
                     <!--Aqui tendira que ir ?id=id para procesarlo por get-->
                       <?php if(!is_null($key['ruta_imagen'])): ?>
                           <!-- class height-27 mantiene las imagenes siempre en 275 px -->
-                          <img class="card-img-top img-fluid height-275 " src="admin/<?php echo $key['ruta_imagen']; ?>" alt="Card image cap"> 
+                          <img class="card-img-top img-fluid height-275 " src="admin/uploaded_files/img_books/<?php echo $key['ruta_imagen']; ?>" alt="Card image cap"> 
                       <?php else: ?>
                            <img class="card-img-top img-fluid height-275" src="admin/images/no_image.png" alt="Card image cap">
                       <?php endif ?>

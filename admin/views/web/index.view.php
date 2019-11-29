@@ -38,7 +38,7 @@ require (TEMPLATES.'head.php');
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-heading text-white">
-                                                Total Neto
+                                                Ultima venta
                                             </div>
                                             <div class="stat-text text-white">
                                                 Bs.<span class="count"><?php echo $activos; ?></span>
@@ -100,13 +100,6 @@ require (TEMPLATES.'head.php');
                     <div class="tab-pane fade active show">
                         <div class="h-25">
                             <canvas id="myChart" style="width: 350px"></canvas>
-                            <div class="widget-chart-content text-center mt-5">
-                                <div class="widget-description mt-0 text-success">
-                                    <i class="fa fa-arrow-up"></i>
-                                    <span class="pl-1">46%</span>
-                                    <span class="text-muted opacity-8 pb-3 pl-1">Aumento de ventas</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

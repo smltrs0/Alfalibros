@@ -25,7 +25,7 @@
 
           <div class="form-group">
             <label>N° Documento sin puntos ni espacios</label>
-            <input class="form-control" type="number" name="cedula" id="cedula" min="1"  required>
+            <input class="form-control" type="text" name="cedula" id="cedula" pattern="^([VEJPG]{1})([0-9]{7,9})$" placeholder="ej: V12345670 o E59345670"  required>
           </div>
 
           <div class="form-group">
@@ -52,6 +52,7 @@
       <div class="modal-footer">
           <input type="hidden" name="id" id="id" />
           <input type="hidden" name="operation" id="operation" />
+          <input type="hidden" name="id_datos_personales" id="id_datos_personales">
           <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>

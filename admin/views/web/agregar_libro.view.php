@@ -54,16 +54,12 @@
                         <input class="form-control" type="date" name="fecha_lanzamiento" id="fecha_lanzamiento" require>
                     </div>
                     <div class="form-group">
-                        <label>Cantidad</label>
-                        <input class="form-control" type="number" name="cantidad" min="1" require>
-                    </div>
-                    <div class="form-group">
                         <label>Precio</label>
                         <input class="form-control" type="number" name="precio" min="1" require>
                     </div>
                     <div class="form-group">
                       <label>ISBN </label> <label style="font-size: 12px;">(Número Estándar Internacional de Libros)</label>
-                      <input type="text" class="form-control" minlength="10" name="" required>
+                      <input type="text" class="form-control" minlength="10" name="isbn" required>
                     </div>
                     <div class="form-group">
                       <label>Numero de paginas</label>

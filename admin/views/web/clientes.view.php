@@ -34,7 +34,6 @@ require (TEMPLATES.'breadcrumb.php');
         <table id="tablaClientes" class="table table-hover table-sm">
           <thead>
             <tr>
-              <th >Id</th>
               <th >Documento</th>
               <th >Nombre</th>
               <th >Apellido</th>
@@ -67,7 +66,6 @@ require (TEMPLATES.'breadcrumb.php');
             "url": "scripts/js/traducciones/Spanish.json"
             },
         "columns": [
-           { "data": "id" },
               { "data": "documento" },
                 { "data": "nombre" },
                   { "data": "apellido" },
@@ -145,11 +143,12 @@ console.log(respuestas);
         $('.modal-title').text("Editar cliente");
         $('#clienteModal').modal('show');
         $('#cedula').val(data.documento);
-        $('#tipo_de_documento').val(data.id_tipo_de_documento);
+        $('#tipo_de_documento').val(data.id_tipo_documento);
         $('#nombre').val(data.nombre);
         $('#apellido').val(data.apellido);
         $('#direccion').val(data.direccion);
         $('#telefono').val(data.telefono);
+         $('#id_datos_personales').val(data.datos_personales);
         $('#id').val(data.id);
         $('#action').val("Editar");
         $('#operation').val("Edit");

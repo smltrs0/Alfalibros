@@ -3,61 +3,48 @@
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-		// CARGANDO LAS CONSTANTES DE RUTAS
 	    require('../config.path.php');
-
-	    // CARGANDO LAS HERRAMIENTAS SOLO UNA VEZ PARA NO GENERAR CONFLICTOS DE CLASES DUPLICADAS O DE RUTAS
 	    require(TOOLS.'db_connector.php');
-	    require(TOOLS.'check.php');
-	    require(TOOLS.'cleaning.php');
-	    require(TOOLS.'get.php');
-
 	    require(MODELS.'libro.php');
-	    
+
+		$libro = new libro(); 
+		function upload_img_books()
+		{
+			if(isset( $_FILES['img']))
+			{
+				$extension = explode('.',  $_FILES['img']['name']);
+				$new_name = rand() . '.' . $extension[1];
+				$destination = '../uploaded_files/img_books/' . $new_name;
+				move_uploaded_file( $_FILES['img']['tmp_name'], $destination);
+				return $new_name;
+			}
+		}
+
 		$titulo = $_POST['titulo'];
 		$autor = $_POST['autor'];
 		$categoria = $_POST['categoria'];
 		$fecha_lanzamiento = $_POST['fecha_lanzamiento'];
-		$cantidad = $_POST['cantidad'];
+		$cantidad = 0;
+		$isbn = $_POST['isbn'];
 		$precio = $_POST['precio'];
 		$sinopsis = $_POST['sinopsis'];
 
-		$libro = new libro();
-
-		if(empty($_FILES['img']['name']))
+		$image = NULL;
+		if( $_FILES['img']["name"] != '')
 		{
-			if($libro->set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis))
-			{
-				$libro->save_on_db();
-				echo "done";
-			}
-			else
-			{
-				die('</br>Error al guardar el libro');
-			}
-			
+			$image = upload_img_books();
 		}
-		else
-		{
-			if($libro->set_values($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis, $_FILES['img']))
-			{
-				$libro->save_on_db();
-				echo "done";
+			$resultado = $libro->crear($titulo, $autor, $categoria, $fecha_lanzamiento, $cantidad, $precio, $sinopsis,$image,$isbn);
+			if ($resultado) {
+				echo "completado";
+			}else{
+				echo $resultado;
 			}
-			else
-			{
-				die('</br>Error al guardar el libro');
-			}
-			
-		}
-
-		//header('location: ../agregar_libro.php');
-
 
 	}
 	else
 	{
-		die('ERROR.');
+		die('ERROR. No se resivieron datos');
 	}
 
 ?>

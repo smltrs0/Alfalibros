@@ -17,15 +17,14 @@
 		$autor = $_POST['autor'];
 		$categoria = $_POST['categoria'];
 		$fecha_lanzamiento = $_POST['fecha_lanzamiento'];
-		$cantidad = $_POST['cantidad'];
 		$precio = $_POST['precio'];
 		$sinopsis = $_POST['sinopsis'];
 		$libro = new libro();
 
 
-		if (!empty($id_libro) && !empty($id_info_libro) && !empty($titulo) && !empty($autor) && !empty($categoria) && !empty($fecha_lanzamiento) && !empty($cantidad) && !empty($precio))  {
+		if (!empty($id_libro) && !empty($id_info_libro) && !empty($titulo) && !empty($autor) && !empty($categoria) && !empty($fecha_lanzamiento) && !empty($precio))  {
 
-			$res= $libro->editar($id_libro,$id_info_libro,$titulo,$autor,$categoria,$fecha_lanzamiento,$cantidad,$precio,$sinopsis);
+			$res= $libro->editar($id_libro,$id_info_libro,$titulo,$autor,$categoria,$fecha_lanzamiento,$precio,$sinopsis);
 			if ($res) {
 				echo "done";
 			}

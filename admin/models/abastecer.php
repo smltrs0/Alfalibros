@@ -89,7 +89,9 @@
 							FROM abastecer AS a
 							INNER JOIN libro AS l ON a.id_libro = l.id_libro
 							INNER JOIN proveedor AS p ON a.id_proveedor = p.id
-							INNER JOIN datos_personales AS dp ON p.datos_personales = dp.id_datos_personales"
+							INNER JOIN datos_personales AS dp ON p.datos_personales = dp.id_datos_personales 
+							ORDER BY `a`.`fecha_entrada`  ASC
+							"
 					);
 					$sentencia->execute();
 					$result = $sentencia->fetchAll(PDO::FETCH_ASSOC);

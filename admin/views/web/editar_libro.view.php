@@ -25,9 +25,9 @@ require(TEMPLATES.'breadcrumb.php');
        <div class="m-1"> 
         <?php if(!is_null($libro['ruta_imagen'])): ?>
        <!-- class height-27 mantiene las imagenes siempre en 275 px -->
-        <img class="" src="<?php echo $libro['ruta_imagen']; ?>" alt="Card image cap"> 
+        <img class="" src="uploaded_files/img_books/<?php echo $libro['ruta_imagen']; ?>" alt="Card image cap"> 
         <?php else: ?>
-        <img class=" height-275" src="images/no_image.png" alt="Card image cap">
+        <img class=" height-275" src="images/no_image.PNG" alt="Card image cap">
         <?php endif ?>
       </div>
     </div>
@@ -48,14 +48,8 @@ require(TEMPLATES.'breadcrumb.php');
                             <?php foreach ($autores as $key): ?>
                                 <option value="<?php echo $key['id_autor']; ?>"><?php echo $key['autor']; ?></option>
                             <?php endforeach ?>
-                            <!-- ESTE LUEGO SE TRATARA CON JS PARA AGREGAR OTRO INPUT PARA AÑADIR EL NUEVO AUTOR -->
-                            <option value="nuevo_autor">Otro autor</option>
                         </select>
                     </div>
-  <div class="form-group">
-    <label>Cantidad</label>
-    <input class="form-control" type="text" name="cantidad" value="<?php echo $libro['cantidad'] ?>">
-  </div>
   <div class="form-group">
     Precio
     <input class="form-control" type="text" name="precio" value="<?php echo $libro['precio'] ?>">
@@ -68,8 +62,7 @@ require(TEMPLATES.'breadcrumb.php');
                             <?php foreach ($categorias as $key): ?>
                                 <option value="<?php echo $key['id_categoria']; ?>"><?php echo $key['categoria']; ?></option>
                             <?php endforeach ?>
-                            <!-- ESTE LUEGO SE TRATARA CON JS PARA AGREGAR OTRO INPUT PARA AÑADIR EL NUEVO AUTOR -->
-                            <option value="nuevo_autor">Otra categoria</option>
+                          
                         </select>
                     </div>
   <div class="form-group">

@@ -44,7 +44,7 @@ require (TEMPLATES.'breadcrumb.php');
             echo "<ul class='list-group'>";
             while(($archivo = readdir($dir)) !== false){
                 if($archivo != '.' && $archivo != '..' && $archivo != '.htaccess'){
-                    echo "<li class='list-group-item'><a target='_blank' href='$carpeta/$archivo'download><i class='fa fa-download'></i> $archivo </a> <a class='btn btn-sm float-right btn-danger btn-xs' href='action/borrar_archivo.php?archivo=$archivo&dir=$carpeta'><i class='fa fa-trash-alt'></i></a> </li>";
+                    echo "<li class='list-group-item'><a target='_blank' href='$carpeta/$archivo'download><i class='fa fa-download'></i> $archivo </a> <a class='btn btn-sm float-right btn-danger btn-xs' href='controller/borrar_archivo.php?archivo=$archivo&dir=$carpeta'><i class='fa fa-trash-alt'></i></a> </li>";
                 }
             }
             echo "</ul>";

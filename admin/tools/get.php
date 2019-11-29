@@ -46,12 +46,12 @@
 
 				case 'finanzas':
 
-					$sentencia = self::$connection->query('SELECT MAX(id_finanzas)
-												   		   FROM finanzas');
+					$sentencia = self::$connection->query('SELECT MAX(id_factura)
+												   		   FROM factura');
 
 					$id_finanzas = $sentencia->fetch();
 
-					return $id_finanzas['MAX(id_finanzas)'];
+					return $id_finanzas['MAX(id_factura)'];
 
 				break;
 
@@ -145,8 +145,7 @@
 
 				case 'cliente':
 
-					$sentencia = self::$connection->query('SELECT *
-												           FROM cliente');
+					$sentencia = self::$connection->query('SELECT * FROM cliente INNER JOIN datos_personales ON cliente.datos_personales = datos_personales.id_datos_personales');
 
 					return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -169,6 +168,7 @@
                                                            FROM factura
                                                            INNER JOIN cliente
                                                            ON factura.id_cliente = cliente.id
+                                                           INNER JOIN datos_personales ON cliente.datos_personales = datos_personales.id_datos_personales
                                                            INNER JOIN forma_de_pago
                                                            ON factura.cod_formapago = forma_de_pago.id_formapago');
 
@@ -268,8 +268,8 @@
 			}
 
 			$sentencia = self::$connection->prepare('SELECT cantidad
-											   FROM info_libro
-											   WHERE id_info_libro = :id ');
+											   FROM libro
+											   WHERE id_libro = :id ');
 
 			$sentencia->execute(array(':id' => $id));
 
@@ -305,15 +305,15 @@
 
 			$last_id = self::last_id('finanzas');
 
-			$sentencia = self::$connection->prepare('SELECT activos
-													 FROM finanzas
-													 WHERE id_finanzas = :last_id');
+			$sentencia = self::$connection->prepare('SELECT total_factura
+													 FROM factura
+													 WHERE id_factura = :last_id');
 
 			$sentencia->execute(array(':last_id' => $last_id));
 
 			$datos = $sentencia->fetch();
 
-			return $datos['activos'];
+			return $datos['total_factura'];
 		}
 
 		static public function new_file_path($table, $file)
@@ -367,12 +367,12 @@
 			{
 				case 'finanzas':
 					
-					$sentencia = self::$connection->query('SELECT MAX(fecha)
-														     FROM finanzas');
+					$sentencia = self::$connection->query('SELECT MAX(fecha_facturacion)
+														     FROM factura');
 
 					$fecha = $sentencia->fetch();
 
-					return $fecha['MAX(fecha)'];
+					return $fecha['MAX(fecha_facturacion)'];
 
 				break;
 				
@@ -419,16 +419,14 @@
 
 						$inicio_mes = $año_ultima_venta.'-'.$i.'-1';
 
-						$sentencia = self::$connection->prepare('SELECT SUM(activos)
-																 FROM finanzas
-																 WHERE fecha BETWEEN CAST(:inicio_mes AS DATE) AND CAST(:fin_mes AS DATE)');
+						$sentencia = self::$connection->prepare('SELECT SUM(total_factura) FROM factura WHERE fecha_facturacion BETWEEN CAST(:inicio_mes AS DATE) AND CAST(:fin_mes AS DATE)');
 
 						$sentencia->execute(array(':inicio_mes'	=> $inicio_mes,
 												  ':fin_mes'	=> $fin_mes));
 
 						$sumatoria_por_mes = $sentencia->fetch();
 
-						$values[$i] = round($sumatoria_por_mes['SUM(activos)'], 2);
+						$values[$i] = round($sumatoria_por_mes['SUM(total_factura)'], 2);
 
 					}
 
@@ -474,7 +472,8 @@
 		{
 			// Conexion a la base de datos
 			self::$connection = db_connector::get_connection();
-			$sentencia = self::$connection->query("SELECT * FROM `cliente` WHERE nombre LIKE '%$id%' OR apellido LIKE '%$id%' OR documento LIKE '%$id%' LIMIT 10");
+			$sentencia = self::$connection->query("SELECT * FROM `cliente` 
+				INNER JOIN datos_personales ON cliente.datos_personales = datos_personales.id_datos_personales WHERE datos_personales.nombre LIKE '%$id%' OR datos_personales.apellido LIKE '%$id%' OR datos_personales.documento LIKE '%$id%' LIMIT 10");
 
 					return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 		}
@@ -484,7 +483,8 @@
 		{
 			// Conexion a la base de datos
 			self::$connection = db_connector::get_connection();
-			$sentencia = self::$connection->query("SELECT * FROM `cliente` WHERE id= '$id' LIMIT 1");
+			$sentencia = self::$connection->query("SELECT * FROM `cliente` 
+				INNER JOIN datos_personales ON cliente.datos_personales = datos_personales.id_datos_personales  WHERE id= '$id' LIMIT 1");
 
 					return $sentencia->fetch(PDO::FETCH_ASSOC);
 		}
@@ -561,33 +561,18 @@
 		}
 	static public function get_factura($id)
 	{		
-			// self::$connection = db_connector::get_connection();
-			// $sentencia = $this->connection->prepare(
-			// 		"SELECT f.fecha_facturacion, f.IVA, df.cantidad,  
-			// 		df.precio, c.documento , c.nombre ,c.apellido ,
-			// 		c.direccion, c.telefono, l.titulo, a.autor
-			// 		FROM factura AS f
-			// 		INNER JOIN detalles_factura AS df ON f.id_factura = df.id_factura
-			// 		INNER JOIN cliente AS c ON f.id_cliente = c.id
-			// 		INNER JOIN libro AS l ON df.id_producto = l.id_libro 
-			// 		INNER JOIN autor AS a on l.id_autor = a.id_autor WHERE f.id_factura = $id"
-			// 	);
-			// 	$sentencia->execute();
-			// 	$result = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-			// 	return $result;
-
 
 							// Conexion a la base de datos
 			self::$connection = db_connector::get_connection();
 			$sentencia = self::$connection->query("SELECT f.fecha_facturacion, f.IVA, df.cantidad,  
-					df.precio, c.documento , c.nombre ,c.apellido ,
-					c.direccion, c.telefono, l.titulo, a.autor
-					FROM factura AS f
-					INNER JOIN detalles_factura AS df ON f.id_factura = df.id_factura
-					INNER JOIN cliente AS c ON f.id_cliente = c.id
-					INNER JOIN libro AS l ON df.id_producto = l.id_libro 
-					INNER JOIN autor AS a on l.id_autor = a.id_autor WHERE f.id_factura = $id");
+                    df.precio, dp.documento , dp.nombre ,dp.apellido ,
+                    dp.direccion, dp.telefono, l.titulo, a.autor
+                    FROM factura AS f
+                    INNER JOIN detalles_factura AS df ON f.id_factura = df.id_factura
+                    INNER JOIN cliente AS c ON f.id_cliente = c.id
+                   INNER JOIN datos_personales AS dp ON c.datos_personales = dp.id_datos_personales
+                    INNER JOIN libro AS l ON df.id_producto = l.id_libro 
+                    INNER JOIN autor AS a on l.id_autor = a.id_autor WHERE f.id_factura= $id");
 
 					return $sentencia->fetch(PDO::FETCH_ASSOC);
 	}

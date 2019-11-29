@@ -31,8 +31,11 @@ require (TEMPLATES.'breadcrumb.php');
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="ventas" role="tabpanel" aria-labelledby="ventas-tab">
     <div class="card">
+      <div class="alert alert-success text-center" id="AlertAdd" style="display:none;">
+              <strong id="text-alert">Todo bien  todo correcto!</strong>
+            </div>
         <div class="card-body">
-            <form action="controller/abastecer_libro.php" method="POST">
+            <form  id="abastecerLibro">
                 <div class="form-group">
                     <label>Selecciona el libro a abastecer</label>
                     <select class="form-control" name="libro" id="libro" required>
@@ -45,7 +48,7 @@ require (TEMPLATES.'breadcrumb.php');
                 </div>
                 <div class="form-group">
                     <label>Introduce la cantidad</label>
-                    <input type="number" name="cantidad" class="form-control" min="1" name="">
+                    <input type="number" name="cantidad" class="form-control" min="1" required>
                 </div>
                <div class="form-group">
                 <label>Selecciona un proveedor</label>
@@ -72,12 +75,11 @@ require (TEMPLATES.'breadcrumb.php');
         <table id="tablaAbastecer" class="table table-hover table-sm" width="100%">
           <thead>
             <tr>
-              <th >Cantidad</th>
-              <th >Fecha y hora</th>
+              <th data-sort='YYYYMMDD'>Fecha y hora</th>
               <th >Titulo</th>
+              <th >Cantidad</th>
               <th >Nombre comercial</th>
               <th >Editar</th>
-              <th >Eliminar</th>
             </tr>
           </thead>
         </table>
@@ -100,12 +102,11 @@ require (TEMPLATES.'breadcrumb.php');
             "url": "scripts/js/traducciones/Spanish.json"
             },
         "columns": [
-                { "data": "cantidad" },
                   { "data": "fecha_entrada" },
                     { "data": "titulo" },
+                      { "data": "cantidad" },
                         { "data": "nombre_comercial" },
-                                { "data": "edit" },
-                                  { "data": "delete" }
+                          { "data": "edit" }
         ]
     } );
 
@@ -114,11 +115,42 @@ require (TEMPLATES.'breadcrumb.php');
       $('#libro').select2();
       $('#proveedor').select2();
 
+  $(document).on('submit', '#abastecerLibro', function(event)
+  {
+    event.preventDefault();
+    $.ajax({
+        url:"controller/abastecer_libro.php",
+        method:'POST',
+        data:new FormData(this),
+        contentType:false,
+        processData:false,
+    })
+    .done(function(data) {
+        // Limpiamos los campos del formulario en el modal
+            $('#abastecerLibro')[0].reset();
+            // Ocultamos el modal
+            // Mostramos un alerta 
+            $('#text-alert').html(data);
+            $('#AlertAdd').fadeIn(1000);
+              setTimeout(function() 
+              { 
+              // Ocultamos el alerta
+                 $('#AlertAdd').fadeOut(1000); 
+              }, 10000);
+              dataTable.ajax.reload();
+    })
+    .fail(function(data) {
+      console.log("error"+data);
+    })
+    .always(function() {
+      console.log("complete");
+    });
+    
 
+      });
+      
 
-
-
-});
+}); // end document ready
 
   </script>
 <?php 

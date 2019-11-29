@@ -31,7 +31,7 @@ require(TEMPLATES.'breadcrumb.php');
        <div class="m-1"> 
         <?php if(!is_null($libro['ruta_imagen'])): ?>
        <!-- class height-27 mantiene las imagenes siempre en 275 px -->
-        <img class="" src="<?php echo $libro['ruta_imagen']; ?>" alt="Card image cap"> 
+        <img class="" src="uploaded_files/img_books/<?php echo $libro['ruta_imagen']; ?>" alt="Card image cap"> 
         <?php else: ?>
         <img class=" height-275" src="images/no_image.png" alt="Card image cap">
         <?php endif ?>

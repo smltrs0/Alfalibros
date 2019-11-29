@@ -14,9 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $libro_info = get::libro_by_id($libro_id);
 
 	// Sumamos la cantidad actual con la cantidad que se va a suministrar
-	echo $libro_info['cantidad']."<br>";
  	$cantidad_total= ($libro_info['cantidad']+$cantidad);
-	echo $cantidad_total;
+
 
 
 
@@ -26,7 +25,7 @@ if ($res) {
 	// Actualizamos la cantidad total solo si se agrego a la tabla abastecer, en el else se tendría que capturar la id de la ultima transacción para eliminar la consulta de abastecer::agregar() si no se introdujo la información a actualizar cantidad, esto es para solucionar algún fallo que pueda ocurrir durante la inserción...
 	$result = $libro->actualizar_cantidad($libro_id, $cantidad_total);
 	if ($result) {
-		echo "Se completo correctamente el abastecimiento.";
+		echo "Se agregaron correctamente $cantidad, la cantidad total actual es:  $cantidad_total.";
 	}else{
 		echo "No se pudo actualizar la cantidad de libros.";
 	}
