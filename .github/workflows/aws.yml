@@ -80,6 +80,3 @@ jobs:
         service: sample-app-service
         cluster: default
         wait-for-service-stability: true
-
-- name: PHP Lint
-  uses: michaelw90/PHP-Lint@1.0.0
