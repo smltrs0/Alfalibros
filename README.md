@@ -1,2 +1,2 @@
 # Alfalibros
-Proyecto academico de parte de los estudiantes de la UPT Bolivar Oscar Ruiz, Samuel Trias y Yoelvis Eleazar
+Sistema de venta de libros usando POO y SINGLETON e implementando el modelo vista controlador
